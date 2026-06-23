@@ -1,0 +1,3548 @@
+{
+  "boxes": [
+    {
+      "code": "box_common",
+      "name": "Cofre Común",
+      "rarity": "common",
+      "description": "Cofre básico. Mayormente materiales, consumibles y una pequeña probabilidad de equipo inusual.",
+      "sources": [
+        {
+          "zone_id": 14,
+          "zone_name": "Aldea Olvidada",
+          "zone_min_level": 1,
+          "zone_max_level": 60,
+          "monster_id": 59,
+          "monster_name": "Lobo Olvidado",
+          "monster_level": 8,
+          "monster_is_boss": 0,
+          "chance": 50,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 15,
+          "zone_name": "Pueblo Verdoso",
+          "zone_min_level": 1,
+          "zone_max_level": 60,
+          "monster_id": 63,
+          "monster_name": "Goblin Esmeralda",
+          "monster_level": 11,
+          "monster_is_boss": 0,
+          "chance": 40,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 15,
+          "zone_name": "Pueblo Verdoso",
+          "zone_min_level": 1,
+          "zone_max_level": 60,
+          "monster_id": 64,
+          "monster_name": "Berserker Verdoso",
+          "monster_level": 12,
+          "monster_is_boss": 0,
+          "chance": 40,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 16,
+          "zone_name": "Villa Zafiro",
+          "zone_min_level": 1,
+          "zone_max_level": 60,
+          "monster_id": 66,
+          "monster_name": "Centinela de Zafiro",
+          "monster_level": 21,
+          "monster_is_boss": 0,
+          "chance": 30,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 16,
+          "zone_name": "Villa Zafiro",
+          "zone_min_level": 1,
+          "zone_max_level": 60,
+          "monster_id": 67,
+          "monster_name": "Caminante Azulado",
+          "monster_level": 23,
+          "monster_is_boss": 0,
+          "chance": 30,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 17,
+          "zone_name": "Ciudadela Amatista",
+          "zone_min_level": 1,
+          "zone_max_level": 60,
+          "monster_id": 69,
+          "monster_name": "Custodio Amatista",
+          "monster_level": 26,
+          "monster_is_boss": 0,
+          "chance": 30,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 17,
+          "zone_name": "Ciudadela Amatista",
+          "zone_min_level": 1,
+          "zone_max_level": 60,
+          "monster_id": 70,
+          "monster_name": "Acólito Violeta",
+          "monster_level": 28,
+          "monster_is_boss": 0,
+          "chance": 30,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 18,
+          "zone_name": "Bastión Áureo",
+          "zone_min_level": 1,
+          "zone_max_level": 60,
+          "monster_id": 73,
+          "monster_name": "Heraldo Dorado",
+          "monster_level": 30,
+          "monster_is_boss": 0,
+          "chance": 30,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 28,
+          "zone_name": "Catacumbas Olvidadas",
+          "zone_min_level": 35,
+          "zone_max_level": 100,
+          "monster_id": 111,
+          "monster_name": "Caballero Caido",
+          "monster_level": 45,
+          "monster_is_boss": 0,
+          "chance": 20,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 21,
+          "zone_name": "Glaciar Eterno",
+          "zone_min_level": 22,
+          "zone_max_level": 40,
+          "monster_id": 86,
+          "monster_name": "Coloso de Cristal",
+          "monster_level": 30,
+          "monster_is_boss": 0,
+          "chance": 9,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 25,
+          "zone_name": "Cumbres del Trueno",
+          "zone_min_level": 25,
+          "zone_max_level": 50,
+          "monster_id": 100,
+          "monster_name": "Drake del Cielo",
+          "monster_level": 34,
+          "monster_is_boss": 0,
+          "chance": 9,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 25,
+          "zone_name": "Cumbres del Trueno",
+          "zone_min_level": 25,
+          "zone_max_level": 50,
+          "monster_id": 101,
+          "monster_name": "Coloso de Rayo",
+          "monster_level": 36,
+          "monster_is_boss": 0,
+          "chance": 9,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 21,
+          "zone_name": "Glaciar Eterno",
+          "zone_min_level": 22,
+          "zone_max_level": 40,
+          "monster_id": 85,
+          "monster_name": "Demonio del Frío",
+          "monster_level": 25,
+          "monster_is_boss": 0,
+          "chance": 8,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 21,
+          "zone_name": "Glaciar Eterno",
+          "zone_min_level": 22,
+          "zone_max_level": 40,
+          "monster_id": 84,
+          "monster_name": "Sirena de Hielo",
+          "monster_level": 28,
+          "monster_is_boss": 0,
+          "chance": 8,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 25,
+          "zone_name": "Cumbres del Trueno",
+          "zone_min_level": 25,
+          "zone_max_level": 50,
+          "monster_id": 98,
+          "monster_name": "Águila Tempestad",
+          "monster_level": 30,
+          "monster_is_boss": 0,
+          "chance": 8,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 25,
+          "zone_name": "Cumbres del Trueno",
+          "zone_min_level": 25,
+          "zone_max_level": 50,
+          "monster_id": 99,
+          "monster_name": "Brujo del Trueno",
+          "monster_level": 32,
+          "monster_is_boss": 0,
+          "chance": 8,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 19,
+          "zone_name": "Sanctum Mítico",
+          "zone_min_level": 1,
+          "zone_max_level": 70,
+          "monster_id": 75,
+          "monster_name": "Vigía del Sanctum",
+          "monster_level": 45,
+          "monster_is_boss": 0,
+          "chance": 8,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 19,
+          "zone_name": "Sanctum Mítico",
+          "zone_min_level": 1,
+          "zone_max_level": 70,
+          "monster_id": 76,
+          "monster_name": "Profeta Caído",
+          "monster_level": 50,
+          "monster_is_boss": 0,
+          "chance": 8,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 19,
+          "zone_name": "Sanctum Mítico",
+          "zone_min_level": 1,
+          "zone_max_level": 70,
+          "monster_id": 77,
+          "monster_name": "Hidra Primigenia",
+          "monster_level": 70,
+          "monster_is_boss": 1,
+          "chance": 8,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 22,
+          "zone_name": "Minas de Carbón",
+          "zone_min_level": 5,
+          "zone_max_level": 100,
+          "monster_id": 90,
+          "monster_name": "Trituradora de Carbón",
+          "monster_level": 30,
+          "monster_is_boss": 0,
+          "chance": 7.5,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 21,
+          "zone_name": "Glaciar Eterno",
+          "zone_min_level": 22,
+          "zone_max_level": 40,
+          "monster_id": 83,
+          "monster_name": "Mamut Lanudo",
+          "monster_level": 27,
+          "monster_is_boss": 0,
+          "chance": 7,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 4,
+          "zone_name": "Bosque Verde",
+          "zone_min_level": 1,
+          "zone_max_level": 10,
+          "monster_id": 4,
+          "monster_name": "Jefe Bandido",
+          "monster_level": 10,
+          "monster_is_boss": 1,
+          "chance": 6,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 5,
+          "zone_name": "Llanuras de Piedra",
+          "zone_min_level": 5,
+          "zone_max_level": 20,
+          "monster_id": 5,
+          "monster_name": "Goblin Explorador",
+          "monster_level": 6,
+          "monster_is_boss": 0,
+          "chance": 5,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 24,
+          "zone_name": "La Ciudad de Raza",
+          "zone_min_level": 20,
+          "zone_max_level": 40,
+          "monster_id": 97,
+          "monster_name": "Guardián de las Razas",
+          "monster_level": 22,
+          "monster_is_boss": 1,
+          "chance": 5,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 24,
+          "zone_name": "La Ciudad de Raza",
+          "zone_min_level": 20,
+          "zone_max_level": 40,
+          "monster_id": 118,
+          "monster_name": "Centinela de las Razas",
+          "monster_level": 32,
+          "monster_is_boss": 1,
+          "chance": 5,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 30,
+          "zone_name": "Grieta del Cósmos",
+          "zone_min_level": 10,
+          "zone_max_level": 100,
+          "monster_id": 124,
+          "monster_name": "Titán Quebrado",
+          "monster_level": 35,
+          "monster_is_boss": 0,
+          "chance": 5,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 24,
+          "zone_name": "La Ciudad de Raza",
+          "zone_min_level": 20,
+          "zone_max_level": 40,
+          "monster_id": 157,
+          "monster_name": "Heraldo de las Razas",
+          "monster_level": 42,
+          "monster_is_boss": 1,
+          "chance": 5,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 24,
+          "zone_name": "La Ciudad de Raza",
+          "zone_min_level": 20,
+          "zone_max_level": 40,
+          "monster_id": 158,
+          "monster_name": "Patriarca de las Razas",
+          "monster_level": 52,
+          "monster_is_boss": 1,
+          "chance": 5,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 4,
+          "zone_name": "Bosque Verde",
+          "zone_min_level": 1,
+          "zone_max_level": 10,
+          "monster_id": 1,
+          "monster_name": "Lobo Gris",
+          "monster_level": 1,
+          "monster_is_boss": 0,
+          "chance": 4,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 30,
+          "zone_name": "Grieta del Cósmos",
+          "zone_min_level": 10,
+          "zone_max_level": 100,
+          "monster_id": 123,
+          "monster_name": "Arconte Sideral",
+          "monster_level": 30,
+          "monster_is_boss": 0,
+          "chance": 4,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 30,
+          "zone_name": "Grieta del Cósmos",
+          "zone_min_level": 10,
+          "zone_max_level": 100,
+          "monster_id": 122,
+          "monster_name": "Heraldo del Vacío",
+          "monster_level": 25,
+          "monster_is_boss": 0,
+          "chance": 3.5,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 4,
+          "zone_name": "Bosque Verde",
+          "zone_min_level": 1,
+          "zone_max_level": 10,
+          "monster_id": 2,
+          "monster_name": "Bandido",
+          "monster_level": 2,
+          "monster_is_boss": 0,
+          "chance": 3,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 4,
+          "zone_name": "Bosque Verde",
+          "zone_min_level": 1,
+          "zone_max_level": 10,
+          "monster_id": 3,
+          "monster_name": "Arana Gigante",
+          "monster_level": 4,
+          "monster_is_boss": 0,
+          "chance": 3,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 30,
+          "zone_name": "Grieta del Cósmos",
+          "zone_min_level": 10,
+          "zone_max_level": 100,
+          "monster_id": 121,
+          "monster_name": "Devorador de Estrellas",
+          "monster_level": 20,
+          "monster_is_boss": 0,
+          "chance": 3,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 22,
+          "zone_name": "Minas de Carbón",
+          "zone_min_level": 5,
+          "zone_max_level": 100,
+          "monster_id": 89,
+          "monster_name": "Capataz de la Mina",
+          "monster_level": 15,
+          "monster_is_boss": 0,
+          "chance": 2.5,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 30,
+          "zone_name": "Grieta del Cósmos",
+          "zone_min_level": 10,
+          "zone_max_level": 100,
+          "monster_id": 120,
+          "monster_name": "Susurro Astral",
+          "monster_level": 15,
+          "monster_is_boss": 0,
+          "chance": 2.5,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 30,
+          "zone_name": "Grieta del Cósmos",
+          "zone_min_level": 10,
+          "zone_max_level": 100,
+          "monster_id": 119,
+          "monster_name": "Acólito del Velo",
+          "monster_level": 10,
+          "monster_is_boss": 0,
+          "chance": 2,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 6,
+          "zone_name": "Pantano Oscuro",
+          "zone_min_level": 15,
+          "zone_max_level": 35,
+          "monster_id": 8,
+          "monster_name": "Esqueleto",
+          "monster_level": 12,
+          "monster_is_boss": 0,
+          "chance": 1,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 6,
+          "zone_name": "Pantano Oscuro",
+          "zone_min_level": 15,
+          "zone_max_level": 35,
+          "monster_id": 9,
+          "monster_name": "Zombi",
+          "monster_level": 15,
+          "monster_is_boss": 0,
+          "chance": 1,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 6,
+          "zone_name": "Pantano Oscuro",
+          "zone_min_level": 15,
+          "zone_max_level": 35,
+          "monster_id": 96,
+          "monster_name": "Zombi Decadente",
+          "monster_level": 18,
+          "monster_is_boss": 0,
+          "chance": 1,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 6,
+          "zone_name": "Pantano Oscuro",
+          "zone_min_level": 15,
+          "zone_max_level": 35,
+          "monster_id": 94,
+          "monster_name": "Zombi Putrefacto",
+          "monster_level": 19,
+          "monster_is_boss": 0,
+          "chance": 1,
+          "guaranteed": false
+        }
+      ],
+      "equipment_rarities": [
+        "uncommon"
+      ],
+      "equipment_count": 39,
+      "equipment_items": [
+        {
+          "catalog_id": 85,
+          "item_code": "amulet_iron",
+          "item_name": "Amuleto de Hierro",
+          "item_type": "amulet",
+          "rarity": "uncommon",
+          "level_req": 12,
+          "price": 6439
+        },
+        {
+          "catalog_id": 179,
+          "item_code": "amulet_apprentice_orb",
+          "item_name": "Orbe del Aprendiz",
+          "item_type": "amulet",
+          "rarity": "uncommon",
+          "level_req": 1,
+          "price": 7459
+        },
+        {
+          "catalog_id": 51,
+          "item_code": "amulet_silver",
+          "item_name": "Amuleto de Plata",
+          "item_type": "amulet",
+          "rarity": "uncommon",
+          "level_req": 15,
+          "price": 8398
+        },
+        {
+          "catalog_id": 86,
+          "item_code": "amulet_jade",
+          "item_name": "Amuleto de Jade",
+          "item_type": "amulet",
+          "rarity": "uncommon",
+          "level_req": 16,
+          "price": 10489
+        },
+        {
+          "catalog_id": 164,
+          "item_code": "armor_bronze",
+          "item_name": "Coraza de Bronce",
+          "item_type": "armor",
+          "rarity": "uncommon",
+          "level_req": 10,
+          "price": 4635
+        },
+        {
+          "catalog_id": 9,
+          "item_code": "armor_chain",
+          "item_name": "Cota de Malla",
+          "item_type": "armor",
+          "rarity": "uncommon",
+          "level_req": 12,
+          "price": 6185
+        },
+        {
+          "catalog_id": 77,
+          "item_code": "armor_studded",
+          "item_name": "Cuero Tachonado",
+          "item_type": "armor",
+          "rarity": "uncommon",
+          "level_req": 10,
+          "price": 6758
+        },
+        {
+          "catalog_id": 174,
+          "item_code": "armor_apprentice_robe",
+          "item_name": "Túnica del Aprendiz",
+          "item_type": "armor",
+          "rarity": "uncommon",
+          "level_req": 1,
+          "price": 8606
+        },
+        {
+          "catalog_id": 78,
+          "item_code": "armor_brigandine",
+          "item_name": "Brigantina",
+          "item_type": "armor",
+          "rarity": "uncommon",
+          "level_req": 15,
+          "price": 9527
+        },
+        {
+          "catalog_id": 165,
+          "item_code": "boots_explorer",
+          "item_name": "Botas del Explorador",
+          "item_type": "boots",
+          "rarity": "uncommon",
+          "level_req": 8,
+          "price": 4275
+        },
+        {
+          "catalog_id": 176,
+          "item_code": "boots_apprentice_sandals",
+          "item_name": "Sandalias del Aprendiz",
+          "item_type": "boots",
+          "rarity": "uncommon",
+          "level_req": 1,
+          "price": 6311
+        },
+        {
+          "catalog_id": 81,
+          "item_code": "boots_studded",
+          "item_name": "Botas Tachonadas",
+          "item_type": "boots",
+          "rarity": "uncommon",
+          "level_req": 12,
+          "price": 7559
+        },
+        {
+          "catalog_id": 82,
+          "item_code": "boots_ranger",
+          "item_name": "Botas de Guardabosque",
+          "item_type": "boots",
+          "rarity": "uncommon",
+          "level_req": 16,
+          "price": 10008
+        },
+        {
+          "catalog_id": 42,
+          "item_code": "boots_steel",
+          "item_name": "Botas de Acero",
+          "item_type": "boots",
+          "rarity": "uncommon",
+          "level_req": 18,
+          "price": 10200
+        },
+        {
+          "catalog_id": 171,
+          "item_code": "gloves_recruit",
+          "item_name": "Guantes del Recluta",
+          "item_type": "gloves",
+          "rarity": "uncommon",
+          "level_req": 9,
+          "price": 4806
+        },
+        {
+          "catalog_id": 79,
+          "item_code": "gloves_studded",
+          "item_name": "Guantes Tachonados",
+          "item_type": "gloves",
+          "rarity": "uncommon",
+          "level_req": 12,
+          "price": 6649
+        },
+        {
+          "catalog_id": 177,
+          "item_code": "gloves_apprentice_wraps",
+          "item_name": "Vendas del Aprendiz",
+          "item_type": "gloves",
+          "rarity": "uncommon",
+          "level_req": 1,
+          "price": 6885
+        },
+        {
+          "catalog_id": 80,
+          "item_code": "gloves_chainmesh",
+          "item_name": "Guantes de Malla",
+          "item_type": "gloves",
+          "rarity": "uncommon",
+          "level_req": 16,
+          "price": 8757
+        },
+        {
+          "catalog_id": 38,
+          "item_code": "gloves_steel",
+          "item_name": "Guanteletes de Acero",
+          "item_type": "gloves",
+          "rarity": "uncommon",
+          "level_req": 18,
+          "price": 10489
+        },
+        {
+          "catalog_id": 75,
+          "item_code": "helmet_kettle",
+          "item_name": "Yelmo Cuenco",
+          "item_type": "helmet",
+          "rarity": "uncommon",
+          "level_req": 12,
+          "price": 6299
+        },
+        {
+          "catalog_id": 175,
+          "item_code": "helmet_apprentice_hood",
+          "item_name": "Capucha del Aprendiz",
+          "item_type": "helmet",
+          "rarity": "uncommon",
+          "level_req": 1,
+          "price": 7459
+        },
+        {
+          "catalog_id": 34,
+          "item_code": "helmet_steel",
+          "item_name": "Yelmo de Acero",
+          "item_type": "helmet",
+          "rarity": "uncommon",
+          "level_req": 18,
+          "price": 9553
+        },
+        {
+          "catalog_id": 76,
+          "item_code": "helmet_horned",
+          "item_name": "Casco Cornudo",
+          "item_type": "helmet",
+          "rarity": "uncommon",
+          "level_req": 16,
+          "price": 10296
+        },
+        {
+          "catalog_id": 168,
+          "item_code": "ring_tenacity",
+          "item_name": "Anillo de Tenacidad",
+          "item_type": "ring",
+          "rarity": "uncommon",
+          "level_req": 4,
+          "price": 4194
+        },
+        {
+          "catalog_id": 167,
+          "item_code": "ring_hunter",
+          "item_name": "Anillo del Cazador",
+          "item_type": "ring",
+          "rarity": "uncommon",
+          "level_req": 5,
+          "price": 4365
+        },
+        {
+          "catalog_id": 18,
+          "item_code": "ring_vitality",
+          "item_name": "Anillo de Vitalidad",
+          "item_type": "ring",
+          "rarity": "uncommon",
+          "level_req": 5,
+          "price": 5572
+        },
+        {
+          "catalog_id": 83,
+          "item_code": "ring_iron_bound",
+          "item_name": "Anillo Reforzado",
+          "item_type": "ring",
+          "rarity": "uncommon",
+          "level_req": 12,
+          "price": 6998
+        },
+        {
+          "catalog_id": 178,
+          "item_code": "ring_apprentice_focus",
+          "item_name": "Anillo del Aprendiz",
+          "item_type": "ring",
+          "rarity": "uncommon",
+          "level_req": 1,
+          "price": 8033
+        },
+        {
+          "catalog_id": 46,
+          "item_code": "ring_silver",
+          "item_name": "Anillo de Plata",
+          "item_type": "ring",
+          "rarity": "uncommon",
+          "level_req": 15,
+          "price": 9360
+        },
+        {
+          "catalog_id": 84,
+          "item_code": "ring_silvered",
+          "item_name": "Anillo Plateado",
+          "item_type": "ring",
+          "rarity": "uncommon",
+          "level_req": 16,
+          "price": 10078
+        },
+        {
+          "catalog_id": 166,
+          "item_code": "dagger_wanderer",
+          "item_name": "Daga del Vagabundo",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 7,
+          "price": 4410
+        },
+        {
+          "catalog_id": 169,
+          "item_code": "sword_soldier",
+          "item_name": "Espada del Soldado",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 10,
+          "price": 4545
+        },
+        {
+          "catalog_id": 25,
+          "item_code": "dagger_steel",
+          "item_name": "Daga de Acero",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 10,
+          "price": 5629
+        },
+        {
+          "catalog_id": 6,
+          "item_code": "dagger_assassin",
+          "item_name": "Daga del Asesino",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 8,
+          "price": 5879
+        },
+        {
+          "catalog_id": 2,
+          "item_code": "sword_steel",
+          "item_name": "Espada de Acero",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 12,
+          "price": 6063
+        },
+        {
+          "catalog_id": 236,
+          "item_code": "sword_draconic",
+          "item_name": "Hoja Drácica",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 14,
+          "price": 8575
+        },
+        {
+          "catalog_id": 173,
+          "item_code": "staff_apprentice_v2",
+          "item_name": "Báculo del Aprendiz",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 1,
+          "price": 9754
+        },
+        {
+          "catalog_id": 30,
+          "item_code": "staff_runic",
+          "item_name": "Báculo Rúnico",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 15,
+          "price": 10602
+        },
+        {
+          "catalog_id": 22,
+          "item_code": "sword_runic",
+          "item_name": "Espada Rúnica",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 18,
+          "price": 13384
+        }
+      ],
+      "estimated_probabilities": {
+        "uncommon": 20,
+        "materials": 80
+      }
+    },
+    {
+      "code": "box_common_special",
+      "name": "Cofre Común Especial",
+      "rarity": "uncommon",
+      "description": "Variante mejorada del cofre común. Tiende a incluir equipo inusual y algunos materiales.",
+      "sources": [
+        {
+          "zone_id": 19,
+          "zone_name": "Sanctum Mítico",
+          "zone_min_level": 1,
+          "zone_max_level": 70,
+          "monster_id": 77,
+          "monster_name": "Hidra Primigenia",
+          "monster_level": 70,
+          "monster_is_boss": 1,
+          "chance": 1,
+          "guaranteed": false
+        }
+      ],
+      "equipment_rarities": [
+        "uncommon"
+      ],
+      "equipment_count": 39,
+      "equipment_items": [
+        {
+          "catalog_id": 85,
+          "item_code": "amulet_iron",
+          "item_name": "Amuleto de Hierro",
+          "item_type": "amulet",
+          "rarity": "uncommon",
+          "level_req": 12,
+          "price": 6439
+        },
+        {
+          "catalog_id": 179,
+          "item_code": "amulet_apprentice_orb",
+          "item_name": "Orbe del Aprendiz",
+          "item_type": "amulet",
+          "rarity": "uncommon",
+          "level_req": 1,
+          "price": 7459
+        },
+        {
+          "catalog_id": 51,
+          "item_code": "amulet_silver",
+          "item_name": "Amuleto de Plata",
+          "item_type": "amulet",
+          "rarity": "uncommon",
+          "level_req": 15,
+          "price": 8398
+        },
+        {
+          "catalog_id": 86,
+          "item_code": "amulet_jade",
+          "item_name": "Amuleto de Jade",
+          "item_type": "amulet",
+          "rarity": "uncommon",
+          "level_req": 16,
+          "price": 10489
+        },
+        {
+          "catalog_id": 164,
+          "item_code": "armor_bronze",
+          "item_name": "Coraza de Bronce",
+          "item_type": "armor",
+          "rarity": "uncommon",
+          "level_req": 10,
+          "price": 4635
+        },
+        {
+          "catalog_id": 9,
+          "item_code": "armor_chain",
+          "item_name": "Cota de Malla",
+          "item_type": "armor",
+          "rarity": "uncommon",
+          "level_req": 12,
+          "price": 6185
+        },
+        {
+          "catalog_id": 77,
+          "item_code": "armor_studded",
+          "item_name": "Cuero Tachonado",
+          "item_type": "armor",
+          "rarity": "uncommon",
+          "level_req": 10,
+          "price": 6758
+        },
+        {
+          "catalog_id": 174,
+          "item_code": "armor_apprentice_robe",
+          "item_name": "Túnica del Aprendiz",
+          "item_type": "armor",
+          "rarity": "uncommon",
+          "level_req": 1,
+          "price": 8606
+        },
+        {
+          "catalog_id": 78,
+          "item_code": "armor_brigandine",
+          "item_name": "Brigantina",
+          "item_type": "armor",
+          "rarity": "uncommon",
+          "level_req": 15,
+          "price": 9527
+        },
+        {
+          "catalog_id": 165,
+          "item_code": "boots_explorer",
+          "item_name": "Botas del Explorador",
+          "item_type": "boots",
+          "rarity": "uncommon",
+          "level_req": 8,
+          "price": 4275
+        },
+        {
+          "catalog_id": 176,
+          "item_code": "boots_apprentice_sandals",
+          "item_name": "Sandalias del Aprendiz",
+          "item_type": "boots",
+          "rarity": "uncommon",
+          "level_req": 1,
+          "price": 6311
+        },
+        {
+          "catalog_id": 81,
+          "item_code": "boots_studded",
+          "item_name": "Botas Tachonadas",
+          "item_type": "boots",
+          "rarity": "uncommon",
+          "level_req": 12,
+          "price": 7559
+        },
+        {
+          "catalog_id": 82,
+          "item_code": "boots_ranger",
+          "item_name": "Botas de Guardabosque",
+          "item_type": "boots",
+          "rarity": "uncommon",
+          "level_req": 16,
+          "price": 10008
+        },
+        {
+          "catalog_id": 42,
+          "item_code": "boots_steel",
+          "item_name": "Botas de Acero",
+          "item_type": "boots",
+          "rarity": "uncommon",
+          "level_req": 18,
+          "price": 10200
+        },
+        {
+          "catalog_id": 171,
+          "item_code": "gloves_recruit",
+          "item_name": "Guantes del Recluta",
+          "item_type": "gloves",
+          "rarity": "uncommon",
+          "level_req": 9,
+          "price": 4806
+        },
+        {
+          "catalog_id": 79,
+          "item_code": "gloves_studded",
+          "item_name": "Guantes Tachonados",
+          "item_type": "gloves",
+          "rarity": "uncommon",
+          "level_req": 12,
+          "price": 6649
+        },
+        {
+          "catalog_id": 177,
+          "item_code": "gloves_apprentice_wraps",
+          "item_name": "Vendas del Aprendiz",
+          "item_type": "gloves",
+          "rarity": "uncommon",
+          "level_req": 1,
+          "price": 6885
+        },
+        {
+          "catalog_id": 80,
+          "item_code": "gloves_chainmesh",
+          "item_name": "Guantes de Malla",
+          "item_type": "gloves",
+          "rarity": "uncommon",
+          "level_req": 16,
+          "price": 8757
+        },
+        {
+          "catalog_id": 38,
+          "item_code": "gloves_steel",
+          "item_name": "Guanteletes de Acero",
+          "item_type": "gloves",
+          "rarity": "uncommon",
+          "level_req": 18,
+          "price": 10489
+        },
+        {
+          "catalog_id": 75,
+          "item_code": "helmet_kettle",
+          "item_name": "Yelmo Cuenco",
+          "item_type": "helmet",
+          "rarity": "uncommon",
+          "level_req": 12,
+          "price": 6299
+        },
+        {
+          "catalog_id": 175,
+          "item_code": "helmet_apprentice_hood",
+          "item_name": "Capucha del Aprendiz",
+          "item_type": "helmet",
+          "rarity": "uncommon",
+          "level_req": 1,
+          "price": 7459
+        },
+        {
+          "catalog_id": 34,
+          "item_code": "helmet_steel",
+          "item_name": "Yelmo de Acero",
+          "item_type": "helmet",
+          "rarity": "uncommon",
+          "level_req": 18,
+          "price": 9553
+        },
+        {
+          "catalog_id": 76,
+          "item_code": "helmet_horned",
+          "item_name": "Casco Cornudo",
+          "item_type": "helmet",
+          "rarity": "uncommon",
+          "level_req": 16,
+          "price": 10296
+        },
+        {
+          "catalog_id": 168,
+          "item_code": "ring_tenacity",
+          "item_name": "Anillo de Tenacidad",
+          "item_type": "ring",
+          "rarity": "uncommon",
+          "level_req": 4,
+          "price": 4194
+        },
+        {
+          "catalog_id": 167,
+          "item_code": "ring_hunter",
+          "item_name": "Anillo del Cazador",
+          "item_type": "ring",
+          "rarity": "uncommon",
+          "level_req": 5,
+          "price": 4365
+        },
+        {
+          "catalog_id": 18,
+          "item_code": "ring_vitality",
+          "item_name": "Anillo de Vitalidad",
+          "item_type": "ring",
+          "rarity": "uncommon",
+          "level_req": 5,
+          "price": 5572
+        },
+        {
+          "catalog_id": 83,
+          "item_code": "ring_iron_bound",
+          "item_name": "Anillo Reforzado",
+          "item_type": "ring",
+          "rarity": "uncommon",
+          "level_req": 12,
+          "price": 6998
+        },
+        {
+          "catalog_id": 178,
+          "item_code": "ring_apprentice_focus",
+          "item_name": "Anillo del Aprendiz",
+          "item_type": "ring",
+          "rarity": "uncommon",
+          "level_req": 1,
+          "price": 8033
+        },
+        {
+          "catalog_id": 46,
+          "item_code": "ring_silver",
+          "item_name": "Anillo de Plata",
+          "item_type": "ring",
+          "rarity": "uncommon",
+          "level_req": 15,
+          "price": 9360
+        },
+        {
+          "catalog_id": 84,
+          "item_code": "ring_silvered",
+          "item_name": "Anillo Plateado",
+          "item_type": "ring",
+          "rarity": "uncommon",
+          "level_req": 16,
+          "price": 10078
+        },
+        {
+          "catalog_id": 166,
+          "item_code": "dagger_wanderer",
+          "item_name": "Daga del Vagabundo",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 7,
+          "price": 4410
+        },
+        {
+          "catalog_id": 169,
+          "item_code": "sword_soldier",
+          "item_name": "Espada del Soldado",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 10,
+          "price": 4545
+        },
+        {
+          "catalog_id": 25,
+          "item_code": "dagger_steel",
+          "item_name": "Daga de Acero",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 10,
+          "price": 5629
+        },
+        {
+          "catalog_id": 6,
+          "item_code": "dagger_assassin",
+          "item_name": "Daga del Asesino",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 8,
+          "price": 5879
+        },
+        {
+          "catalog_id": 2,
+          "item_code": "sword_steel",
+          "item_name": "Espada de Acero",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 12,
+          "price": 6063
+        },
+        {
+          "catalog_id": 236,
+          "item_code": "sword_draconic",
+          "item_name": "Hoja Drácica",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 14,
+          "price": 8575
+        },
+        {
+          "catalog_id": 173,
+          "item_code": "staff_apprentice_v2",
+          "item_name": "Báculo del Aprendiz",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 1,
+          "price": 9754
+        },
+        {
+          "catalog_id": 30,
+          "item_code": "staff_runic",
+          "item_name": "Báculo Rúnico",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 15,
+          "price": 10602
+        },
+        {
+          "catalog_id": 22,
+          "item_code": "sword_runic",
+          "item_name": "Espada Rúnica",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 18,
+          "price": 13384
+        }
+      ],
+      "estimated_probabilities": {
+        "uncommon": 40,
+        "materials": 60
+      }
+    },
+    {
+      "code": "box_uncommon",
+      "name": "Cofre Inusual",
+      "rarity": "uncommon",
+      "description": "Cofre de rareza inusual. Equipo inusual/raro y materiales de calidad media.",
+      "sources": [
+        {
+          "zone_id": 21,
+          "zone_name": "Glaciar Eterno",
+          "zone_min_level": 22,
+          "zone_max_level": 40,
+          "monster_id": 87,
+          "monster_name": "Yorvath el Inmortal",
+          "monster_level": 32,
+          "monster_is_boss": 1,
+          "chance": 3,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 20,
+          "zone_name": "Tundra Crepuscular",
+          "zone_min_level": 19,
+          "zone_max_level": 30,
+          "monster_id": 81,
+          "monster_name": "Boreal Ancestral",
+          "monster_level": 30,
+          "monster_is_boss": 1,
+          "chance": 2,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 25,
+          "zone_name": "Cumbres del Trueno",
+          "zone_min_level": 25,
+          "zone_max_level": 50,
+          "monster_id": 102,
+          "monster_name": "Zultharion el Trueno Eterno",
+          "monster_level": 40,
+          "monster_is_boss": 1,
+          "chance": 2,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 28,
+          "zone_name": "Catacumbas Olvidadas",
+          "zone_min_level": 35,
+          "zone_max_level": 100,
+          "monster_id": 112,
+          "monster_name": "Nigromante Supremo",
+          "monster_level": 50,
+          "monster_is_boss": 1,
+          "chance": 2,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 15,
+          "zone_name": "Pueblo Verdoso",
+          "zone_min_level": 1,
+          "zone_max_level": 60,
+          "monster_id": 130,
+          "monster_name": "Soberano Esmeralda",
+          "monster_level": 45,
+          "monster_is_boss": 1,
+          "chance": 1,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 31,
+          "zone_name": "Bosque de Cristal",
+          "zone_min_level": 45,
+          "zone_max_level": 57,
+          "monster_id": 128,
+          "monster_name": "Arconte del Bosque Cristalino",
+          "monster_level": 57,
+          "monster_is_boss": 1,
+          "chance": 1,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 15,
+          "zone_name": "Pueblo Verdoso",
+          "zone_min_level": 1,
+          "zone_max_level": 60,
+          "monster_id": 65,
+          "monster_name": "Coloso de Esmeralda",
+          "monster_level": 20,
+          "monster_is_boss": 1,
+          "chance": 0.5,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 15,
+          "zone_name": "Pueblo Verdoso",
+          "zone_min_level": 1,
+          "zone_max_level": 60,
+          "monster_id": 114,
+          "monster_name": "Heraldo Esmeralda",
+          "monster_level": 30,
+          "monster_is_boss": 1,
+          "chance": 0.5,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 34,
+          "zone_name": "Murallas",
+          "zone_min_level": 15,
+          "zone_max_level": 50,
+          "monster_id": 141,
+          "monster_name": "Coloso Acorazado",
+          "monster_level": 34,
+          "monster_is_boss": 0,
+          "chance": 0.5,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 34,
+          "zone_name": "Murallas",
+          "zone_min_level": 15,
+          "zone_max_level": 50,
+          "monster_id": 142,
+          "monster_name": "Bastión Eterno",
+          "monster_level": 44,
+          "monster_is_boss": 1,
+          "chance": 0.5,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 6,
+          "zone_name": "Pantano Oscuro",
+          "zone_min_level": 15,
+          "zone_max_level": 35,
+          "monster_id": 10,
+          "monster_name": "Hidra del Pantano",
+          "monster_level": 20,
+          "monster_is_boss": 1,
+          "chance": 0.1,
+          "guaranteed": false
+        }
+      ],
+      "equipment_rarities": [
+        "uncommon",
+        "rare"
+      ],
+      "equipment_count": 70,
+      "equipment_items": [
+        {
+          "catalog_id": 85,
+          "item_code": "amulet_iron",
+          "item_name": "Amuleto de Hierro",
+          "item_type": "amulet",
+          "rarity": "uncommon",
+          "level_req": 12,
+          "price": 6439
+        },
+        {
+          "catalog_id": 179,
+          "item_code": "amulet_apprentice_orb",
+          "item_name": "Orbe del Aprendiz",
+          "item_type": "amulet",
+          "rarity": "uncommon",
+          "level_req": 1,
+          "price": 7459
+        },
+        {
+          "catalog_id": 51,
+          "item_code": "amulet_silver",
+          "item_name": "Amuleto de Plata",
+          "item_type": "amulet",
+          "rarity": "uncommon",
+          "level_req": 15,
+          "price": 8398
+        },
+        {
+          "catalog_id": 86,
+          "item_code": "amulet_jade",
+          "item_name": "Amuleto de Jade",
+          "item_type": "amulet",
+          "rarity": "uncommon",
+          "level_req": 16,
+          "price": 10489
+        },
+        {
+          "catalog_id": 164,
+          "item_code": "armor_bronze",
+          "item_name": "Coraza de Bronce",
+          "item_type": "armor",
+          "rarity": "uncommon",
+          "level_req": 10,
+          "price": 4635
+        },
+        {
+          "catalog_id": 9,
+          "item_code": "armor_chain",
+          "item_name": "Cota de Malla",
+          "item_type": "armor",
+          "rarity": "uncommon",
+          "level_req": 12,
+          "price": 6185
+        },
+        {
+          "catalog_id": 77,
+          "item_code": "armor_studded",
+          "item_name": "Cuero Tachonado",
+          "item_type": "armor",
+          "rarity": "uncommon",
+          "level_req": 10,
+          "price": 6758
+        },
+        {
+          "catalog_id": 174,
+          "item_code": "armor_apprentice_robe",
+          "item_name": "Túnica del Aprendiz",
+          "item_type": "armor",
+          "rarity": "uncommon",
+          "level_req": 1,
+          "price": 8606
+        },
+        {
+          "catalog_id": 78,
+          "item_code": "armor_brigandine",
+          "item_name": "Brigantina",
+          "item_type": "armor",
+          "rarity": "uncommon",
+          "level_req": 15,
+          "price": 9527
+        },
+        {
+          "catalog_id": 165,
+          "item_code": "boots_explorer",
+          "item_name": "Botas del Explorador",
+          "item_type": "boots",
+          "rarity": "uncommon",
+          "level_req": 8,
+          "price": 4275
+        },
+        {
+          "catalog_id": 176,
+          "item_code": "boots_apprentice_sandals",
+          "item_name": "Sandalias del Aprendiz",
+          "item_type": "boots",
+          "rarity": "uncommon",
+          "level_req": 1,
+          "price": 6311
+        },
+        {
+          "catalog_id": 81,
+          "item_code": "boots_studded",
+          "item_name": "Botas Tachonadas",
+          "item_type": "boots",
+          "rarity": "uncommon",
+          "level_req": 12,
+          "price": 7559
+        },
+        {
+          "catalog_id": 82,
+          "item_code": "boots_ranger",
+          "item_name": "Botas de Guardabosque",
+          "item_type": "boots",
+          "rarity": "uncommon",
+          "level_req": 16,
+          "price": 10008
+        },
+        {
+          "catalog_id": 42,
+          "item_code": "boots_steel",
+          "item_name": "Botas de Acero",
+          "item_type": "boots",
+          "rarity": "uncommon",
+          "level_req": 18,
+          "price": 10200
+        },
+        {
+          "catalog_id": 171,
+          "item_code": "gloves_recruit",
+          "item_name": "Guantes del Recluta",
+          "item_type": "gloves",
+          "rarity": "uncommon",
+          "level_req": 9,
+          "price": 4806
+        },
+        {
+          "catalog_id": 79,
+          "item_code": "gloves_studded",
+          "item_name": "Guantes Tachonados",
+          "item_type": "gloves",
+          "rarity": "uncommon",
+          "level_req": 12,
+          "price": 6649
+        },
+        {
+          "catalog_id": 177,
+          "item_code": "gloves_apprentice_wraps",
+          "item_name": "Vendas del Aprendiz",
+          "item_type": "gloves",
+          "rarity": "uncommon",
+          "level_req": 1,
+          "price": 6885
+        },
+        {
+          "catalog_id": 80,
+          "item_code": "gloves_chainmesh",
+          "item_name": "Guantes de Malla",
+          "item_type": "gloves",
+          "rarity": "uncommon",
+          "level_req": 16,
+          "price": 8757
+        },
+        {
+          "catalog_id": 38,
+          "item_code": "gloves_steel",
+          "item_name": "Guanteletes de Acero",
+          "item_type": "gloves",
+          "rarity": "uncommon",
+          "level_req": 18,
+          "price": 10489
+        },
+        {
+          "catalog_id": 75,
+          "item_code": "helmet_kettle",
+          "item_name": "Yelmo Cuenco",
+          "item_type": "helmet",
+          "rarity": "uncommon",
+          "level_req": 12,
+          "price": 6299
+        },
+        {
+          "catalog_id": 175,
+          "item_code": "helmet_apprentice_hood",
+          "item_name": "Capucha del Aprendiz",
+          "item_type": "helmet",
+          "rarity": "uncommon",
+          "level_req": 1,
+          "price": 7459
+        },
+        {
+          "catalog_id": 34,
+          "item_code": "helmet_steel",
+          "item_name": "Yelmo de Acero",
+          "item_type": "helmet",
+          "rarity": "uncommon",
+          "level_req": 18,
+          "price": 9553
+        },
+        {
+          "catalog_id": 76,
+          "item_code": "helmet_horned",
+          "item_name": "Casco Cornudo",
+          "item_type": "helmet",
+          "rarity": "uncommon",
+          "level_req": 16,
+          "price": 10296
+        },
+        {
+          "catalog_id": 168,
+          "item_code": "ring_tenacity",
+          "item_name": "Anillo de Tenacidad",
+          "item_type": "ring",
+          "rarity": "uncommon",
+          "level_req": 4,
+          "price": 4194
+        },
+        {
+          "catalog_id": 167,
+          "item_code": "ring_hunter",
+          "item_name": "Anillo del Cazador",
+          "item_type": "ring",
+          "rarity": "uncommon",
+          "level_req": 5,
+          "price": 4365
+        },
+        {
+          "catalog_id": 18,
+          "item_code": "ring_vitality",
+          "item_name": "Anillo de Vitalidad",
+          "item_type": "ring",
+          "rarity": "uncommon",
+          "level_req": 5,
+          "price": 5572
+        },
+        {
+          "catalog_id": 83,
+          "item_code": "ring_iron_bound",
+          "item_name": "Anillo Reforzado",
+          "item_type": "ring",
+          "rarity": "uncommon",
+          "level_req": 12,
+          "price": 6998
+        },
+        {
+          "catalog_id": 178,
+          "item_code": "ring_apprentice_focus",
+          "item_name": "Anillo del Aprendiz",
+          "item_type": "ring",
+          "rarity": "uncommon",
+          "level_req": 1,
+          "price": 8033
+        },
+        {
+          "catalog_id": 46,
+          "item_code": "ring_silver",
+          "item_name": "Anillo de Plata",
+          "item_type": "ring",
+          "rarity": "uncommon",
+          "level_req": 15,
+          "price": 9360
+        },
+        {
+          "catalog_id": 84,
+          "item_code": "ring_silvered",
+          "item_name": "Anillo Plateado",
+          "item_type": "ring",
+          "rarity": "uncommon",
+          "level_req": 16,
+          "price": 10078
+        },
+        {
+          "catalog_id": 166,
+          "item_code": "dagger_wanderer",
+          "item_name": "Daga del Vagabundo",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 7,
+          "price": 4410
+        },
+        {
+          "catalog_id": 169,
+          "item_code": "sword_soldier",
+          "item_name": "Espada del Soldado",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 10,
+          "price": 4545
+        },
+        {
+          "catalog_id": 25,
+          "item_code": "dagger_steel",
+          "item_name": "Daga de Acero",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 10,
+          "price": 5629
+        },
+        {
+          "catalog_id": 6,
+          "item_code": "dagger_assassin",
+          "item_name": "Daga del Asesino",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 8,
+          "price": 5879
+        },
+        {
+          "catalog_id": 2,
+          "item_code": "sword_steel",
+          "item_name": "Espada de Acero",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 12,
+          "price": 6063
+        },
+        {
+          "catalog_id": 236,
+          "item_code": "sword_draconic",
+          "item_name": "Hoja Drácica",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 14,
+          "price": 8575
+        },
+        {
+          "catalog_id": 173,
+          "item_code": "staff_apprentice_v2",
+          "item_name": "Báculo del Aprendiz",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 1,
+          "price": 9754
+        },
+        {
+          "catalog_id": 30,
+          "item_code": "staff_runic",
+          "item_name": "Báculo Rúnico",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 15,
+          "price": 10602
+        },
+        {
+          "catalog_id": 22,
+          "item_code": "sword_runic",
+          "item_name": "Espada Rúnica",
+          "item_type": "weapon",
+          "rarity": "uncommon",
+          "level_req": 18,
+          "price": 13384
+        },
+        {
+          "catalog_id": 19,
+          "item_code": "amulet_gold",
+          "item_name": "Amuleto del Oro",
+          "item_type": "amulet",
+          "rarity": "rare",
+          "level_req": 15,
+          "price": 19683
+        },
+        {
+          "catalog_id": 96,
+          "item_code": "amulet_silver_cross",
+          "item_name": "Amuleto Cruz de Plata",
+          "item_type": "amulet",
+          "rarity": "rare",
+          "level_req": 22,
+          "price": 19683
+        },
+        {
+          "catalog_id": 97,
+          "item_code": "amulet_obsidian",
+          "item_name": "Amuleto de Obsidiana",
+          "item_type": "amulet",
+          "rarity": "rare",
+          "level_req": 28,
+          "price": 32762
+        },
+        {
+          "catalog_id": 186,
+          "item_code": "amulet_adept_sigil",
+          "item_name": "Sigilo del Adepto",
+          "item_type": "amulet",
+          "rarity": "rare",
+          "level_req": 1,
+          "price": 39015
+        },
+        {
+          "catalog_id": 89,
+          "item_code": "armor_scaled",
+          "item_name": "Armadura Escamada",
+          "item_type": "armor",
+          "rarity": "rare",
+          "level_req": 22,
+          "price": 21214
+        },
+        {
+          "catalog_id": 10,
+          "item_code": "armor_plate",
+          "item_name": "Armadura de Placas",
+          "item_type": "armor",
+          "rarity": "rare",
+          "level_req": 25,
+          "price": 24750
+        },
+        {
+          "catalog_id": 90,
+          "item_code": "armor_runic",
+          "item_name": "Armadura Rúnica",
+          "item_type": "armor",
+          "rarity": "rare",
+          "level_req": 28,
+          "price": 28475
+        },
+        {
+          "catalog_id": 181,
+          "item_code": "armor_adept_robe",
+          "item_name": "Túnica del Adepto",
+          "item_type": "armor",
+          "rarity": "rare",
+          "level_req": 1,
+          "price": 40163
+        },
+        {
+          "catalog_id": 93,
+          "item_code": "boots_swift",
+          "item_name": "Botas Veloces",
+          "item_type": "boots",
+          "rarity": "rare",
+          "level_req": 22,
+          "price": 22308
+        },
+        {
+          "catalog_id": 94,
+          "item_code": "boots_ironhide",
+          "item_name": "Botas Ironhide",
+          "item_type": "boots",
+          "rarity": "rare",
+          "level_req": 26,
+          "price": 27148
+        },
+        {
+          "catalog_id": 43,
+          "item_code": "boots_silver",
+          "item_name": "Botas de Plata",
+          "item_type": "boots",
+          "rarity": "rare",
+          "level_req": 28,
+          "price": 29743
+        },
+        {
+          "catalog_id": 183,
+          "item_code": "boots_adept_etheric",
+          "item_name": "Botas Etéreas",
+          "item_type": "boots",
+          "rarity": "rare",
+          "level_req": 1,
+          "price": 30983
+        },
+        {
+          "catalog_id": 91,
+          "item_code": "gloves_runic",
+          "item_name": "Guantes Rúnicos",
+          "item_type": "gloves",
+          "rarity": "rare",
+          "level_req": 22,
+          "price": 24057
+        },
+        {
+          "catalog_id": 92,
+          "item_code": "gloves_assassin",
+          "item_name": "Guantes del Asesino",
+          "item_type": "gloves",
+          "rarity": "rare",
+          "level_req": 26,
+          "price": 29364
+        },
+        {
+          "catalog_id": 39,
+          "item_code": "gloves_arcane",
+          "item_name": "Guantes Arcanos",
+          "item_type": "gloves",
+          "rarity": "rare",
+          "level_req": 28,
+          "price": 30618
+        },
+        {
+          "catalog_id": 184,
+          "item_code": "gloves_adept_mystic",
+          "item_name": "Guantes Místicos",
+          "item_type": "gloves",
+          "rarity": "rare",
+          "level_req": 1,
+          "price": 36720
+        },
+        {
+          "catalog_id": 87,
+          "item_code": "helmet_visor",
+          "item_name": "Yelmo de Visor",
+          "item_type": "helmet",
+          "rarity": "rare",
+          "level_req": 22,
+          "price": 22963
+        },
+        {
+          "catalog_id": 88,
+          "item_code": "helmet_winged",
+          "item_name": "Yelmo Alado",
+          "item_type": "helmet",
+          "rarity": "rare",
+          "level_req": 28,
+          "price": 30924
+        },
+        {
+          "catalog_id": 182,
+          "item_code": "helmet_adept_circlet",
+          "item_name": "Diadema del Adepto",
+          "item_type": "helmet",
+          "rarity": "rare",
+          "level_req": 1,
+          "price": 34425
+        },
+        {
+          "catalog_id": 35,
+          "item_code": "helmet_mithril",
+          "item_name": "Casco de Mitril",
+          "item_type": "helmet",
+          "rarity": "rare",
+          "level_req": 30,
+          "price": 35430
+        },
+        {
+          "catalog_id": 95,
+          "item_code": "ring_topaz",
+          "item_name": "Anillo del Topacio",
+          "item_type": "ring",
+          "rarity": "rare",
+          "level_req": 25,
+          "price": 27411
+        },
+        {
+          "catalog_id": 49,
+          "item_code": "ring_sapphire",
+          "item_name": "Anillo del Zafiro",
+          "item_type": "ring",
+          "rarity": "rare",
+          "level_req": 25,
+          "price": 31164
+        },
+        {
+          "catalog_id": 48,
+          "item_code": "ring_emerald",
+          "item_name": "Anillo Esmeralda",
+          "item_type": "ring",
+          "rarity": "rare",
+          "level_req": 25,
+          "price": 32477
+        },
+        {
+          "catalog_id": 47,
+          "item_code": "ring_ruby",
+          "item_name": "Anillo del Rubí",
+          "item_type": "ring",
+          "rarity": "rare",
+          "level_req": 25,
+          "price": 33789
+        },
+        {
+          "catalog_id": 185,
+          "item_code": "ring_adept_sage",
+          "item_name": "Anillo del Sabio",
+          "item_type": "ring",
+          "rarity": "rare",
+          "level_req": 1,
+          "price": 37868
+        },
+        {
+          "catalog_id": 7,
+          "item_code": "bow_elven",
+          "item_name": "Arco Elfico",
+          "item_type": "weapon",
+          "rarity": "rare",
+          "level_req": 15,
+          "price": 16767
+        },
+        {
+          "catalog_id": 23,
+          "item_code": "sword_silverstrike",
+          "item_name": "Filo de Plata",
+          "item_type": "weapon",
+          "rarity": "rare",
+          "level_req": 22,
+          "price": 17860
+        },
+        {
+          "catalog_id": 26,
+          "item_code": "dagger_venom",
+          "item_name": "Colmillo Venenoso",
+          "item_type": "weapon",
+          "rarity": "rare",
+          "level_req": 20,
+          "price": 20776
+        },
+        {
+          "catalog_id": 3,
+          "item_code": "sword_mithril",
+          "item_name": "Filo de Mitril",
+          "item_type": "weapon",
+          "rarity": "rare",
+          "level_req": 25,
+          "price": 24239
+        },
+        {
+          "catalog_id": 5,
+          "item_code": "staff_arcane",
+          "item_name": "Baston Arcano",
+          "item_type": "weapon",
+          "rarity": "rare",
+          "level_req": 20,
+          "price": 25515
+        },
+        {
+          "catalog_id": 180,
+          "item_code": "staff_adept",
+          "item_name": "Báculo del Adepto",
+          "item_type": "weapon",
+          "rarity": "rare",
+          "level_req": 1,
+          "price": 43605
+        }
+      ],
+      "estimated_probabilities": {
+        "uncommon": 50,
+        "rare": 40,
+        "materials": 10
+      }
+    },
+    {
+      "code": "box_rare",
+      "name": "Cofre Raro",
+      "rarity": "rare",
+      "description": "Cofre valioso. Buenas probabilidades de equipo raro, épico y ocasional legendario.",
+      "sources": [
+        {
+          "zone_id": 17,
+          "zone_name": "Ciudadela Amatista",
+          "zone_min_level": 1,
+          "zone_max_level": 60,
+          "monster_id": 71,
+          "monster_name": "Hidra Amatista",
+          "monster_level": 38,
+          "monster_is_boss": 1,
+          "chance": 5,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 17,
+          "zone_name": "Ciudadela Amatista",
+          "zone_min_level": 1,
+          "zone_max_level": 60,
+          "monster_id": 116,
+          "monster_name": "Drakón Amatista",
+          "monster_level": 40,
+          "monster_is_boss": 1,
+          "chance": 5,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 18,
+          "zone_name": "Bastión Áureo",
+          "zone_min_level": 1,
+          "zone_max_level": 60,
+          "monster_id": 117,
+          "monster_name": "Drakón Áureo",
+          "monster_level": 45,
+          "monster_is_boss": 1,
+          "chance": 5,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 17,
+          "zone_name": "Ciudadela Amatista",
+          "zone_min_level": 1,
+          "zone_max_level": 60,
+          "monster_id": 155,
+          "monster_name": "Soberano Amatista",
+          "monster_level": 50,
+          "monster_is_boss": 1,
+          "chance": 5,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 18,
+          "zone_name": "Bastión Áureo",
+          "zone_min_level": 1,
+          "zone_max_level": 60,
+          "monster_id": 74,
+          "monster_name": "Hidra Áurea",
+          "monster_level": 40,
+          "monster_is_boss": 1,
+          "chance": 4,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 16,
+          "zone_name": "Villa Zafiro",
+          "zone_min_level": 1,
+          "zone_max_level": 60,
+          "monster_id": 68,
+          "monster_name": "Hidra de Zafiro",
+          "monster_level": 33,
+          "monster_is_boss": 1,
+          "chance": 2.5,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 16,
+          "zone_name": "Villa Zafiro",
+          "zone_min_level": 1,
+          "zone_max_level": 60,
+          "monster_id": 115,
+          "monster_name": "Drakón Zafiro",
+          "monster_level": 35,
+          "monster_is_boss": 1,
+          "chance": 2.5,
+          "guaranteed": false
+        },
+        {
+          "zone_id": 16,
+          "zone_name": "Villa Zafiro",
+          "zone_min_level": 1,
+          "zone_max_level": 60,
+          "monster_id": 154,
+          "monster_name": "Soberano Zafiro",
+          "monster_level": 45,
+          "monster_is_boss": 1,
+          "chance": 2.5,
+          "guaranteed": false
+        }
+      ],
+      "equipment_rarities": [
+        "rare",
+        "epic",
+        "legendary"
+      ],
+      "equipment_count": 85,
+      "equipment_items": [
+        {
+          "catalog_id": 19,
+          "item_code": "amulet_gold",
+          "item_name": "Amuleto del Oro",
+          "item_type": "amulet",
+          "rarity": "rare",
+          "level_req": 15,
+          "price": 19683
+        },
+        {
+          "catalog_id": 96,
+          "item_code": "amulet_silver_cross",
+          "item_name": "Amuleto Cruz de Plata",
+          "item_type": "amulet",
+          "rarity": "rare",
+          "level_req": 22,
+          "price": 19683
+        },
+        {
+          "catalog_id": 97,
+          "item_code": "amulet_obsidian",
+          "item_name": "Amuleto de Obsidiana",
+          "item_type": "amulet",
+          "rarity": "rare",
+          "level_req": 28,
+          "price": 32762
+        },
+        {
+          "catalog_id": 186,
+          "item_code": "amulet_adept_sigil",
+          "item_name": "Sigilo del Adepto",
+          "item_type": "amulet",
+          "rarity": "rare",
+          "level_req": 1,
+          "price": 39015
+        },
+        {
+          "catalog_id": 89,
+          "item_code": "armor_scaled",
+          "item_name": "Armadura Escamada",
+          "item_type": "armor",
+          "rarity": "rare",
+          "level_req": 22,
+          "price": 21214
+        },
+        {
+          "catalog_id": 10,
+          "item_code": "armor_plate",
+          "item_name": "Armadura de Placas",
+          "item_type": "armor",
+          "rarity": "rare",
+          "level_req": 25,
+          "price": 24750
+        },
+        {
+          "catalog_id": 90,
+          "item_code": "armor_runic",
+          "item_name": "Armadura Rúnica",
+          "item_type": "armor",
+          "rarity": "rare",
+          "level_req": 28,
+          "price": 28475
+        },
+        {
+          "catalog_id": 181,
+          "item_code": "armor_adept_robe",
+          "item_name": "Túnica del Adepto",
+          "item_type": "armor",
+          "rarity": "rare",
+          "level_req": 1,
+          "price": 40163
+        },
+        {
+          "catalog_id": 93,
+          "item_code": "boots_swift",
+          "item_name": "Botas Veloces",
+          "item_type": "boots",
+          "rarity": "rare",
+          "level_req": 22,
+          "price": 22308
+        },
+        {
+          "catalog_id": 94,
+          "item_code": "boots_ironhide",
+          "item_name": "Botas Ironhide",
+          "item_type": "boots",
+          "rarity": "rare",
+          "level_req": 26,
+          "price": 27148
+        },
+        {
+          "catalog_id": 43,
+          "item_code": "boots_silver",
+          "item_name": "Botas de Plata",
+          "item_type": "boots",
+          "rarity": "rare",
+          "level_req": 28,
+          "price": 29743
+        },
+        {
+          "catalog_id": 183,
+          "item_code": "boots_adept_etheric",
+          "item_name": "Botas Etéreas",
+          "item_type": "boots",
+          "rarity": "rare",
+          "level_req": 1,
+          "price": 30983
+        },
+        {
+          "catalog_id": 91,
+          "item_code": "gloves_runic",
+          "item_name": "Guantes Rúnicos",
+          "item_type": "gloves",
+          "rarity": "rare",
+          "level_req": 22,
+          "price": 24057
+        },
+        {
+          "catalog_id": 92,
+          "item_code": "gloves_assassin",
+          "item_name": "Guantes del Asesino",
+          "item_type": "gloves",
+          "rarity": "rare",
+          "level_req": 26,
+          "price": 29364
+        },
+        {
+          "catalog_id": 39,
+          "item_code": "gloves_arcane",
+          "item_name": "Guantes Arcanos",
+          "item_type": "gloves",
+          "rarity": "rare",
+          "level_req": 28,
+          "price": 30618
+        },
+        {
+          "catalog_id": 184,
+          "item_code": "gloves_adept_mystic",
+          "item_name": "Guantes Místicos",
+          "item_type": "gloves",
+          "rarity": "rare",
+          "level_req": 1,
+          "price": 36720
+        },
+        {
+          "catalog_id": 87,
+          "item_code": "helmet_visor",
+          "item_name": "Yelmo de Visor",
+          "item_type": "helmet",
+          "rarity": "rare",
+          "level_req": 22,
+          "price": 22963
+        },
+        {
+          "catalog_id": 88,
+          "item_code": "helmet_winged",
+          "item_name": "Yelmo Alado",
+          "item_type": "helmet",
+          "rarity": "rare",
+          "level_req": 28,
+          "price": 30924
+        },
+        {
+          "catalog_id": 182,
+          "item_code": "helmet_adept_circlet",
+          "item_name": "Diadema del Adepto",
+          "item_type": "helmet",
+          "rarity": "rare",
+          "level_req": 1,
+          "price": 34425
+        },
+        {
+          "catalog_id": 35,
+          "item_code": "helmet_mithril",
+          "item_name": "Casco de Mitril",
+          "item_type": "helmet",
+          "rarity": "rare",
+          "level_req": 30,
+          "price": 35430
+        },
+        {
+          "catalog_id": 95,
+          "item_code": "ring_topaz",
+          "item_name": "Anillo del Topacio",
+          "item_type": "ring",
+          "rarity": "rare",
+          "level_req": 25,
+          "price": 27411
+        },
+        {
+          "catalog_id": 49,
+          "item_code": "ring_sapphire",
+          "item_name": "Anillo del Zafiro",
+          "item_type": "ring",
+          "rarity": "rare",
+          "level_req": 25,
+          "price": 31164
+        },
+        {
+          "catalog_id": 48,
+          "item_code": "ring_emerald",
+          "item_name": "Anillo Esmeralda",
+          "item_type": "ring",
+          "rarity": "rare",
+          "level_req": 25,
+          "price": 32477
+        },
+        {
+          "catalog_id": 47,
+          "item_code": "ring_ruby",
+          "item_name": "Anillo del Rubí",
+          "item_type": "ring",
+          "rarity": "rare",
+          "level_req": 25,
+          "price": 33789
+        },
+        {
+          "catalog_id": 185,
+          "item_code": "ring_adept_sage",
+          "item_name": "Anillo del Sabio",
+          "item_type": "ring",
+          "rarity": "rare",
+          "level_req": 1,
+          "price": 37868
+        },
+        {
+          "catalog_id": 7,
+          "item_code": "bow_elven",
+          "item_name": "Arco Elfico",
+          "item_type": "weapon",
+          "rarity": "rare",
+          "level_req": 15,
+          "price": 16767
+        },
+        {
+          "catalog_id": 23,
+          "item_code": "sword_silverstrike",
+          "item_name": "Filo de Plata",
+          "item_type": "weapon",
+          "rarity": "rare",
+          "level_req": 22,
+          "price": 17860
+        },
+        {
+          "catalog_id": 26,
+          "item_code": "dagger_venom",
+          "item_name": "Colmillo Venenoso",
+          "item_type": "weapon",
+          "rarity": "rare",
+          "level_req": 20,
+          "price": 20776
+        },
+        {
+          "catalog_id": 3,
+          "item_code": "sword_mithril",
+          "item_name": "Filo de Mitril",
+          "item_type": "weapon",
+          "rarity": "rare",
+          "level_req": 25,
+          "price": 24239
+        },
+        {
+          "catalog_id": 5,
+          "item_code": "staff_arcane",
+          "item_name": "Baston Arcano",
+          "item_type": "weapon",
+          "rarity": "rare",
+          "level_req": 20,
+          "price": 25515
+        },
+        {
+          "catalog_id": 180,
+          "item_code": "staff_adept",
+          "item_name": "Báculo del Adepto",
+          "item_type": "weapon",
+          "rarity": "rare",
+          "level_req": 1,
+          "price": 43605
+        },
+        {
+          "catalog_id": 52,
+          "item_code": "amulet_phoenix",
+          "item_name": "Amuleto del Fénix",
+          "item_type": "amulet",
+          "rarity": "epic",
+          "level_req": 42,
+          "price": 71539
+        },
+        {
+          "catalog_id": 103,
+          "item_code": "amulet_demon",
+          "item_name": "Amuleto Demoníaco",
+          "item_type": "amulet",
+          "rarity": "epic",
+          "level_req": 40,
+          "price": 80870
+        },
+        {
+          "catalog_id": 246,
+          "item_code": "amulet_twilight",
+          "item_name": "Amuleto del Crepúsculo",
+          "item_type": "amulet",
+          "rarity": "epic",
+          "level_req": 45,
+          "price": 95000
+        },
+        {
+          "catalog_id": 193,
+          "item_code": "amulet_archmage_pendant",
+          "item_name": "Pendiente del Archimago",
+          "item_type": "amulet",
+          "rarity": "epic",
+          "level_req": 1,
+          "price": 114750
+        },
+        {
+          "catalog_id": 99,
+          "item_code": "armor_obsidian",
+          "item_name": "Armadura de Obsidiana",
+          "item_type": "armor",
+          "rarity": "epic",
+          "level_req": 38,
+          "price": 69284
+        },
+        {
+          "catalog_id": 32,
+          "item_code": "armor_dragon",
+          "item_name": "Coraza de Dragón",
+          "item_type": "armor",
+          "rarity": "epic",
+          "level_req": 40,
+          "price": 74183
+        },
+        {
+          "catalog_id": 188,
+          "item_code": "armor_archmage_robe",
+          "item_name": "Manto del Archimago",
+          "item_type": "armor",
+          "rarity": "epic",
+          "level_req": 1,
+          "price": 114750
+        },
+        {
+          "catalog_id": 101,
+          "item_code": "boots_phantom",
+          "item_name": "Botas Fantasmales",
+          "item_type": "boots",
+          "rarity": "epic",
+          "level_req": 38,
+          "price": 63685
+        },
+        {
+          "catalog_id": 44,
+          "item_code": "boots_dragon",
+          "item_name": "Botas del Dragón",
+          "item_type": "boots",
+          "rarity": "epic",
+          "level_req": 42,
+          "price": 68584
+        },
+        {
+          "catalog_id": 247,
+          "item_code": "boots_twilight",
+          "item_name": "Botas del Crepúsculo",
+          "item_type": "boots",
+          "rarity": "epic",
+          "level_req": 45,
+          "price": 80000
+        },
+        {
+          "catalog_id": 190,
+          "item_code": "boots_archmage_steps",
+          "item_name": "Pasos del Archimago",
+          "item_type": "boots",
+          "rarity": "epic",
+          "level_req": 1,
+          "price": 97538
+        },
+        {
+          "catalog_id": 100,
+          "item_code": "gloves_demonclaw",
+          "item_name": "Garras Demoníacas",
+          "item_type": "gloves",
+          "rarity": "epic",
+          "level_req": 36,
+          "price": 59097
+        },
+        {
+          "catalog_id": 40,
+          "item_code": "gloves_titan",
+          "item_name": "Puños del Titán",
+          "item_type": "gloves",
+          "rarity": "epic",
+          "level_req": 40,
+          "price": 62830
+        },
+        {
+          "catalog_id": 248,
+          "item_code": "gloves_twilight",
+          "item_name": "Guanteletes del Crepúsculo",
+          "item_type": "gloves",
+          "rarity": "epic",
+          "level_req": 45,
+          "price": 85000
+        },
+        {
+          "catalog_id": 191,
+          "item_code": "gloves_archmage_runes",
+          "item_name": "Guantes Rúnicos del Archimago",
+          "item_type": "gloves",
+          "rarity": "epic",
+          "level_req": 1,
+          "price": 103275
+        },
+        {
+          "catalog_id": 98,
+          "item_code": "helmet_demon",
+          "item_name": "Yelmo Demoníaco",
+          "item_type": "helmet",
+          "rarity": "epic",
+          "level_req": 38,
+          "price": 72084
+        },
+        {
+          "catalog_id": 249,
+          "item_code": "helmet_twilight",
+          "item_name": "Yelmo del Crepúsculo",
+          "item_type": "helmet",
+          "rarity": "epic",
+          "level_req": 45,
+          "price": 80000
+        },
+        {
+          "catalog_id": 36,
+          "item_code": "helmet_dragon",
+          "item_name": "Yelmo del Dragón",
+          "item_type": "helmet",
+          "rarity": "epic",
+          "level_req": 42,
+          "price": 80870
+        },
+        {
+          "catalog_id": 189,
+          "item_code": "helmet_archmage_diadem",
+          "item_name": "Diadema del Archimago",
+          "item_type": "helmet",
+          "rarity": "epic",
+          "level_req": 1,
+          "price": 109013
+        },
+        {
+          "catalog_id": 250,
+          "item_code": "ring_twilight",
+          "item_name": "Anillo del Crepúsculo",
+          "item_type": "ring",
+          "rarity": "epic",
+          "level_req": 45,
+          "price": 75000
+        },
+        {
+          "catalog_id": 251,
+          "item_code": "seal_twilight",
+          "item_name": "Sello del Crepúsculo",
+          "item_type": "ring",
+          "rarity": "epic",
+          "level_req": 45,
+          "price": 75000
+        },
+        {
+          "catalog_id": 20,
+          "item_code": "ring_thief",
+          "item_name": "Anillo del Ladron",
+          "item_type": "ring",
+          "rarity": "epic",
+          "level_req": 25,
+          "price": 80870
+        },
+        {
+          "catalog_id": 102,
+          "item_code": "ring_void",
+          "item_name": "Anillo del Vacío",
+          "item_type": "ring",
+          "rarity": "epic",
+          "level_req": 38,
+          "price": 83980
+        },
+        {
+          "catalog_id": 192,
+          "item_code": "ring_archmage_seer",
+          "item_name": "Anillo del Vidente",
+          "item_type": "ring",
+          "rarity": "epic",
+          "level_req": 1,
+          "price": 120488
+        },
+        {
+          "catalog_id": 24,
+          "item_code": "sword_dragonbone",
+          "item_name": "Hueso de Dragón",
+          "item_type": "weapon",
+          "rarity": "epic",
+          "level_req": 35,
+          "price": 43856
+        },
+        {
+          "catalog_id": 28,
+          "item_code": "bow_stormcaller",
+          "item_name": "Arco del Tormenta",
+          "item_type": "weapon",
+          "rarity": "epic",
+          "level_req": 40,
+          "price": 67184
+        },
+        {
+          "catalog_id": 31,
+          "item_code": "staff_celestial",
+          "item_name": "Báculo Celestial",
+          "item_type": "weapon",
+          "rarity": "epic",
+          "level_req": 42,
+          "price": 90512
+        },
+        {
+          "catalog_id": 252,
+          "item_code": "sword_twilight",
+          "item_name": "Espada del Crepúsculo",
+          "item_type": "weapon",
+          "rarity": "epic",
+          "level_req": 45,
+          "price": 100000
+        },
+        {
+          "catalog_id": 4,
+          "item_code": "sword_shadow",
+          "item_name": "Sombrahoja",
+          "item_type": "weapon",
+          "rarity": "epic",
+          "level_req": 40,
+          "price": 106142
+        },
+        {
+          "catalog_id": 187,
+          "item_code": "staff_archmage",
+          "item_name": "Báculo del Archimago",
+          "item_type": "weapon",
+          "rarity": "epic",
+          "level_req": 1,
+          "price": 126225
+        },
+        {
+          "catalog_id": 200,
+          "item_code": "amulet_chronomancer_star",
+          "item_name": "Amuleto Estelar",
+          "item_type": "amulet",
+          "rarity": "legendary",
+          "level_req": 1,
+          "price": 286875
+        },
+        {
+          "catalog_id": 239,
+          "item_code": "amulet_eternal",
+          "item_name": "Amuleto del Eterno",
+          "item_type": "amulet",
+          "rarity": "legendary",
+          "level_req": 50,
+          "price": 350000
+        },
+        {
+          "catalog_id": 129,
+          "item_code": "armor_dragonscale",
+          "item_name": "Escamas de Dragon",
+          "item_type": "armor",
+          "rarity": "legendary",
+          "level_req": 55,
+          "price": 183052
+        },
+        {
+          "catalog_id": 195,
+          "item_code": "armor_chronomancer_robe",
+          "item_name": "Manto Cósmico",
+          "item_type": "armor",
+          "rarity": "legendary",
+          "level_req": 1,
+          "price": 252450
+        },
+        {
+          "catalog_id": 134,
+          "item_code": "armor_eternal",
+          "item_name": "Coraza Eterna",
+          "item_type": "armor",
+          "rarity": "legendary",
+          "level_req": 60,
+          "price": 312304
+        },
+        {
+          "catalog_id": 197,
+          "item_code": "boots_chronomancer_steps",
+          "item_name": "Pasos del Cronomante",
+          "item_type": "boots",
+          "rarity": "legendary",
+          "level_req": 1,
+          "price": 212288
+        },
+        {
+          "catalog_id": 137,
+          "item_code": "boots_wind",
+          "item_name": "Pies del Viento",
+          "item_type": "boots",
+          "rarity": "legendary",
+          "level_req": 62,
+          "price": 267251
+        },
+        {
+          "catalog_id": 240,
+          "item_code": "boots_eternal",
+          "item_name": "Botas del Eterno",
+          "item_type": "boots",
+          "rarity": "legendary",
+          "level_req": 50,
+          "price": 280000
+        },
+        {
+          "catalog_id": 198,
+          "item_code": "gloves_chronomancer_grasp",
+          "item_name": "Manos del Cronomante",
+          "item_type": "gloves",
+          "rarity": "legendary",
+          "level_req": 1,
+          "price": 223763
+        },
+        {
+          "catalog_id": 136,
+          "item_code": "gloves_underworld",
+          "item_name": "Garras del Inframundo",
+          "item_type": "gloves",
+          "rarity": "legendary",
+          "level_req": 62,
+          "price": 275781
+        },
+        {
+          "catalog_id": 241,
+          "item_code": "gloves_eternal",
+          "item_name": "Guanteletes del Eterno",
+          "item_type": "gloves",
+          "rarity": "legendary",
+          "level_req": 50,
+          "price": 285000
+        },
+        {
+          "catalog_id": 196,
+          "item_code": "helmet_chronomancer_crown",
+          "item_name": "Corona Estelar",
+          "item_type": "helmet",
+          "rarity": "legendary",
+          "level_req": 1,
+          "price": 229500
+        },
+        {
+          "catalog_id": 135,
+          "item_code": "helmet_godsight",
+          "item_name": "Visión Divina",
+          "item_type": "helmet",
+          "rarity": "legendary",
+          "level_req": 60,
+          "price": 262440
+        },
+        {
+          "catalog_id": 242,
+          "item_code": "helmet_eternal",
+          "item_name": "Yelmo del Eterno",
+          "item_type": "helmet",
+          "rarity": "legendary",
+          "level_req": 50,
+          "price": 290000
+        },
+        {
+          "catalog_id": 138,
+          "item_code": "ring_dragon",
+          "item_name": "Anillo del Dragón",
+          "item_type": "ring",
+          "rarity": "legendary",
+          "level_req": 55,
+          "price": 238820
+        },
+        {
+          "catalog_id": 199,
+          "item_code": "ring_chronomancer_loop",
+          "item_name": "Anillo Cósmico",
+          "item_type": "ring",
+          "rarity": "legendary",
+          "level_req": 1,
+          "price": 263925
+        },
+        {
+          "catalog_id": 243,
+          "item_code": "ring_eternal",
+          "item_name": "Anillo del Eterno",
+          "item_type": "ring",
+          "rarity": "legendary",
+          "level_req": 50,
+          "price": 290000
+        },
+        {
+          "catalog_id": 244,
+          "item_code": "seal_eternal",
+          "item_name": "Sello del Eterno",
+          "item_type": "ring",
+          "rarity": "legendary",
+          "level_req": 50,
+          "price": 290000
+        },
+        {
+          "catalog_id": 131,
+          "item_code": "sword_titanblade",
+          "item_name": "Filo del Titán",
+          "item_type": "weapon",
+          "rarity": "legendary",
+          "level_req": 55,
+          "price": 216513
+        },
+        {
+          "catalog_id": 128,
+          "item_code": "sword_eldoria",
+          "item_name": "Espada de Eldoria",
+          "item_type": "weapon",
+          "rarity": "legendary",
+          "level_req": 60,
+          "price": 236196
+        },
+        {
+          "catalog_id": 194,
+          "item_code": "staff_chronomancer",
+          "item_name": "Báculo del Cronomante",
+          "item_type": "weapon",
+          "rarity": "legendary",
+          "level_req": 1,
+          "price": 275400
+        },
+        {
+          "catalog_id": 132,
+          "item_code": "bow_phoenix",
+          "item_name": "Arco del Fénix",
+          "item_type": "weapon",
+          "rarity": "legendary",
+          "level_req": 60,
+          "price": 281686
+        },
+        {
+          "catalog_id": 133,
+          "item_code": "staff_archon",
+          "item_name": "Cetro del Arconte",
+          "item_type": "weapon",
+          "rarity": "legendary",
+          "level_req": 65,
+          "price": 305087
+        },
+        {
+          "catalog_id": 245,
+          "item_code": "sword_eternal",
+          "item_name": "Espada del Eterno",
+          "item_type": "weapon",
+          "rarity": "legendary",
+          "level_req": 50,
+          "price": 320000
+        }
+      ],
+      "estimated_probabilities": {
+        "rare": 50,
+        "epic": 35,
+        "legendary": 15
+      }
+    },
+    {
+      "code": "box_mythic",
+      "name": "Cofre Mítico",
+      "rarity": "mythic",
+      "description": "Cofre de élite. Alta probabilidad de equipo épico, mítico y legendario.",
+      "sources": [
+        {
+          "zone_id": 19,
+          "zone_name": "Sanctum Mítico",
+          "zone_min_level": 1,
+          "zone_max_level": 70,
+          "monster_id": 77,
+          "monster_name": "Hidra Primigenia",
+          "monster_level": 70,
+          "monster_is_boss": 1,
+          "chance": 1,
+          "guaranteed": false
+        }
+      ],
+      "equipment_rarities": [
+        "epic",
+        "mythic",
+        "legendary"
+      ],
+      "equipment_count": 67,
+      "equipment_items": [
+        {
+          "catalog_id": 52,
+          "item_code": "amulet_phoenix",
+          "item_name": "Amuleto del Fénix",
+          "item_type": "amulet",
+          "rarity": "epic",
+          "level_req": 42,
+          "price": 71539
+        },
+        {
+          "catalog_id": 103,
+          "item_code": "amulet_demon",
+          "item_name": "Amuleto Demoníaco",
+          "item_type": "amulet",
+          "rarity": "epic",
+          "level_req": 40,
+          "price": 80870
+        },
+        {
+          "catalog_id": 246,
+          "item_code": "amulet_twilight",
+          "item_name": "Amuleto del Crepúsculo",
+          "item_type": "amulet",
+          "rarity": "epic",
+          "level_req": 45,
+          "price": 95000
+        },
+        {
+          "catalog_id": 193,
+          "item_code": "amulet_archmage_pendant",
+          "item_name": "Pendiente del Archimago",
+          "item_type": "amulet",
+          "rarity": "epic",
+          "level_req": 1,
+          "price": 114750
+        },
+        {
+          "catalog_id": 99,
+          "item_code": "armor_obsidian",
+          "item_name": "Armadura de Obsidiana",
+          "item_type": "armor",
+          "rarity": "epic",
+          "level_req": 38,
+          "price": 69284
+        },
+        {
+          "catalog_id": 32,
+          "item_code": "armor_dragon",
+          "item_name": "Coraza de Dragón",
+          "item_type": "armor",
+          "rarity": "epic",
+          "level_req": 40,
+          "price": 74183
+        },
+        {
+          "catalog_id": 188,
+          "item_code": "armor_archmage_robe",
+          "item_name": "Manto del Archimago",
+          "item_type": "armor",
+          "rarity": "epic",
+          "level_req": 1,
+          "price": 114750
+        },
+        {
+          "catalog_id": 101,
+          "item_code": "boots_phantom",
+          "item_name": "Botas Fantasmales",
+          "item_type": "boots",
+          "rarity": "epic",
+          "level_req": 38,
+          "price": 63685
+        },
+        {
+          "catalog_id": 44,
+          "item_code": "boots_dragon",
+          "item_name": "Botas del Dragón",
+          "item_type": "boots",
+          "rarity": "epic",
+          "level_req": 42,
+          "price": 68584
+        },
+        {
+          "catalog_id": 247,
+          "item_code": "boots_twilight",
+          "item_name": "Botas del Crepúsculo",
+          "item_type": "boots",
+          "rarity": "epic",
+          "level_req": 45,
+          "price": 80000
+        },
+        {
+          "catalog_id": 190,
+          "item_code": "boots_archmage_steps",
+          "item_name": "Pasos del Archimago",
+          "item_type": "boots",
+          "rarity": "epic",
+          "level_req": 1,
+          "price": 97538
+        },
+        {
+          "catalog_id": 100,
+          "item_code": "gloves_demonclaw",
+          "item_name": "Garras Demoníacas",
+          "item_type": "gloves",
+          "rarity": "epic",
+          "level_req": 36,
+          "price": 59097
+        },
+        {
+          "catalog_id": 40,
+          "item_code": "gloves_titan",
+          "item_name": "Puños del Titán",
+          "item_type": "gloves",
+          "rarity": "epic",
+          "level_req": 40,
+          "price": 62830
+        },
+        {
+          "catalog_id": 248,
+          "item_code": "gloves_twilight",
+          "item_name": "Guanteletes del Crepúsculo",
+          "item_type": "gloves",
+          "rarity": "epic",
+          "level_req": 45,
+          "price": 85000
+        },
+        {
+          "catalog_id": 191,
+          "item_code": "gloves_archmage_runes",
+          "item_name": "Guantes Rúnicos del Archimago",
+          "item_type": "gloves",
+          "rarity": "epic",
+          "level_req": 1,
+          "price": 103275
+        },
+        {
+          "catalog_id": 98,
+          "item_code": "helmet_demon",
+          "item_name": "Yelmo Demoníaco",
+          "item_type": "helmet",
+          "rarity": "epic",
+          "level_req": 38,
+          "price": 72084
+        },
+        {
+          "catalog_id": 249,
+          "item_code": "helmet_twilight",
+          "item_name": "Yelmo del Crepúsculo",
+          "item_type": "helmet",
+          "rarity": "epic",
+          "level_req": 45,
+          "price": 80000
+        },
+        {
+          "catalog_id": 36,
+          "item_code": "helmet_dragon",
+          "item_name": "Yelmo del Dragón",
+          "item_type": "helmet",
+          "rarity": "epic",
+          "level_req": 42,
+          "price": 80870
+        },
+        {
+          "catalog_id": 189,
+          "item_code": "helmet_archmage_diadem",
+          "item_name": "Diadema del Archimago",
+          "item_type": "helmet",
+          "rarity": "epic",
+          "level_req": 1,
+          "price": 109013
+        },
+        {
+          "catalog_id": 250,
+          "item_code": "ring_twilight",
+          "item_name": "Anillo del Crepúsculo",
+          "item_type": "ring",
+          "rarity": "epic",
+          "level_req": 45,
+          "price": 75000
+        },
+        {
+          "catalog_id": 251,
+          "item_code": "seal_twilight",
+          "item_name": "Sello del Crepúsculo",
+          "item_type": "ring",
+          "rarity": "epic",
+          "level_req": 45,
+          "price": 75000
+        },
+        {
+          "catalog_id": 20,
+          "item_code": "ring_thief",
+          "item_name": "Anillo del Ladron",
+          "item_type": "ring",
+          "rarity": "epic",
+          "level_req": 25,
+          "price": 80870
+        },
+        {
+          "catalog_id": 102,
+          "item_code": "ring_void",
+          "item_name": "Anillo del Vacío",
+          "item_type": "ring",
+          "rarity": "epic",
+          "level_req": 38,
+          "price": 83980
+        },
+        {
+          "catalog_id": 192,
+          "item_code": "ring_archmage_seer",
+          "item_name": "Anillo del Vidente",
+          "item_type": "ring",
+          "rarity": "epic",
+          "level_req": 1,
+          "price": 120488
+        },
+        {
+          "catalog_id": 24,
+          "item_code": "sword_dragonbone",
+          "item_name": "Hueso de Dragón",
+          "item_type": "weapon",
+          "rarity": "epic",
+          "level_req": 35,
+          "price": 43856
+        },
+        {
+          "catalog_id": 28,
+          "item_code": "bow_stormcaller",
+          "item_name": "Arco del Tormenta",
+          "item_type": "weapon",
+          "rarity": "epic",
+          "level_req": 40,
+          "price": 67184
+        },
+        {
+          "catalog_id": 31,
+          "item_code": "staff_celestial",
+          "item_name": "Báculo Celestial",
+          "item_type": "weapon",
+          "rarity": "epic",
+          "level_req": 42,
+          "price": 90512
+        },
+        {
+          "catalog_id": 252,
+          "item_code": "sword_twilight",
+          "item_name": "Espada del Crepúsculo",
+          "item_type": "weapon",
+          "rarity": "epic",
+          "level_req": 45,
+          "price": 100000
+        },
+        {
+          "catalog_id": 4,
+          "item_code": "sword_shadow",
+          "item_name": "Sombrahoja",
+          "item_type": "weapon",
+          "rarity": "epic",
+          "level_req": 40,
+          "price": 106142
+        },
+        {
+          "catalog_id": 187,
+          "item_code": "staff_archmage",
+          "item_name": "Báculo del Archimago",
+          "item_type": "weapon",
+          "rarity": "epic",
+          "level_req": 1,
+          "price": 126225
+        },
+        {
+          "catalog_id": 146,
+          "item_code": "amulet_underworld",
+          "item_name": "Amuleto del Inframundo",
+          "item_type": "amulet",
+          "rarity": "mythic",
+          "level_req": 50,
+          "price": 510300
+        },
+        {
+          "catalog_id": 207,
+          "item_code": "amulet_primal_origin",
+          "item_name": "Amuleto del Origen",
+          "item_type": "amulet",
+          "rarity": "mythic",
+          "level_req": 1,
+          "price": 573750
+        },
+        {
+          "catalog_id": 202,
+          "item_code": "armor_primal_robe",
+          "item_name": "Manto Primigenio",
+          "item_type": "armor",
+          "rarity": "mythic",
+          "level_req": 1,
+          "price": 504900
+        },
+        {
+          "catalog_id": 144,
+          "item_code": "armor_void",
+          "item_name": "Armadura del Vacío",
+          "item_type": "armor",
+          "rarity": "mythic",
+          "level_req": 50,
+          "price": 685260
+        },
+        {
+          "catalog_id": 204,
+          "item_code": "boots_primal_eternal",
+          "item_name": "Pies del Eterno",
+          "item_type": "boots",
+          "rarity": "mythic",
+          "level_req": 1,
+          "price": 459000
+        },
+        {
+          "catalog_id": 205,
+          "item_code": "gloves_primal_origin",
+          "item_name": "Garras del Origen",
+          "item_type": "gloves",
+          "rarity": "mythic",
+          "level_req": 1,
+          "price": 470475
+        },
+        {
+          "catalog_id": 203,
+          "item_code": "helmet_primal_crown",
+          "item_name": "Corona Primigenia",
+          "item_type": "helmet",
+          "rarity": "mythic",
+          "level_req": 1,
+          "price": 481950
+        },
+        {
+          "catalog_id": 206,
+          "item_code": "ring_primal_eternal",
+          "item_name": "Anillo del Eterno",
+          "item_type": "ring",
+          "rarity": "mythic",
+          "level_req": 1,
+          "price": 550800
+        },
+        {
+          "catalog_id": 145,
+          "item_code": "ring_time",
+          "item_name": "Anillo del Tiempo",
+          "item_type": "ring",
+          "rarity": "mythic",
+          "level_req": 50,
+          "price": 612360
+        },
+        {
+          "catalog_id": 201,
+          "item_code": "staff_primal",
+          "item_name": "Báculo Primigenio",
+          "item_type": "weapon",
+          "rarity": "mythic",
+          "level_req": 1,
+          "price": 527850
+        },
+        {
+          "catalog_id": 147,
+          "item_code": "dagger_eternal",
+          "item_name": "Daga Eterna",
+          "item_type": "weapon",
+          "rarity": "mythic",
+          "level_req": 50,
+          "price": 583200
+        },
+        {
+          "catalog_id": 148,
+          "item_code": "sword_voidblade",
+          "item_name": "Filo del Vacío",
+          "item_type": "weapon",
+          "rarity": "mythic",
+          "level_req": 50,
+          "price": 656100
+        },
+        {
+          "catalog_id": 143,
+          "item_code": "sword_cataclysm",
+          "item_name": "Espada del Cataclismo",
+          "item_type": "weapon",
+          "rarity": "mythic",
+          "level_req": 50,
+          "price": 729000
+        },
+        {
+          "catalog_id": 200,
+          "item_code": "amulet_chronomancer_star",
+          "item_name": "Amuleto Estelar",
+          "item_type": "amulet",
+          "rarity": "legendary",
+          "level_req": 1,
+          "price": 286875
+        },
+        {
+          "catalog_id": 239,
+          "item_code": "amulet_eternal",
+          "item_name": "Amuleto del Eterno",
+          "item_type": "amulet",
+          "rarity": "legendary",
+          "level_req": 50,
+          "price": 350000
+        },
+        {
+          "catalog_id": 129,
+          "item_code": "armor_dragonscale",
+          "item_name": "Escamas de Dragon",
+          "item_type": "armor",
+          "rarity": "legendary",
+          "level_req": 55,
+          "price": 183052
+        },
+        {
+          "catalog_id": 195,
+          "item_code": "armor_chronomancer_robe",
+          "item_name": "Manto Cósmico",
+          "item_type": "armor",
+          "rarity": "legendary",
+          "level_req": 1,
+          "price": 252450
+        },
+        {
+          "catalog_id": 134,
+          "item_code": "armor_eternal",
+          "item_name": "Coraza Eterna",
+          "item_type": "armor",
+          "rarity": "legendary",
+          "level_req": 60,
+          "price": 312304
+        },
+        {
+          "catalog_id": 197,
+          "item_code": "boots_chronomancer_steps",
+          "item_name": "Pasos del Cronomante",
+          "item_type": "boots",
+          "rarity": "legendary",
+          "level_req": 1,
+          "price": 212288
+        },
+        {
+          "catalog_id": 137,
+          "item_code": "boots_wind",
+          "item_name": "Pies del Viento",
+          "item_type": "boots",
+          "rarity": "legendary",
+          "level_req": 62,
+          "price": 267251
+        },
+        {
+          "catalog_id": 240,
+          "item_code": "boots_eternal",
+          "item_name": "Botas del Eterno",
+          "item_type": "boots",
+          "rarity": "legendary",
+          "level_req": 50,
+          "price": 280000
+        },
+        {
+          "catalog_id": 198,
+          "item_code": "gloves_chronomancer_grasp",
+          "item_name": "Manos del Cronomante",
+          "item_type": "gloves",
+          "rarity": "legendary",
+          "level_req": 1,
+          "price": 223763
+        },
+        {
+          "catalog_id": 136,
+          "item_code": "gloves_underworld",
+          "item_name": "Garras del Inframundo",
+          "item_type": "gloves",
+          "rarity": "legendary",
+          "level_req": 62,
+          "price": 275781
+        },
+        {
+          "catalog_id": 241,
+          "item_code": "gloves_eternal",
+          "item_name": "Guanteletes del Eterno",
+          "item_type": "gloves",
+          "rarity": "legendary",
+          "level_req": 50,
+          "price": 285000
+        },
+        {
+          "catalog_id": 196,
+          "item_code": "helmet_chronomancer_crown",
+          "item_name": "Corona Estelar",
+          "item_type": "helmet",
+          "rarity": "legendary",
+          "level_req": 1,
+          "price": 229500
+        },
+        {
+          "catalog_id": 135,
+          "item_code": "helmet_godsight",
+          "item_name": "Visión Divina",
+          "item_type": "helmet",
+          "rarity": "legendary",
+          "level_req": 60,
+          "price": 262440
+        },
+        {
+          "catalog_id": 242,
+          "item_code": "helmet_eternal",
+          "item_name": "Yelmo del Eterno",
+          "item_type": "helmet",
+          "rarity": "legendary",
+          "level_req": 50,
+          "price": 290000
+        },
+        {
+          "catalog_id": 138,
+          "item_code": "ring_dragon",
+          "item_name": "Anillo del Dragón",
+          "item_type": "ring",
+          "rarity": "legendary",
+          "level_req": 55,
+          "price": 238820
+        },
+        {
+          "catalog_id": 199,
+          "item_code": "ring_chronomancer_loop",
+          "item_name": "Anillo Cósmico",
+          "item_type": "ring",
+          "rarity": "legendary",
+          "level_req": 1,
+          "price": 263925
+        },
+        {
+          "catalog_id": 243,
+          "item_code": "ring_eternal",
+          "item_name": "Anillo del Eterno",
+          "item_type": "ring",
+          "rarity": "legendary",
+          "level_req": 50,
+          "price": 290000
+        },
+        {
+          "catalog_id": 244,
+          "item_code": "seal_eternal",
+          "item_name": "Sello del Eterno",
+          "item_type": "ring",
+          "rarity": "legendary",
+          "level_req": 50,
+          "price": 290000
+        },
+        {
+          "catalog_id": 131,
+          "item_code": "sword_titanblade",
+          "item_name": "Filo del Titán",
+          "item_type": "weapon",
+          "rarity": "legendary",
+          "level_req": 55,
+          "price": 216513
+        },
+        {
+          "catalog_id": 128,
+          "item_code": "sword_eldoria",
+          "item_name": "Espada de Eldoria",
+          "item_type": "weapon",
+          "rarity": "legendary",
+          "level_req": 60,
+          "price": 236196
+        },
+        {
+          "catalog_id": 194,
+          "item_code": "staff_chronomancer",
+          "item_name": "Báculo del Cronomante",
+          "item_type": "weapon",
+          "rarity": "legendary",
+          "level_req": 1,
+          "price": 275400
+        },
+        {
+          "catalog_id": 132,
+          "item_code": "bow_phoenix",
+          "item_name": "Arco del Fénix",
+          "item_type": "weapon",
+          "rarity": "legendary",
+          "level_req": 60,
+          "price": 281686
+        },
+        {
+          "catalog_id": 133,
+          "item_code": "staff_archon",
+          "item_name": "Cetro del Arconte",
+          "item_type": "weapon",
+          "rarity": "legendary",
+          "level_req": 65,
+          "price": 305087
+        },
+        {
+          "catalog_id": 245,
+          "item_code": "sword_eternal",
+          "item_name": "Espada del Eterno",
+          "item_type": "weapon",
+          "rarity": "legendary",
+          "level_req": 50,
+          "price": 320000
+        }
+      ],
+      "estimated_probabilities": {
+        "epic": 35,
+        "mythic": 40,
+        "legendary": 25
+      }
+    }
+  ],
+  "generated_at": "2026-06-23T03:57:32.096Z",
+  "disclaimer": "Probabilidades y contenido de cofres estimados. Los datos exactos requieren endpoint /inventory/box-contents autenticado."
+}
