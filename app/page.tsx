@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import zonesData from "@/public/eldoria_zones_with_loot.json";
 import Link from "next/link";
 
@@ -118,6 +118,45 @@ const RARITY_BG: Record<string, string> = {
   legendary: "bg-yellow-900/40 border-yellow-700",
 };
 
+const RARITY_HEX: Record<string, string> = {
+  common: "#94a3b8",
+  uncommon: "#34d399",
+  rare: "#60a5fa",
+  epic: "#c084fc",
+  mythic: "#fb923c",
+  legendary: "#facc15",
+};
+
+function StatIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+      <path d="M12 7v10M7 12h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function SkillIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <path d="M12 21V11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path d="M12 11C12 11 8 8 5 9c0 0 1-4 4-3 0 0-1-4 3-5 0 0 0 4-3 5 3-1 6 1 6 1s2 3-2 5c0 0 2 2 3 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M7 21h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function SwordIcon({ className, color }: { className?: string; color?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <path d="M14.5 3.5L20.5 9.5L10 20L4 14L14.5 3.5Z" stroke={color || "currentColor"} strokeWidth="2" strokeLinejoin="round" />
+      <path d="M14.5 3.5L20.5 9.5" stroke={color || "currentColor"} strokeWidth="2" strokeLinecap="round" />
+      <path d="M4 14L7.5 17.5" stroke={color || "currentColor"} strokeWidth="2" strokeLinecap="round" />
+      <path d="M10 20L7.5 17.5" stroke={color || "currentColor"} strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 export default function Home() {
   const [zones] = useState<Zone[]>(zonesData.zones || []);
   const [search, setSearch] = useState("");
@@ -195,24 +234,24 @@ export default function Home() {
   };
 
   const getMonsterHighlights = (m: Monster) => {
-    const highlights: { icon: string; label: string; color: string }[] = [];
+    const highlights: { icon: ReactNode; label: string; color: string }[] = [];
     if (m.attribute_point_chance && m.attribute_point_chance > 0) {
-      highlights.push({ icon: "◆", label: `${m.attribute_point_chance}% attr`, color: "text-amber-400" });
+      highlights.push({ icon: <StatIcon className="w-3.5 h-3.5" />, label: `${m.attribute_point_chance}% attr`, color: "text-amber-400" });
     }
     if (m.skill_tree_point_chance && m.skill_tree_point_chance > 0) {
-      highlights.push({ icon: "⬡", label: `${m.skill_tree_point_chance}% skill`, color: "text-cyan-400" });
+      highlights.push({ icon: <SkillIcon className="w-3.5 h-3.5" />, label: `${m.skill_tree_point_chance}% skill`, color: "text-cyan-400" });
     }
     if (m.unique_drop_chance && m.unique_drop_chance > 0) {
-      highlights.push({ icon: "★", label: `unique ${m.unique_drop_chance}%`, color: "text-yellow-400" });
+      highlights.push({ icon: <SwordIcon className="w-3.5 h-3.5" color={RARITY_HEX.common} />, label: `unique ${m.unique_drop_chance}%`, color: "text-slate-300" });
     }
     if (m.unique_uncommon_drop_chance && m.unique_uncommon_drop_chance > 0) {
-      highlights.push({ icon: "◆", label: `inusual ${m.unique_uncommon_drop_chance}%`, color: "text-emerald-400" });
+      highlights.push({ icon: <SwordIcon className="w-3.5 h-3.5" color={RARITY_HEX.uncommon} />, label: `inusual ${m.unique_uncommon_drop_chance}%`, color: "text-emerald-400" });
     }
     if (m.unique_rare_drop_chance && m.unique_rare_drop_chance > 0) {
-      highlights.push({ icon: "◆", label: `raro ${m.unique_rare_drop_chance}%`, color: "text-blue-400" });
+      highlights.push({ icon: <SwordIcon className="w-3.5 h-3.5" color={RARITY_HEX.rare} />, label: `raro ${m.unique_rare_drop_chance}%`, color: "text-blue-400" });
     }
     if (m.unique_epic_drop_chance && m.unique_epic_drop_chance > 0) {
-      highlights.push({ icon: "◆", label: `épico ${m.unique_epic_drop_chance}%`, color: "text-purple-400" });
+      highlights.push({ icon: <SwordIcon className="w-3.5 h-3.5" color={RARITY_HEX.epic} />, label: `épico ${m.unique_epic_drop_chance}%`, color: "text-purple-400" });
     }
     return highlights;
   };
@@ -392,7 +431,7 @@ export default function Home() {
                                                 <span>{m.name}</span>
                                                 {m.is_boss ? <span className="text-[10px] text-purple-400 font-bold">BOSS</span> : null}
                                                 {highlights.map((h, i) => (
-                                                  <span key={i} className={`text-[10px] ${h.color}`} title={h.label}>
+                                                  <span key={i} className={`${h.color}`} title={h.label}>
                                                     {h.icon}
                                                   </span>
                                                 ))}
@@ -447,11 +486,13 @@ export default function Home() {
             className="fixed z-50 bg-slate-900 border border-slate-700 rounded-lg p-3 shadow-xl pointer-events-none"
             style={{ left: hoverPos.x + 16, top: hoverPos.y - 8 }}
           >
-            <p className="text-xs font-bold text-slate-200 mb-1">
-              {m.name}
-              {m.is_boss ? <span className="ml-1.5 text-[10px] text-purple-400">BOSS</span> : null}
+            <p className="text-xs font-bold text-slate-200 mb-1 flex items-center gap-1.5">
+              <span>{m.name}</span>
+              {m.is_boss ? <span className="text-[10px] text-purple-400">BOSS</span> : null}
               {highlights.map((h, i) => (
-                <span key={i} className={`ml-1.5 text-[10px] ${h.color}`}>{h.icon} {h.label}</span>
+                <span key={i} className={`${h.color} flex items-center gap-0.5`} title={h.label}>
+                  {h.icon}
+                </span>
               ))}
             </p>
             {drops.length > 0 && (
@@ -461,7 +502,7 @@ export default function Home() {
                   {drops.map((d, i) => (
                     <div key={i} className="flex items-center gap-2 text-[11px]">
                       <span className={`font-medium ${RARITY_COLORS[d.rarity] || "text-slate-400"}`}>{d.name}</span>
-                      <span className="text-slate-600">×{d.qty}</span>
+                      {d.qty > 1 && <span className="text-slate-600">x{d.qty}</span>}
                       <span className={`ml-auto ${d.guaranteed ? "text-emerald-400" : "text-slate-500"}`}>
                         {d.guaranteed ? "100%" : `${d.chance}%`}
                       </span>
@@ -471,14 +512,16 @@ export default function Home() {
               </>
             )}
             {m.attribute_point_chance && m.attribute_point_chance > 0 && (
-              <div className="mt-2 pt-1.5 border-t border-slate-800 text-[11px]">
-                <span className="text-amber-400">◆ Attr points: {m.attribute_point_chance}%</span>
+              <div className="mt-2 pt-1.5 border-t border-slate-800 text-[11px] flex items-center gap-1">
+                <StatIcon className="w-3 h-3 text-amber-400" />
+                <span className="text-amber-400">Attr points: {m.attribute_point_chance}%</span>
                 {m.attribute_point_max_per_player ? <span className="text-slate-600 ml-1">(max {m.attribute_point_max_per_player})</span> : null}
               </div>
             )}
             {m.skill_tree_point_chance && m.skill_tree_point_chance > 0 && (
-              <div className="text-[11px]">
-                <span className="text-cyan-400">⬡ Skill points: {m.skill_tree_point_chance}%</span>
+              <div className="text-[11px] flex items-center gap-1">
+                <SkillIcon className="w-3 h-3 text-cyan-400" />
+                <span className="text-cyan-400">Skill points: {m.skill_tree_point_chance}%</span>
                 {m.skill_tree_point_max_per_player ? <span className="text-slate-600 ml-1">(max {m.skill_tree_point_max_per_player})</span> : null}
               </div>
             )}
