@@ -376,7 +376,7 @@ export default function Home() {
                               {bossCount > 0 ? <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-purple-900/40 text-purple-300 border border-purple-800">{bossCount} boss</span> : null}
                             </div>
                             <div className="text-xs text-slate-400 mt-1">
-                              Nivel {zone.min_level}-{zone.max_level} · Danger {zone.danger} · {zone.monsters.length} mob
+                              Nivel req: {zone.min_level} · Danger {zone.danger} · {zone.monsters.length} mob
                               {zone.gold_loss_on_death && zone.gold_loss_on_death !== "0.00" ? ` · -${zone.gold_loss_on_death}% gold` : ""}
                             </div>
                             <div className="flex items-center gap-3 mt-1.5 text-xs text-slate-500">
@@ -421,15 +421,19 @@ export default function Home() {
                                         return (
                                           <tr
                                             key={m.id}
-                                            className={`border-b border-slate-800/40 hover:bg-slate-800/30 ${m.is_boss ? "text-purple-200" : "text-slate-300"}`}
+                                            className={`border-b border-slate-800/40 hover:bg-slate-800/30 ${m.is_boss ? "text-purple-100 bg-purple-950/30 border-l-2 border-l-purple-500" : "text-slate-300"}`}
                                             onMouseEnter={(e) => { setHoveredMonster(m.id); setHoverPos({ x: e.clientX, y: e.clientY }); }}
                                             onMouseMove={(e) => setHoverPos({ x: e.clientX, y: e.clientY })}
                                             onMouseLeave={() => setHoveredMonster(null)}
                                           >
                                             <td className="py-1.5 pr-3 font-medium whitespace-nowrap relative">
                                               <div className="flex items-center gap-1.5">
-                                                <span>{m.name}</span>
-                                                {m.is_boss ? <span className="text-[10px] text-purple-400 font-bold">BOSS</span> : null}
+                                                {m.is_boss ? (
+                                                  <span className="font-bold text-purple-300">{m.name}</span>
+                                                ) : (
+                                                  <span>{m.name}</span>
+                                                )}
+                                                {m.is_boss ? <span className="text-[10px] px-1.5 py-0.5 rounded bg-purple-800/60 text-purple-200 font-bold border border-purple-600/40">BOSS</span> : null}
                                                 {highlights.map((h, i) => (
                                                   <span key={i} className={`${h.color}`} title={h.label}>
                                                     {h.icon}
