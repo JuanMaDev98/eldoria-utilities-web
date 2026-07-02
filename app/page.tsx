@@ -78,7 +78,7 @@ export default function Home() {
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState<string>("all");
   const [minLevel, setMinLevel] = useState<number | "">("");
-  const [expandedZones, setExpandedZones] = useState<Set<number>>(new Set());
+  const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
   const [expandedTypes, setExpandedTypes] = useState<Set<string>>(new Set(TYPE_ORDER));
   const [sortBy, setSortBy] = useState<"level" | "danger" | "name">("level");
 
@@ -114,11 +114,14 @@ export default function Home() {
     return groups;
   }, [filteredZones]);
 
-  const toggleZone = (id: number) => {
-    setExpandedZones((prev) => {
+  const getRowKey = (type: string, index: number) => `${type}-${Math.floor(index / 2)}`;
+
+  const toggleRow = (type: string, index: number) => {
+    const key = getRowKey(type, index);
+    setExpandedRows((prev) => {
       const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
       return next;
     });
   };
@@ -133,11 +136,16 @@ export default function Home() {
   };
 
   const expandAll = () => {
+    const allRows = new Set<string>();
+    for (const type of Object.keys(groupedZones)) {
+      groupedZones[type].forEach((_, i) => allRows.add(getRowKey(type, i)));
+    }
     setExpandedTypes(new Set(TYPE_ORDER));
-    setExpandedZones(new Set(filteredZones.map((z) => z.id)));
+    setExpandedRows(allRows);
   };
+
   const collapseAll = () => {
-    setExpandedZones(new Set());
+    setExpandedRows(new Set());
   };
 
   return (
@@ -231,8 +239,9 @@ export default function Home() {
               {isTypeOpen && (
                 <div className="p-4 bg-slate-900/30">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {typeZones.map((zone) => {
-                      const isZoneOpen = expandedZones.has(zone.id);
+                    {typeZones.map((zone, idx) => {
+                      const rowKey = getRowKey(type, idx);
+                      const isZoneOpen = expandedRows.has(rowKey);
                       const bossCount = zone.monsters.filter((m) => m.is_boss).length;
                       return (
                         <div
@@ -240,7 +249,7 @@ export default function Home() {
                           className={`border rounded-xl overflow-hidden transition ${isZoneOpen ? "border-gold-500/50 shadow-lg shadow-gold-500/5" : "border-slate-700/50 hover:border-slate-600"}`}
                         >
                           <button
-                            onClick={() => toggleZone(zone.id)}
+                            onClick={() => toggleRow(type, idx)}
                             className="w-full text-left px-4 py-3 bg-slate-900/60 hover:bg-slate-800/70 transition"
                           >
                             <div className="flex items-center gap-2 flex-wrap">
@@ -279,30 +288,39 @@ export default function Home() {
                                         <th className="py-1.5 pr-3">Dodge</th>
                                         <th className="py-1.5 pr-3">XP</th>
                                         <th className="py-1.5 pr-3">Gold</th>
+                                        <th className="py-1.5 pr-3">Exp/Sta</th>
+                                        <th className="py-1.5 pr-3">Oro/Sta</th>
                                         <th className="py-1.5 pr-3">Tipo</th>
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      {zone.monsters.map((m) => (
-                                        <tr key={m.id} className={`border-b border-slate-800/40 hover:bg-slate-800/30 ${m.is_boss ? "text-purple-200" : "text-slate-300"}`}>
-                                          <td className="py-1.5 pr-3 font-medium whitespace-nowrap">
-                                            {m.name}
-                                            {m.is_boss ? <span className="ml-1.5 text-[10px] text-purple-400 font-bold">BOSS</span> : null}
-                                          </td>
-                                          <td className="py-1.5 pr-3">{m.level}</td>
-                                          <td className="py-1.5 pr-3 font-semibold text-yellow-400">{m.stamina_cost}</td>
-                                          <td className="py-1.5 pr-3">{m.hp_max.toLocaleString()}</td>
-                                          <td className="py-1.5 pr-3">{m.attack.toLocaleString()}</td>
-                                          <td className="py-1.5 pr-3">{m.defense.toLocaleString()}</td>
-                                          <td className="py-1.5 pr-3">{m.dodge}%</td>
-                                          <td className="py-1.5 pr-3 font-semibold text-emerald-400">{m.xp_reward.toLocaleString()}</td>
-                                          <td className="py-1.5 pr-3">{m.gold_min}-{m.gold_max}</td>
-                                          <td className="py-1.5 pr-3 text-slate-500">
-                                            {m.dmg_type}
-                                            {m.dot_chance ? ` · DOT` : ""}
-                                          </td>
-                                        </tr>
-                                      ))}
+                                      {zone.monsters.map((m) => {
+                                        const expPerSta = m.stamina_cost > 0 ? (m.xp_reward / m.stamina_cost).toFixed(1) : "0";
+                                        const goldAvg = (m.gold_min + m.gold_max) / 2;
+                                        const goldPerSta = m.stamina_cost > 0 ? (goldAvg / m.stamina_cost).toFixed(1) : "0";
+                                        return (
+                                          <tr key={m.id} className={`border-b border-slate-800/40 hover:bg-slate-800/30 ${m.is_boss ? "text-purple-200" : "text-slate-300"}`}>
+                                            <td className="py-1.5 pr-3 font-medium whitespace-nowrap">
+                                              {m.name}
+                                              {m.is_boss ? <span className="ml-1.5 text-[10px] text-purple-400 font-bold">BOSS</span> : null}
+                                            </td>
+                                            <td className="py-1.5 pr-3">{m.level}</td>
+                                            <td className="py-1.5 pr-3 font-semibold text-yellow-400">{m.stamina_cost}</td>
+                                            <td className="py-1.5 pr-3">{m.hp_max.toLocaleString()}</td>
+                                            <td className="py-1.5 pr-3">{m.attack.toLocaleString()}</td>
+                                            <td className="py-1.5 pr-3">{m.defense.toLocaleString()}</td>
+                                            <td className="py-1.5 pr-3">{m.dodge}%</td>
+                                            <td className="py-1.5 pr-3 font-semibold text-emerald-400">{m.xp_reward.toLocaleString()}</td>
+                                            <td className="py-1.5 pr-3">{m.gold_min}-{m.gold_max}</td>
+                                            <td className="py-1.5 pr-3 font-semibold text-cyan-400">{expPerSta}</td>
+                                            <td className="py-1.5 pr-3 font-semibold text-amber-400">{goldPerSta}</td>
+                                            <td className="py-1.5 pr-3 text-slate-500">
+                                              {m.dmg_type}
+                                              {m.dot_chance ? ` · DOT` : ""}
+                                            </td>
+                                          </tr>
+                                        );
+                                      })}
                                     </tbody>
                                   </table>
                                 </div>
