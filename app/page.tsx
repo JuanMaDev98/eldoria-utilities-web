@@ -1,8 +1,18 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import zonesData from "@/public/eldoria_zones.json";
+import zonesData from "@/public/eldoria_zones_with_loot.json";
 import Link from "next/link";
+
+interface DropItem {
+  item: string;
+  qty: number;
+  chance: number;
+  name: string;
+  name_en?: string | null;
+  rarity: string;
+  item_type: string;
+}
 
 interface Monster {
   id: number;
@@ -29,8 +39,25 @@ interface Monster {
   dot_dpt?: number;
   dot_turns?: number;
   dot_type?: string | null;
-  attribute_point_chance?: number;
-  skill_tree_point_chance?: number;
+  guaranteed_drops: DropItem[];
+  chance_drops: DropItem[];
+  unique_drop_chance?: number | null;
+  unique_common_drop_chance?: number | null;
+  unique_common_max_per_player?: number | null;
+  unique_uncommon_drop_chance?: number | null;
+  unique_uncommon_max_per_player?: number | null;
+  unique_rare_drop_chance?: number | null;
+  unique_rare_max_per_player?: number | null;
+  unique_epic_drop_chance?: number | null;
+  unique_epic_max_per_player?: number | null;
+  attribute_point_chance?: number | null;
+  attribute_point_max_per_player?: number | null;
+  attribute_point_qty?: number;
+  skill_tree_point_chance?: number | null;
+  skill_tree_point_max_per_player?: number | null;
+  skill_tree_point_qty?: number;
+  respawn_seconds?: number;
+  boss_kills_limit?: number | null;
 }
 
 interface Zone {
@@ -73,14 +100,34 @@ const TYPE_ICONS: Record<string, string> = {
 
 const TYPE_ORDER = ["city", "farm", "loot", "wild", "pvp", "event"];
 
+const RARITY_COLORS: Record<string, string> = {
+  common: "text-slate-400",
+  uncommon: "text-emerald-400",
+  rare: "text-blue-400",
+  epic: "text-purple-400",
+  mythic: "text-orange-400",
+  legendary: "text-yellow-400",
+};
+
+const RARITY_BG: Record<string, string> = {
+  common: "bg-slate-800/60 border-slate-700",
+  uncommon: "bg-emerald-900/40 border-emerald-700",
+  rare: "bg-blue-900/40 border-blue-700",
+  epic: "bg-purple-900/40 border-purple-700",
+  mythic: "bg-orange-900/40 border-orange-700",
+  legendary: "bg-yellow-900/40 border-yellow-700",
+};
+
 export default function Home() {
   const [zones] = useState<Zone[]>(zonesData.zones || []);
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState<string>("all");
-  const [minLevel, setMinLevel] = useState<number | "">("");
+  const [maxLevel, setMaxLevel] = useState<number | "">("");
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
   const [expandedTypes, setExpandedTypes] = useState<Set<string>>(new Set(TYPE_ORDER));
-  const [sortBy, setSortBy] = useState<"level" | "danger" | "name">("level");
+  const [sortBy, setSortBy] = useState<"level" | "name">("level");
+  const [hoveredMonster, setHoveredMonster] = useState<number | null>(null);
+  const [hoverPos, setHoverPos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
   const types = useMemo(() => {
     return TYPE_ORDER.filter((t) => zones.some((z) => z.type === t));
@@ -93,17 +140,16 @@ export default function Home() {
         z.code.toLowerCase().includes(search.toLowerCase()) ||
         z.monsters.some((m) => m.name.toLowerCase().includes(search.toLowerCase()));
       const matchesType = typeFilter === "all" || z.type === typeFilter;
-      const matchesLevel = minLevel === "" || z.max_level >= minLevel;
+      const matchesLevel = maxLevel === "" || z.min_level <= maxLevel;
       return matchesSearch && matchesType && matchesLevel;
     });
 
     list.sort((a, b) => {
       if (sortBy === "level") return a.min_level - b.min_level || a.id - b.id;
-      if (sortBy === "danger") return a.danger - b.danger || a.id - b.id;
       return a.name.localeCompare(b.name);
     });
     return list;
-  }, [zones, search, typeFilter, minLevel, sortBy]);
+  }, [zones, search, typeFilter, maxLevel, sortBy]);
 
   const groupedZones = useMemo(() => {
     const groups: Record<string, Zone[]> = {};
@@ -146,6 +192,40 @@ export default function Home() {
 
   const collapseAll = () => {
     setExpandedRows(new Set());
+  };
+
+  const getMonsterHighlights = (m: Monster) => {
+    const highlights: { icon: string; label: string; color: string }[] = [];
+    if (m.attribute_point_chance && m.attribute_point_chance > 0) {
+      highlights.push({ icon: "◆", label: `${m.attribute_point_chance}% attr`, color: "text-amber-400" });
+    }
+    if (m.skill_tree_point_chance && m.skill_tree_point_chance > 0) {
+      highlights.push({ icon: "⬡", label: `${m.skill_tree_point_chance}% skill`, color: "text-cyan-400" });
+    }
+    if (m.unique_drop_chance && m.unique_drop_chance > 0) {
+      highlights.push({ icon: "★", label: `unique ${m.unique_drop_chance}%`, color: "text-yellow-400" });
+    }
+    if (m.unique_uncommon_drop_chance && m.unique_uncommon_drop_chance > 0) {
+      highlights.push({ icon: "◆", label: `inusual ${m.unique_uncommon_drop_chance}%`, color: "text-emerald-400" });
+    }
+    if (m.unique_rare_drop_chance && m.unique_rare_drop_chance > 0) {
+      highlights.push({ icon: "◆", label: `raro ${m.unique_rare_drop_chance}%`, color: "text-blue-400" });
+    }
+    if (m.unique_epic_drop_chance && m.unique_epic_drop_chance > 0) {
+      highlights.push({ icon: "◆", label: `épico ${m.unique_epic_drop_chance}%`, color: "text-purple-400" });
+    }
+    return highlights;
+  };
+
+  const getMonsterDrops = (m: Monster) => {
+    const drops: { name: string; chance: number; rarity: string; qty: number; guaranteed: boolean }[] = [];
+    for (const d of m.guaranteed_drops || []) {
+      drops.push({ name: d.name, chance: 100, rarity: d.rarity, qty: d.qty, guaranteed: true });
+    }
+    for (const d of m.chance_drops || []) {
+      drops.push({ name: d.name, chance: d.chance, rarity: d.rarity, qty: d.qty, guaranteed: false });
+    }
+    return drops;
   };
 
   return (
@@ -196,9 +276,9 @@ export default function Home() {
           </select>
           <input
             type="number"
-            placeholder="Nivel mínimo"
-            value={minLevel}
-            onChange={(e) => setMinLevel(e.target.value === "" ? "" : Number(e.target.value))}
+            placeholder="Nivel máximo"
+            value={maxLevel}
+            onChange={(e) => setMaxLevel(e.target.value === "" ? "" : Number(e.target.value))}
             className="w-32 bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-gold-500"
           />
           <select
@@ -207,7 +287,6 @@ export default function Home() {
             className="bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-gold-500"
           >
             <option value="level">Ordenar por nivel</option>
-            <option value="danger">Ordenar por peligro</option>
             <option value="name">Ordenar por nombre</option>
           </select>
           <div className="flex gap-2">
@@ -298,11 +377,26 @@ export default function Home() {
                                         const expPerSta = m.stamina_cost > 0 ? (m.xp_reward / m.stamina_cost).toFixed(1) : "0";
                                         const goldAvg = (m.gold_min + m.gold_max) / 2;
                                         const goldPerSta = m.stamina_cost > 0 ? (goldAvg / m.stamina_cost).toFixed(1) : "0";
+                                        const highlights = getMonsterHighlights(m);
+                                        const drops = getMonsterDrops(m);
                                         return (
-                                          <tr key={m.id} className={`border-b border-slate-800/40 hover:bg-slate-800/30 ${m.is_boss ? "text-purple-200" : "text-slate-300"}`}>
-                                            <td className="py-1.5 pr-3 font-medium whitespace-nowrap">
-                                              {m.name}
-                                              {m.is_boss ? <span className="ml-1.5 text-[10px] text-purple-400 font-bold">BOSS</span> : null}
+                                          <tr
+                                            key={m.id}
+                                            className={`border-b border-slate-800/40 hover:bg-slate-800/30 ${m.is_boss ? "text-purple-200" : "text-slate-300"}`}
+                                            onMouseEnter={(e) => { setHoveredMonster(m.id); setHoverPos({ x: e.clientX, y: e.clientY }); }}
+                                            onMouseMove={(e) => setHoverPos({ x: e.clientX, y: e.clientY })}
+                                            onMouseLeave={() => setHoveredMonster(null)}
+                                          >
+                                            <td className="py-1.5 pr-3 font-medium whitespace-nowrap relative">
+                                              <div className="flex items-center gap-1.5">
+                                                <span>{m.name}</span>
+                                                {m.is_boss ? <span className="text-[10px] text-purple-400 font-bold">BOSS</span> : null}
+                                                {highlights.map((h, i) => (
+                                                  <span key={i} className={`text-[10px] ${h.color}`} title={h.label}>
+                                                    {h.icon}
+                                                  </span>
+                                                ))}
+                                              </div>
                                             </td>
                                             <td className="py-1.5 pr-3">{m.level}</td>
                                             <td className="py-1.5 pr-3 font-semibold text-yellow-400">{m.stamina_cost}</td>
@@ -343,6 +437,54 @@ export default function Home() {
           </div>
         )}
       </div>
+      {hoveredMonster && (() => {
+        const m = zones.flatMap((z) => z.monsters).find((m) => m.id === hoveredMonster);
+        if (!m) return null;
+        const drops = getMonsterDrops(m);
+        const highlights = getMonsterHighlights(m);
+        return (
+          <div
+            className="fixed z-50 bg-slate-900 border border-slate-700 rounded-lg p-3 shadow-xl pointer-events-none"
+            style={{ left: hoverPos.x + 16, top: hoverPos.y - 8 }}
+          >
+            <p className="text-xs font-bold text-slate-200 mb-1">
+              {m.name}
+              {m.is_boss ? <span className="ml-1.5 text-[10px] text-purple-400">BOSS</span> : null}
+              {highlights.map((h, i) => (
+                <span key={i} className={`ml-1.5 text-[10px] ${h.color}`}>{h.icon} {h.label}</span>
+              ))}
+            </p>
+            {drops.length > 0 && (
+              <>
+                <p className="text-[10px] text-slate-500 uppercase mt-2 mb-1">Drops</p>
+                <div className="space-y-0.5">
+                  {drops.map((d, i) => (
+                    <div key={i} className="flex items-center gap-2 text-[11px]">
+                      <span className={`font-medium ${RARITY_COLORS[d.rarity] || "text-slate-400"}`}>{d.name}</span>
+                      <span className="text-slate-600">×{d.qty}</span>
+                      <span className={`ml-auto ${d.guaranteed ? "text-emerald-400" : "text-slate-500"}`}>
+                        {d.guaranteed ? "100%" : `${d.chance}%`}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+            {m.attribute_point_chance && m.attribute_point_chance > 0 && (
+              <div className="mt-2 pt-1.5 border-t border-slate-800 text-[11px]">
+                <span className="text-amber-400">◆ Attr points: {m.attribute_point_chance}%</span>
+                {m.attribute_point_max_per_player ? <span className="text-slate-600 ml-1">(max {m.attribute_point_max_per_player})</span> : null}
+              </div>
+            )}
+            {m.skill_tree_point_chance && m.skill_tree_point_chance > 0 && (
+              <div className="text-[11px]">
+                <span className="text-cyan-400">⬡ Skill points: {m.skill_tree_point_chance}%</span>
+                {m.skill_tree_point_max_per_player ? <span className="text-slate-600 ml-1">(max {m.skill_tree_point_max_per_player})</span> : null}
+              </div>
+            )}
+          </div>
+        );
+      })()}
     </main>
   );
 }
