@@ -678,7 +678,12 @@ export default function Home() {
           const farmable = isFarmable(m);
           const isExtra = showFallback && rank > 5;
           return (
-            <div className={`flex items-center gap-3 px-3 py-2 rounded-lg ${isExtra ? "bg-emerald-950/20 border border-emerald-800/30" : "bg-slate-800/40 hover:bg-slate-800/60"} transition`}>
+            <div
+              className={`flex items-center gap-3 px-3 py-2 rounded-lg cursor-default ${isExtra ? "bg-emerald-950/20 border border-emerald-800/30" : "bg-slate-800/40 hover:bg-slate-800/60"} transition`}
+              onMouseEnter={(e) => { setHoveredMonster(m.id); setHoverPos({ x: e.clientX, y: e.clientY }); }}
+              onMouseMove={(e) => setHoverPos({ x: e.clientX, y: e.clientY })}
+              onMouseLeave={() => setHoveredMonster(null)}
+            >
               <RankBadge rank={rank} />
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1.5 flex-wrap">
@@ -737,7 +742,13 @@ export default function Home() {
                             const farmable = isFarmable(e.mob);
                             const isExtra = i >= 3;
                             return (
-                              <div key={e.mob.id} className={`flex items-center gap-2 text-[11px] px-2 py-1.5 rounded ${isExtra ? "bg-emerald-950/20 border border-emerald-800/30" : ""}`}>
+                              <div
+                                key={e.mob.id}
+                                className={`flex items-center gap-2 text-[11px] px-2 py-1.5 rounded cursor-default ${isExtra ? "bg-emerald-950/20 border border-emerald-800/30" : "hover:bg-slate-700/30"}`}
+                                onMouseEnter={(ev) => { setHoveredMonster(e.mob.id); setHoverPos({ x: ev.clientX, y: ev.clientY }); }}
+                                onMouseMove={(ev) => setHoverPos({ x: ev.clientX, y: ev.clientY })}
+                                onMouseLeave={() => setHoveredMonster(null)}
+                              >
                                 <RankBadge rank={i + 1} />
                                 <span className={`font-medium ${e.mob.is_boss ? "text-purple-300" : "text-slate-300"}`}>{e.mob.name}</span>
                                 {farmable && <FarmableBadge />}
