@@ -575,14 +575,14 @@ export default function Home() {
                 </div>
               </>
             )}
-            {m.attribute_point_chance && m.attribute_point_chance > 0 && (
+            {m.attribute_point_chance != null && m.attribute_point_chance > 0 && (
               <div className="mt-2 pt-1.5 border-t border-slate-800 text-[11px] flex items-center gap-1">
                 <StatIcon className="w-3 h-3 text-amber-400" />
                 <span className="text-amber-400">Attr points: {m.attribute_point_chance}%</span>
                 {m.attribute_point_max_per_player ? <span className="text-slate-600 ml-1">(max {m.attribute_point_max_per_player})</span> : null}
               </div>
             )}
-            {m.skill_tree_point_chance && m.skill_tree_point_chance > 0 && (
+            {m.skill_tree_point_chance != null && m.skill_tree_point_chance > 0 && (
               <div className="text-[11px] flex items-center gap-1">
                 <SkillIcon className="w-3 h-3 text-cyan-400" />
                 <span className="text-cyan-400">Skill points: {m.skill_tree_point_chance}%</span>
