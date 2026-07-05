@@ -643,7 +643,7 @@ export default function Home() {
         }
 
         const resourceMap = new Map<string, { mob: { zoneName: string } & Monster; drop: DropEntry }[]>();
-        for (const { mob, drops } of mobDrops.values()) {
+        for (const { mob, drops } of Array.from(mobDrops.values())) {
           for (const d of drops) {
             if (!resourceMap.has(d.name)) resourceMap.set(d.name, []);
             resourceMap.get(d.name)!.push({ mob, drop: d });
@@ -651,7 +651,7 @@ export default function Home() {
         }
 
         const bestByResource: { name: string; mob: { zoneName: string } & Monster; drop: DropEntry; score: number }[] = [];
-        for (const [name, entries] of resourceMap) {
+        for (const [name, entries] of Array.from(resourceMap.entries())) {
           let best = entries[0];
           let bestScore = best.drop.chance / effective(best.mob.stamina_cost);
           for (let i = 1; i < entries.length; i++) {
