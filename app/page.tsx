@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import zonesData from "@/public/eldoria_zones_with_loot.json";
 import Link from "next/link";
 
@@ -167,6 +167,17 @@ export default function Home() {
   const [sortBy, setSortBy] = useState<"level" | "name">("level");
   const [hoveredMonster, setHoveredMonster] = useState<number | null>(null);
   const [hoverPos, setHoverPos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [efficiency, setEfficiency] = useState<0 | 1 | 2>(0);
+  const [bonusExp, setBonusExp] = useState<number>(0);
+  const [bonusOro, setBonusOro] = useState<number>(0);
+  const [isDesktop, setIsDesktop] = useState(true);
+
+  useEffect(() => {
+    const check = () => setIsDesktop(window.innerWidth >= 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const types = useMemo(() => {
     return TYPE_ORDER.filter((t) => zones.some((z) => z.type === t));
@@ -199,10 +210,11 @@ export default function Home() {
     return groups;
   }, [filteredZones]);
 
-  const getRowKey = (type: string, index: number) => `${type}-${Math.floor(index / 2)}`;
+  const getRowKey = (type: string, index: number, zoneId: number) =>
+    isDesktop ? `${type}-${Math.floor(index / 2)}` : `zone-${zoneId}`;
 
-  const toggleRow = (type: string, index: number) => {
-    const key = getRowKey(type, index);
+  const toggleRow = (type: string, index: number, zoneId: number) => {
+    const key = getRowKey(type, index, zoneId);
     setExpandedRows((prev) => {
       const next = new Set(prev);
       if (next.has(key)) next.delete(key);
@@ -223,7 +235,7 @@ export default function Home() {
   const expandAll = () => {
     const allRows = new Set<string>();
     for (const type of Object.keys(groupedZones)) {
-      groupedZones[type].forEach((_, i) => allRows.add(getRowKey(type, i)));
+      groupedZones[type].forEach((z, i) => allRows.add(getRowKey(type, i, z.id)));
     }
     setExpandedTypes(new Set(TYPE_ORDER));
     setExpandedRows(allRows);
@@ -328,6 +340,38 @@ export default function Home() {
             <option value="level">Ordenar por nivel</option>
             <option value="name">Ordenar por nombre</option>
           </select>
+          <div className="flex items-center gap-2">
+            <label className="text-xs text-slate-500" title="Talento que reduce costo de stamina de monstruos">Eficiencia</label>
+            <select
+              value={efficiency}
+              onChange={(e) => setEfficiency(Number(e.target.value) as 0 | 1 | 2)}
+              className="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-gold-500"
+            >
+              <option value={0}>0</option>
+              <option value={1}>1</option>
+              <option value={2}>2</option>
+            </select>
+          </div>
+          <div className="flex items-center gap-2">
+            <label className="text-xs text-slate-500">% Bonus Exp</label>
+            <input
+              type="number"
+              min={0}
+              value={bonusExp || ""}
+              onChange={(e) => setBonusExp(e.target.value === "" ? 0 : Number(e.target.value))}
+              className="w-20 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-gold-500"
+            />
+          </div>
+          <div className="flex items-center gap-2">
+            <label className="text-xs text-slate-500">% Bonus Oro</label>
+            <input
+              type="number"
+              min={0}
+              value={bonusOro || ""}
+              onChange={(e) => setBonusOro(e.target.value === "" ? 0 : Number(e.target.value))}
+              className="w-20 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-gold-500"
+            />
+          </div>
           <div className="flex gap-2">
             <button onClick={expandAll} className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm transition">Expandir</button>
             <button onClick={collapseAll} className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm transition">Colapsar</button>
@@ -358,7 +402,7 @@ export default function Home() {
                 <div className="p-4 bg-slate-900/30">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {typeZones.map((zone, idx) => {
-                      const rowKey = getRowKey(type, idx);
+                      const rowKey = getRowKey(type, idx, zone.id);
                       const isZoneOpen = expandedRows.has(rowKey);
                       const bossCount = zone.monsters.filter((m) => m.is_boss).length;
                       return (
@@ -367,7 +411,7 @@ export default function Home() {
                           className={`border rounded-xl overflow-hidden transition ${isZoneOpen ? "border-gold-500/50 shadow-lg shadow-gold-500/5" : "border-slate-700/50 hover:border-slate-600"}`}
                         >
                           <button
-                            onClick={() => toggleRow(type, idx)}
+                            onClick={() => toggleRow(type, idx, zone.id)}
                             className="w-full text-left px-4 py-3 bg-slate-900/60 hover:bg-slate-800/70 transition"
                           >
                             <div className="flex items-center gap-2 flex-wrap">
@@ -413,9 +457,13 @@ export default function Home() {
                                     </thead>
                                     <tbody>
                                       {zone.monsters.map((m) => {
-                                        const expPerSta = m.stamina_cost > 0 ? (m.xp_reward / m.stamina_cost).toFixed(1) : "0";
+                                        const effectiveSta = Math.max(1, m.stamina_cost - efficiency);
                                         const goldAvg = (m.gold_min + m.gold_max) / 2;
-                                        const goldPerSta = m.stamina_cost > 0 ? (goldAvg / m.stamina_cost).toFixed(1) : "0";
+                                        const adjustedXp = Math.round(m.xp_reward * (1 + bonusExp / 100));
+                                        const adjustedGold = Math.round(goldAvg * (1 + bonusOro / 100));
+                                        const expPerSta = effectiveSta > 0 ? (adjustedXp / effectiveSta).toFixed(1) : "0";
+                                        const goldPerSta = effectiveSta > 0 ? (adjustedGold / effectiveSta).toFixed(1) : "0";
+                                        const staChanged = efficiency > 0 && m.stamina_cost > 1;
                                         const highlights = getMonsterHighlights(m);
                                         const drops = getMonsterDrops(m);
                                         return (
@@ -442,13 +490,25 @@ export default function Home() {
                                               </div>
                                             </td>
                                             <td className="py-1.5 pr-3">{m.level}</td>
-                                            <td className="py-1.5 pr-3 font-semibold text-yellow-400">{m.stamina_cost}</td>
+                                            <td className="py-1.5 pr-3 font-semibold text-yellow-400">
+                                              {staChanged ? (
+                                                <span><span className="line-through text-slate-600">{m.stamina_cost}</span> {effectiveSta}</span>
+                                              ) : m.stamina_cost}
+                                            </td>
                                             <td className="py-1.5 pr-3">{m.hp_max.toLocaleString()}</td>
                                             <td className="py-1.5 pr-3">{m.attack.toLocaleString()}</td>
                                             <td className="py-1.5 pr-3">{m.defense.toLocaleString()}</td>
                                             <td className="py-1.5 pr-3">{m.dodge}%</td>
-                                            <td className="py-1.5 pr-3 font-semibold text-emerald-400">{m.xp_reward.toLocaleString()}</td>
-                                            <td className="py-1.5 pr-3">{m.gold_min}-{m.gold_max}</td>
+                                            <td className="py-1.5 pr-3 font-semibold text-emerald-400">
+                                              {bonusExp > 0 ? (
+                                                <span><span className="line-through text-slate-600">{m.xp_reward.toLocaleString()}</span> {adjustedXp.toLocaleString()}</span>
+                                              ) : m.xp_reward.toLocaleString()}
+                                            </td>
+                                            <td className="py-1.5 pr-3">
+                                              {bonusOro > 0 ? (
+                                                <span><span className="line-through text-slate-600">{m.gold_min}-{m.gold_max}</span> {adjustedGold.toLocaleString()}</span>
+                                              ) : `${m.gold_min}-${m.gold_max}`}
+                                            </td>
                                             <td className="py-1.5 pr-3 font-semibold text-cyan-400">{expPerSta}</td>
                                             <td className="py-1.5 pr-3 font-semibold text-amber-400">{goldPerSta}</td>
                                             <td className="py-1.5 pr-3 text-slate-500">
