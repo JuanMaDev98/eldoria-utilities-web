@@ -598,41 +598,41 @@ export default function Home() {
         const effective = (sta: number) => Math.max(1, sta - efficiency);
         const adjGold = (m: Monster) => Math.round(((m.gold_min + m.gold_max) / 2) * (1 + bonusOro / 100));
         const adjXp = (m: Monster) => Math.round(m.xp_reward * (1 + bonusExp / 100));
+        const theRestricted = ["Minas de Carbón", "Campos de Hierbas"];
+        const isFarmable = (m: { is_boss: number; zoneName?: string }) => !m.is_boss && !theRestricted.includes(m.zoneName ?? "");
 
         const eligible = zones
           .filter((z) => maxLevel === "" || z.min_level <= maxLevel)
           .flatMap((z) => z.monsters.map((m) => ({ ...m, zoneName: z.name, zoneType: z.type })))
           .filter((m) => m.stamina_cost > 0 && (maxLevel === "" || maxLevel - m.level < 16));
 
-        const bestGold = eligible.reduce((best, m) => {
-          if (!best) return m;
-          const sta = effective(m.stamina_cost);
-          const score = adjGold(m) / sta;
-          const bestSta = effective(best.stamina_cost);
-          const bestScore = adjGold(best) / bestSta;
-          if (score > bestScore) return m;
-          if (score === bestScore) {
-            if (adjGold(m) / sta > adjGold(best) / bestSta) return m;
-            if (adjXp(m) / sta > adjXp(best) / bestSta) return m;
-            if (m.level < best.level) return m;
-          }
-          return best;
-        }, null as { zoneName: string } & Monster | null);
+        const scoreGold = (m: { stamina_cost: number } & Monster) => adjGold(m) / effective(m.stamina_cost);
+        const scoreExp = (m: { stamina_cost: number } & Monster) => adjXp(m) / effective(m.stamina_cost);
+        const tiebreak = (a: { zoneName: string } & Monster, b: { zoneName: string } & Monster) => {
+          const ga = adjGold(a) / effective(a.stamina_cost), gb = adjGold(b) / effective(b.stamina_cost);
+          if (ga !== gb) return gb - ga;
+          const ea = adjXp(a) / effective(a.stamina_cost), eb = adjXp(b) / effective(b.stamina_cost);
+          if (ea !== eb) return eb - ea;
+          return a.level - b.level;
+        };
 
-        const bestExp = eligible.reduce((best, m) => {
-          if (!best) return m;
-          const sta = effective(m.stamina_cost);
-          const score = adjXp(m) / sta;
-          const bestSta = effective(best.stamina_cost);
-          const bestScore = adjXp(best) / bestSta;
-          if (score > bestScore) return m;
-          if (score === bestScore) {
-            if (adjGold(m) / sta > adjGold(best) / bestSta) return m;
-            if (adjXp(m) / sta > adjXp(best) / bestSta) return m;
-            if (m.level < best.level) return m;
+        const sortedGold = [...eligible].sort((a, b) => scoreGold(b) - scoreGold(a) || tiebreak(a, b));
+        const sortedExp = [...eligible].sort((a, b) => scoreExp(b) - scoreExp(a) || tiebreak(a, b));
+
+        const pickTop = (sorted: typeof eligible, count: number) => {
+          const result = sorted.slice(0, count);
+          const hasFarmable = result.some((m) => isFarmable(m));
+          if (!hasFarmable) {
+            const bestFallback = sorted.find((m) => isFarmable(m));
+            if (bestFallback && !result.some((m) => m.id === bestFallback.id)) {
+              result.push(bestFallback);
+            }
           }
-          return best;
-        }, null as { zoneName: string } & Monster | null);
+          return result;
+        };
+
+        const topGold = pickTop(sortedGold, 5);
+        const topExp = pickTop(sortedExp, 5);
 
         type DropEntry = { name: string; chance: number; qty: number; guaranteed: boolean; rarity: string };
         const mobDrops: Map<number, { mob: { zoneName: string } & Monster; drops: DropEntry[] }> = new Map();
@@ -651,43 +651,46 @@ export default function Home() {
           }
         }
 
-        const bestByResource: { name: string; mob: { zoneName: string } & Monster; drop: DropEntry; score: number }[] = [];
+        const topResources: { name: string; entries: { mob: { zoneName: string } & Monster; drop: DropEntry; score: number }[] }[] = [];
         for (const [name, entries] of Array.from(resourceMap.entries())) {
-          let best = entries[0];
-          let bestScore = best.drop.chance / effective(best.mob.stamina_cost);
-          for (let i = 1; i < entries.length; i++) {
-            const e = entries[i];
-            const score = e.drop.chance / effective(e.mob.stamina_cost);
-            if (score > bestScore) {
-              best = e;
-              bestScore = score;
-            } else if (score === bestScore) {
-              const bGold = adjGold(best.mob) / effective(best.mob.stamina_cost);
-              const eGold = adjGold(e.mob) / effective(e.mob.stamina_cost);
-              if (eGold > bGold) { best = e; bestScore = score; }
-              else if (eGold === bGold) {
-                const bExp = adjXp(best.mob) / effective(best.mob.stamina_cost);
-                const eExp = adjXp(e.mob) / effective(e.mob.stamina_cost);
-                if (eExp > bExp) { best = e; bestScore = score; }
-                else if (eExp === bExp && e.mob.level < best.mob.level) { best = e; bestScore = score; }
-              }
-            }
+          const scored = entries.map((e) => ({ ...e, score: e.drop.chance / effective(e.mob.stamina_cost) }));
+          scored.sort((a, b) => b.score - a.score || tiebreak(a.mob, b.mob));
+          const top3 = scored.slice(0, 3);
+          const hasFarmable = top3.some((e) => isFarmable(e.mob));
+          if (!hasFarmable) {
+            const fallback = scored.find((e) => isFarmable(e.mob));
+            if (fallback && !top3.some((e) => e.mob.id === fallback.mob.id)) top3.push(fallback);
           }
-          bestByResource.push({ name, mob: best.mob, drop: best.drop, score: bestScore });
+          if (top3.length > 0) topResources.push({ name, entries: top3 });
         }
-        bestByResource.sort((a, b) => b.score - a.score);
+        topResources.sort((a, b) => b.entries[0].score - a.entries[0].score);
 
-        const MobCard = ({ label, color, mob, sub }: { label: string; color: string; mob: { zoneName: string } & Monster; sub: string }) => {
-          const sta = effective(mob.stamina_cost);
+        const RankBadge = ({ rank }: { rank: number }) => (
+          <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-bold ${rank === 1 ? "bg-amber-500 text-slate-950" : rank === 2 ? "bg-slate-400 text-slate-950" : rank === 3 ? "bg-amber-700 text-white" : "bg-slate-700 text-slate-300"}`}>{rank}</span>
+        );
+
+        const FarmableBadge = () => (
+          <span className="inline-block text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-900/60 text-emerald-300 border border-emerald-700/50 font-medium ml-1">Siempre farmeable</span>
+        );
+
+        const MobRow = ({ rank, m, score, scoreLabel, showFallback }: { rank: number; m: { zoneName: string } & Monster; score: number; scoreLabel: string; showFallback?: boolean }) => {
+          const sta = effective(m.stamina_cost);
+          const farmable = isFarmable(m);
+          const isExtra = showFallback && rank > 5;
           return (
-            <div className={`border rounded-xl p-4 ${color}`}>
-              <div className="text-xs uppercase tracking-wide opacity-70 mb-1">{label}</div>
-              <div className="font-bold text-lg">{mob.name}</div>
-              <div className="text-sm opacity-80">{mob.zoneName} · Nivel {mob.level}</div>
-              <div className="text-xs mt-2 space-y-0.5 opacity-80">
-                <div>{sub}</div>
-                <div>Stamina: {sta !== mob.stamina_cost ? <><span className="line-through opacity-50">{mob.stamina_cost}</span> {sta}</> : sta}</div>
-                <div>Oro/Sta: {(adjGold(mob) / sta).toFixed(1)} · Exp/Sta: {(adjXp(mob) / sta).toFixed(1)}</div>
+            <div className={`flex items-center gap-3 px-3 py-2 rounded-lg ${isExtra ? "bg-emerald-950/20 border border-emerald-800/30" : "bg-slate-800/40 hover:bg-slate-800/60"} transition`}>
+              <RankBadge rank={rank} />
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <span className={`font-semibold text-sm ${m.is_boss ? "text-purple-300" : "text-slate-200"}`}>{m.name}</span>
+                  {m.is_boss ? <span className="text-[9px] px-1 py-0.5 rounded bg-purple-800/60 text-purple-300 border border-purple-700/40">BOSS</span> : null}
+                  {farmable && <FarmableBadge />}
+                </div>
+                <div className="text-[11px] text-slate-500">{m.zoneName} · Nivel {m.level} · Sta {sta !== m.stamina_cost ? <><span className="line-through opacity-50">{m.stamina_cost}</span> {sta}</> : sta}</div>
+              </div>
+              <div className="text-right shrink-0">
+                <div className="text-sm font-bold text-amber-400">{score.toFixed(1)}</div>
+                <div className="text-[10px] text-slate-500">{scoreLabel}</div>
               </div>
             </div>
           );
@@ -695,55 +698,60 @@ export default function Home() {
 
         return (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm" onClick={() => setShowBestMobs(false)}>
-            <div className="bg-slate-900 border border-slate-700 rounded-2xl p-6 max-w-3xl w-full mx-4 max-h-[85vh] overflow-y-auto shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <div className="bg-slate-900 border border-slate-700 rounded-2xl p-6 max-w-4xl w-full mx-4 max-h-[85vh] overflow-y-auto shadow-2xl" onClick={(e) => e.stopPropagation()}>
               <div className="flex items-center justify-between mb-5">
                 <h2 className="text-xl font-bold text-gold-400">🏆 Mejores Mobs para Farmear</h2>
                 <button onClick={() => setShowBestMobs(false)} className="text-slate-500 hover:text-slate-300 text-xl leading-none">&times;</button>
               </div>
-              <p className="text-xs text-slate-500 mb-4">
-                Filtros: {maxLevel !== "" ? `Nivel jugador ${maxLevel}` : "Sin límite"} · Eficiencia {efficiency} · {bonusOro > 0 ? `+${bonusOro}% oro` : "sin bonus oro"} · {bonusExp > 0 ? `+${bonusExp}% exp` : "sin bonus exp"}
+              <p className="text-xs text-slate-500 mb-5">
+                {maxLevel !== "" ? `Nivel jugador ${maxLevel}` : "Sin límite"} · Eff {efficiency} · {bonusOro > 0 ? `+${bonusOro}% oro` : "sin bonus oro"} · {bonusExp > 0 ? `+${bonusExp}% exp` : "sin bonus exp"} · Excluye mobs 16+ niveles abajo
               </p>
 
               {eligible.length === 0 ? (
                 <p className="text-slate-500 text-center py-8">No hay monstruos elegibles con los filtros actuales.</p>
               ) : (
                 <>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                    {bestGold && <MobCard label="🥇 Mejor para Oro" color="border-amber-700/50 bg-amber-950/30" mob={bestGold} sub={`Oro/Sta: ${(adjGold(bestGold) / effective(bestGold.stamina_cost)).toFixed(1)}`} />}
-                    {bestExp && <MobCard label="🥈 Mejor para Exp" color="border-emerald-700/50 bg-emerald-950/30" mob={bestExp} sub={`Exp/Sta: ${(adjXp(bestExp) / effective(bestExp.stamina_cost)).toFixed(1)}`} />}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+                    <div>
+                      <h3 className="text-sm font-bold text-amber-400 mb-2 flex items-center gap-2">🥇 Top 5 — Oro / Stamina</h3>
+                      <div className="space-y-1.5">
+                        {topGold.map((m, i) => <MobRow key={m.id} rank={i + 1} m={m} score={scoreGold(m)} scoreLabel="oro/sta" showFallback={i >= 5} />)}
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-bold text-emerald-400 mb-2 flex items-center gap-2">🥈 Top 5 — Exp / Stamina</h3>
+                      <div className="space-y-1.5">
+                        {topExp.map((m, i) => <MobRow key={m.id} rank={i + 1} m={m} score={scoreExp(m)} scoreLabel="exp/sta" showFallback={i >= 5} />)}
+                      </div>
+                    </div>
                   </div>
 
-                  <h3 className="text-sm font-bold text-slate-300 mb-3">📦 Mejor mob por recurso (drop_chance / stamina)</h3>
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-xs border-collapse">
-                      <thead>
-                        <tr className="text-left text-slate-500 border-b border-slate-700">
-                          <th className="py-1.5 pr-3">Recurso</th>
-                          <th className="py-1.5 pr-3">Mejor Mob</th>
-                          <th className="py-1.5 pr-3">Zona</th>
-                          <th className="py-1.5 pr-3">Chance</th>
-                          <th className="py-1.5 pr-3">Sta</th>
-                          <th className="py-1.5 pr-3">Eff. Score</th>
-                          <th className="py-1.5 pr-3">Oro/Sta</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {bestByResource.map((r) => {
-                          const sta = effective(r.mob.stamina_cost);
-                          return (
-                            <tr key={r.name} className="border-b border-slate-800/40 hover:bg-slate-800/30">
-                              <td className="py-1.5 pr-3 font-medium text-slate-200">{r.name}</td>
-                              <td className="py-1.5 pr-3 text-slate-300">{r.mob.name}</td>
-                              <td className="py-1.5 pr-3 text-slate-400">{r.mob.zoneName}</td>
-                              <td className="py-1.5 pr-3">{r.drop.chance}%</td>
-                              <td className="py-1.5 pr-3">{sta !== r.mob.stamina_cost ? <span><span className="line-through text-slate-600">{r.mob.stamina_cost}</span> {sta}</span> : sta}</td>
-                              <td className="py-1.5 pr-3 font-semibold text-cyan-400">{r.score.toFixed(2)}</td>
-                              <td className="py-1.5 pr-3 text-amber-400">{(adjGold(r.mob) / sta).toFixed(1)}</td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
+                  <h3 className="text-sm font-bold text-slate-300 mb-3">📦 Top 3 por Recurso (drop_chance / stamina)</h3>
+                  <div className="space-y-3">
+                    {topResources.map((r) => (
+                      <div key={r.name} className="bg-slate-800/30 border border-slate-700/50 rounded-xl p-3">
+                        <div className="text-xs font-bold text-slate-200 mb-2">{r.name}</div>
+                        <div className="space-y-1">
+                          {r.entries.map((e, i) => {
+                            const sta = effective(e.mob.stamina_cost);
+                            const farmable = isFarmable(e.mob);
+                            const isExtra = i >= 3;
+                            return (
+                              <div key={e.mob.id} className={`flex items-center gap-2 text-[11px] px-2 py-1.5 rounded ${isExtra ? "bg-emerald-950/20 border border-emerald-800/30" : ""}`}>
+                                <RankBadge rank={i + 1} />
+                                <span className={`font-medium ${e.mob.is_boss ? "text-purple-300" : "text-slate-300"}`}>{e.mob.name}</span>
+                                {farmable && <FarmableBadge />}
+                                <span className="text-slate-500 ml-auto hidden sm:inline">{e.mob.zoneName}</span>
+                                <span className="text-slate-400 w-12 text-right">{e.drop.chance}%</span>
+                                <span className="text-slate-500 w-8 text-right">st{sta}</span>
+                                <span className="font-semibold text-cyan-400 w-12 text-right">{e.score.toFixed(2)}</span>
+                                <span className="text-amber-400 w-14 text-right">{(adjGold(e.mob) / sta).toFixed(1)}g</span>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </>
               )}
