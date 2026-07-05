@@ -328,7 +328,7 @@ export default function Home() {
           </select>
           <input
             type="number"
-            placeholder="Nivel máximo"
+            placeholder="Nivel del jugador"
             value={maxLevel}
             onChange={(e) => setMaxLevel(e.target.value === "" ? "" : Number(e.target.value))}
             className="w-32 bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-gold-500"
@@ -600,8 +600,9 @@ export default function Home() {
         const adjXp = (m: Monster) => Math.round(m.xp_reward * (1 + bonusExp / 100));
 
         const eligible = zones
+          .filter((z) => maxLevel === "" || z.min_level <= maxLevel)
           .flatMap((z) => z.monsters.map((m) => ({ ...m, zoneName: z.name, zoneType: z.type })))
-          .filter((m) => (maxLevel === "" || m.level <= maxLevel) && m.stamina_cost > 0);
+          .filter((m) => m.stamina_cost > 0 && (maxLevel === "" || maxLevel - m.level < 16));
 
         const bestGold = eligible.reduce((best, m) => {
           if (!best) return m;
@@ -700,7 +701,7 @@ export default function Home() {
                 <button onClick={() => setShowBestMobs(false)} className="text-slate-500 hover:text-slate-300 text-xl leading-none">&times;</button>
               </div>
               <p className="text-xs text-slate-500 mb-4">
-                Filtros: {maxLevel !== "" ? `Nivel máx ${maxLevel}` : "Sin límite"} · Eficiencia {efficiency} · {bonusOro > 0 ? `+${bonusOro}% oro` : "sin bonus oro"} · {bonusExp > 0 ? `+${bonusExp}% exp` : "sin bonus exp"}
+                Filtros: {maxLevel !== "" ? `Nivel jugador ${maxLevel}` : "Sin límite"} · Eficiencia {efficiency} · {bonusOro > 0 ? `+${bonusOro}% oro` : "sin bonus oro"} · {bonusExp > 0 ? `+${bonusExp}% exp` : "sin bonus exp"}
               </p>
 
               {eligible.length === 0 ? (
