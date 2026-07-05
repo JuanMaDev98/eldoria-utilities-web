@@ -171,6 +171,7 @@ export default function Home() {
   const [bonusExp, setBonusExp] = useState<number>(0);
   const [bonusOro, setBonusOro] = useState<number>(0);
   const [isDesktop, setIsDesktop] = useState(true);
+  const [showBestMobs, setShowBestMobs] = useState(false);
 
   useEffect(() => {
     const check = () => setIsDesktop(window.innerWidth >= 768);
@@ -373,6 +374,7 @@ export default function Home() {
             />
           </div>
           <div className="flex gap-2">
+            <button onClick={() => setShowBestMobs(true)} className="px-4 py-2 bg-gold-600 hover:bg-amber-500 text-slate-950 font-bold rounded-lg text-sm transition">Mejores Mobs para Farmear</button>
             <button onClick={expandAll} className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm transition">Expandir</button>
             <button onClick={collapseAll} className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm transition">Colapsar</button>
           </div>
@@ -589,6 +591,162 @@ export default function Home() {
                 {m.skill_tree_point_max_per_player ? <span className="text-slate-600 ml-1">(max {m.skill_tree_point_max_per_player})</span> : null}
               </div>
             )}
+          </div>
+        );
+      })()}
+      {showBestMobs && (() => {
+        const effective = (sta: number) => Math.max(1, sta - efficiency);
+        const adjGold = (m: Monster) => Math.round(((m.gold_min + m.gold_max) / 2) * (1 + bonusOro / 100));
+        const adjXp = (m: Monster) => Math.round(m.xp_reward * (1 + bonusExp / 100));
+
+        const eligible = zones
+          .flatMap((z) => z.monsters.map((m) => ({ ...m, zoneName: z.name, zoneType: z.type })))
+          .filter((m) => (maxLevel === "" || m.level <= maxLevel) && m.stamina_cost > 0);
+
+        const bestGold = eligible.reduce((best, m) => {
+          if (!best) return m;
+          const sta = effective(m.stamina_cost);
+          const score = adjGold(m) / sta;
+          const bestSta = effective(best.stamina_cost);
+          const bestScore = adjGold(best) / bestSta;
+          if (score > bestScore) return m;
+          if (score === bestScore) {
+            if (adjGold(m) / sta > adjGold(best) / bestSta) return m;
+            if (adjXp(m) / sta > adjXp(best) / bestSta) return m;
+            if (m.level < best.level) return m;
+          }
+          return best;
+        }, null as { zoneName: string } & Monster | null);
+
+        const bestExp = eligible.reduce((best, m) => {
+          if (!best) return m;
+          const sta = effective(m.stamina_cost);
+          const score = adjXp(m) / sta;
+          const bestSta = effective(best.stamina_cost);
+          const bestScore = adjXp(best) / bestSta;
+          if (score > bestScore) return m;
+          if (score === bestScore) {
+            if (adjGold(m) / sta > adjGold(best) / bestSta) return m;
+            if (adjXp(m) / sta > adjXp(best) / bestSta) return m;
+            if (m.level < best.level) return m;
+          }
+          return best;
+        }, null as { zoneName: string } & Monster | null);
+
+        type DropEntry = { name: string; chance: number; qty: number; guaranteed: boolean; rarity: string };
+        const mobDrops: Map<number, { mob: { zoneName: string } & Monster; drops: DropEntry[] }> = new Map();
+        for (const m of eligible) {
+          const drops: DropEntry[] = [];
+          for (const d of m.guaranteed_drops || []) drops.push({ name: d.name, chance: 100, qty: d.qty, guaranteed: true, rarity: d.rarity });
+          for (const d of m.chance_drops || []) drops.push({ name: d.name, chance: d.chance, qty: d.qty, guaranteed: false, rarity: d.rarity });
+          if (drops.length > 0) mobDrops.set(m.id, { mob: m, drops });
+        }
+
+        const resourceMap = new Map<string, { mob: { zoneName: string } & Monster; drop: DropEntry }[]>();
+        for (const { mob, drops } of mobDrops.values()) {
+          for (const d of drops) {
+            if (!resourceMap.has(d.name)) resourceMap.set(d.name, []);
+            resourceMap.get(d.name)!.push({ mob, drop: d });
+          }
+        }
+
+        const bestByResource: { name: string; mob: { zoneName: string } & Monster; drop: DropEntry; score: number }[] = [];
+        for (const [name, entries] of resourceMap) {
+          let best = entries[0];
+          let bestScore = best.drop.chance / effective(best.mob.stamina_cost);
+          for (let i = 1; i < entries.length; i++) {
+            const e = entries[i];
+            const score = e.drop.chance / effective(e.mob.stamina_cost);
+            if (score > bestScore) {
+              best = e;
+              bestScore = score;
+            } else if (score === bestScore) {
+              const bGold = adjGold(best.mob) / effective(best.mob.stamina_cost);
+              const eGold = adjGold(e.mob) / effective(e.mob.stamina_cost);
+              if (eGold > bGold) { best = e; bestScore = score; }
+              else if (eGold === bGold) {
+                const bExp = adjXp(best.mob) / effective(best.mob.stamina_cost);
+                const eExp = adjXp(e.mob) / effective(e.mob.stamina_cost);
+                if (eExp > bExp) { best = e; bestScore = score; }
+                else if (eExp === bExp && e.mob.level < best.mob.level) { best = e; bestScore = score; }
+              }
+            }
+          }
+          bestByResource.push({ name, mob: best.mob, drop: best.drop, score: bestScore });
+        }
+        bestByResource.sort((a, b) => b.score - a.score);
+
+        const MobCard = ({ label, color, mob, sub }: { label: string; color: string; mob: { zoneName: string } & Monster; sub: string }) => {
+          const sta = effective(mob.stamina_cost);
+          return (
+            <div className={`border rounded-xl p-4 ${color}`}>
+              <div className="text-xs uppercase tracking-wide opacity-70 mb-1">{label}</div>
+              <div className="font-bold text-lg">{mob.name}</div>
+              <div className="text-sm opacity-80">{mob.zoneName} · Nivel {mob.level}</div>
+              <div className="text-xs mt-2 space-y-0.5 opacity-80">
+                <div>{sub}</div>
+                <div>Stamina: {sta !== mob.stamina_cost ? <><span className="line-through opacity-50">{mob.stamina_cost}</span> {sta}</> : sta}</div>
+                <div>Oro/Sta: {(adjGold(mob) / sta).toFixed(1)} · Exp/Sta: {(adjXp(mob) / sta).toFixed(1)}</div>
+              </div>
+            </div>
+          );
+        };
+
+        return (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm" onClick={() => setShowBestMobs(false)}>
+            <div className="bg-slate-900 border border-slate-700 rounded-2xl p-6 max-w-3xl w-full mx-4 max-h-[85vh] overflow-y-auto shadow-2xl" onClick={(e) => e.stopPropagation()}>
+              <div className="flex items-center justify-between mb-5">
+                <h2 className="text-xl font-bold text-gold-400">🏆 Mejores Mobs para Farmear</h2>
+                <button onClick={() => setShowBestMobs(false)} className="text-slate-500 hover:text-slate-300 text-xl leading-none">&times;</button>
+              </div>
+              <p className="text-xs text-slate-500 mb-4">
+                Filtros: {maxLevel !== "" ? `Nivel máx ${maxLevel}` : "Sin límite"} · Eficiencia {efficiency} · {bonusOro > 0 ? `+${bonusOro}% oro` : "sin bonus oro"} · {bonusExp > 0 ? `+${bonusExp}% exp` : "sin bonus exp"}
+              </p>
+
+              {eligible.length === 0 ? (
+                <p className="text-slate-500 text-center py-8">No hay monstruos elegibles con los filtros actuales.</p>
+              ) : (
+                <>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    {bestGold && <MobCard label="🥇 Mejor para Oro" color="border-amber-700/50 bg-amber-950/30" mob={bestGold} sub={`Oro/Sta: ${(adjGold(bestGold) / effective(bestGold.stamina_cost)).toFixed(1)}`} />}
+                    {bestExp && <MobCard label="🥈 Mejor para Exp" color="border-emerald-700/50 bg-emerald-950/30" mob={bestExp} sub={`Exp/Sta: ${(adjXp(bestExp) / effective(bestExp.stamina_cost)).toFixed(1)}`} />}
+                  </div>
+
+                  <h3 className="text-sm font-bold text-slate-300 mb-3">📦 Mejor mob por recurso (drop_chance / stamina)</h3>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-xs border-collapse">
+                      <thead>
+                        <tr className="text-left text-slate-500 border-b border-slate-700">
+                          <th className="py-1.5 pr-3">Recurso</th>
+                          <th className="py-1.5 pr-3">Mejor Mob</th>
+                          <th className="py-1.5 pr-3">Zona</th>
+                          <th className="py-1.5 pr-3">Chance</th>
+                          <th className="py-1.5 pr-3">Sta</th>
+                          <th className="py-1.5 pr-3">Eff. Score</th>
+                          <th className="py-1.5 pr-3">Oro/Sta</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {bestByResource.map((r) => {
+                          const sta = effective(r.mob.stamina_cost);
+                          return (
+                            <tr key={r.name} className="border-b border-slate-800/40 hover:bg-slate-800/30">
+                              <td className="py-1.5 pr-3 font-medium text-slate-200">{r.name}</td>
+                              <td className="py-1.5 pr-3 text-slate-300">{r.mob.name}</td>
+                              <td className="py-1.5 pr-3 text-slate-400">{r.mob.zoneName}</td>
+                              <td className="py-1.5 pr-3">{r.drop.chance}%</td>
+                              <td className="py-1.5 pr-3">{sta !== r.mob.stamina_cost ? <span><span className="line-through text-slate-600">{r.mob.stamina_cost}</span> {sta}</span> : sta}</td>
+                              <td className="py-1.5 pr-3 font-semibold text-cyan-400">{r.score.toFixed(2)}</td>
+                              <td className="py-1.5 pr-3 text-amber-400">{(adjGold(r.mob) / sta).toFixed(1)}</td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         );
       })()}
