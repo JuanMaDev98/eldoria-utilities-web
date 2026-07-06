@@ -575,7 +575,7 @@ export default function Home() {
         const sta = Math.max(1, m.stamina_cost - efficiency);
         return (
           <div
-            className="fixed z-50 bg-slate-900 border border-slate-700 rounded-lg p-3 shadow-xl pointer-events-none w-64"
+            className="fixed z-[60] bg-slate-900 border border-slate-700 rounded-lg p-3 shadow-xl pointer-events-none w-64"
             style={{ left: hoverPos.x + 16, top: hoverPos.y - 8 }}
           >
             <p className="text-xs font-bold text-slate-200 mb-1 flex items-center gap-1.5">
