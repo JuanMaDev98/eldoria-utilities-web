@@ -172,6 +172,7 @@ export default function Home() {
   const [bonusOro, setBonusOro] = useState<number>(0);
   const [isDesktop, setIsDesktop] = useState(true);
   const [showBestMobs, setShowBestMobs] = useState(false);
+  const [maxRarity, setMaxRarity] = useState<string>("");
 
   useEffect(() => {
     const check = () => setIsDesktop(window.innerWidth >= 768);
@@ -372,6 +373,22 @@ export default function Home() {
               onChange={(e) => setBonusOro(e.target.value === "" ? 0 : Number(e.target.value))}
               className="w-20 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-gold-500"
             />
+          </div>
+          <div className="flex items-center gap-2">
+            <label className="text-xs text-slate-500">Rareza</label>
+            <select
+              value={maxRarity}
+              onChange={(e) => setMaxRarity(e.target.value)}
+              className="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-gold-500"
+            >
+              <option value="">Todas</option>
+              <option value="common">Común</option>
+              <option value="uncommon">Inusual</option>
+              <option value="rare">Raro</option>
+              <option value="epic">Épico</option>
+              <option value="legendary">Legendario</option>
+              <option value="mythic">Mítico</option>
+            </select>
           </div>
           <div className="flex gap-2">
             <button onClick={() => setShowBestMobs(true)} className="px-4 py-2 bg-gold-600 hover:bg-amber-500 text-slate-950 font-bold rounded-lg text-sm transition">Mejores Mobs para Farmear</button>
@@ -601,10 +618,31 @@ export default function Home() {
         const theRestricted = ["Minas de Carbón", "Campos de Hierbas"];
         const isFarmable = (m: { is_boss: number; zoneName?: string }) => !m.is_boss && !theRestricted.includes(m.zoneName ?? "");
 
+        const LOOT_ZONE_RARITY: Record<string, string> = {
+          "Aldea Olvidada": "common",
+          "Pueblo Verdoso": "uncommon",
+          "Villa Zafiro": "rare",
+          "Ciudadela Amatista": "epic",
+          "Bastión Áureo": "legendary",
+          "Sanctum Mítico": "mythic",
+        };
+        const RARITY_ORDER = ["common", "uncommon", "rare", "epic", "legendary", "mythic"];
+        const playerRarityIdx = maxRarity === "" ? RARITY_ORDER.length : RARITY_ORDER.indexOf(maxRarity);
+
         const eligible = zones
-          .filter((z) => maxLevel === "" || z.min_level <= maxLevel)
+          .filter((z) => (maxLevel === "" || z.min_level <= maxLevel) && z.code !== "coliseo_del_tributo" && z.name !== "Coliseo del Tributo")
           .flatMap((z) => z.monsters.map((m) => ({ ...m, zoneName: z.name, zoneType: z.type })))
-          .filter((m) => m.stamina_cost > 0 && (maxLevel === "" || maxLevel - m.level < 16));
+          .filter((m) => {
+            if (m.stamina_cost <= 0) return false;
+            if (maxLevel !== "" && maxLevel - m.level >= 16) return false;
+            if (m.name === "Lobo Gris" && maxLevel !== "" && maxLevel >= 10) return false;
+            const requiredRarity = LOOT_ZONE_RARITY[m.zoneName ?? ""];
+            if (requiredRarity) {
+              const requiredIdx = RARITY_ORDER.indexOf(requiredRarity);
+              if (playerRarityIdx < requiredIdx) return false;
+            }
+            return true;
+          });
 
         const scoreGold = (m: { stamina_cost: number } & Monster) => adjGold(m) / effective(m.stamina_cost);
         const scoreExp = (m: { stamina_cost: number } & Monster) => adjXp(m) / effective(m.stamina_cost);
@@ -709,7 +747,7 @@ export default function Home() {
                 <button onClick={() => setShowBestMobs(false)} className="text-slate-500 hover:text-slate-300 text-xl leading-none">&times;</button>
               </div>
               <p className="text-xs text-slate-500 mb-5">
-                {maxLevel !== "" ? `Nivel jugador ${maxLevel}` : "Sin límite"} · Eff {efficiency} · {bonusOro > 0 ? `+${bonusOro}% oro` : "sin bonus oro"} · {bonusExp > 0 ? `+${bonusExp}% exp` : "sin bonus exp"} · Excluye mobs 16+ niveles abajo
+                {maxLevel !== "" ? `Nivel jugador ${maxLevel}` : "Sin límite"} · Eff {efficiency} · {bonusOro > 0 ? `+${bonusOro}% oro` : "sin bonus oro"} · {bonusExp > 0 ? `+${bonusExp}% exp` : "sin bonus exp"} · Rareza: {maxRarity ? {common:"Común",uncommon:"Inusual",rare:"Raro",epic:"Épico",legendary:"Legendario",mythic:"Mítico"}[maxRarity] : "todas"} · Excluye mobs 16+ niveles abajo
               </p>
 
               {eligible.length === 0 ? (
