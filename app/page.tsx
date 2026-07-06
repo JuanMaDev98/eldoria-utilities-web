@@ -310,7 +310,7 @@ export default function Home() {
       </header>
 
       <div className="sticky top-0 z-20 bg-slate-950/95 backdrop-blur border border-slate-800 rounded-2xl p-4 mb-6 shadow-lg">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 mb-2">
           <input
             type="text"
             placeholder="Buscar zona o monstruo..."
@@ -320,69 +320,54 @@ export default function Home() {
           />
           <button
             onClick={() => setFiltersOpen((p) => !p)}
-            className="md:hidden flex items-center justify-center w-9 h-9 bg-slate-800 hover:bg-slate-700 rounded-lg transition text-slate-400"
+            className="md:hidden flex items-center justify-center w-9 h-9 bg-slate-800 hover:bg-slate-700 rounded-lg transition text-slate-400 shrink-0"
           >
             <span className={`text-sm transition-transform ${filtersOpen ? "rotate-180" : ""}`}>▼</span>
           </button>
-          <div className="hidden md:flex gap-2 flex-wrap flex-1">
-            <select
-              value={typeFilter}
-              onChange={(e) => setTypeFilter(e.target.value)}
-              className="bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-gold-500"
-            >
-              <option value="all">Todos los tipos</option>
-              {types.map((t) => (
-                <option key={t} value={t}>{TYPE_LABELS[t] || t}</option>
-              ))}
+          <button onClick={() => setShowBestMobs(true)} className="hidden md:flex px-6 py-2 bg-gold-600 hover:bg-amber-500 text-slate-950 font-bold rounded-lg text-sm transition whitespace-nowrap shrink-0">Mejores Mobs para Farmear</button>
+        </div>
+        <div className="hidden md:flex gap-2 flex-wrap items-center">
+          <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} className="bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-gold-500">
+            <option value="all">Todos los tipos</option>
+            {types.map((t) => <option key={t} value={t}>{TYPE_LABELS[t] || t}</option>)}
+          </select>
+          <input type="number" placeholder="Nivel del jugador" value={maxLevel} onChange={(e) => setMaxLevel(e.target.value === "" ? "" : Number(e.target.value))} className="w-32 bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-gold-500" />
+          <select value={sortBy} onChange={(e) => setSortBy(e.target.value as any)} className="bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-gold-500">
+            <option value="level">Ordenar por nivel</option><option value="name">Ordenar por nombre</option>
+          </select>
+          <div className="flex items-center gap-2">
+            <label className="text-xs text-slate-500">Eff</label>
+            <select value={efficiency} onChange={(e) => setEfficiency(Number(e.target.value) as 0 | 1 | 2)} className="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-gold-500">
+              <option value={0}>0</option><option value={1}>1</option><option value={2}>2</option>
             </select>
-            <input
-              type="number"
-              placeholder="Nivel del jugador"
-              value={maxLevel}
-              onChange={(e) => setMaxLevel(e.target.value === "" ? "" : Number(e.target.value))}
-              className="w-32 bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-gold-500"
-            />
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as any)}
-              className="bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-gold-500"
-            >
-              <option value="level">Ordenar por nivel</option>
-              <option value="name">Ordenar por nombre</option>
+          </div>
+          <div className="flex items-center gap-2">
+            <label className="text-xs text-slate-500">%Exp</label>
+            <input type="number" min={0} value={bonusExp || ""} onChange={(e) => setBonusExp(e.target.value === "" ? 0 : Number(e.target.value))} className="w-16 bg-slate-900 border border-slate-700 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-gold-500" />
+          </div>
+          <div className="flex items-center gap-2">
+            <label className="text-xs text-slate-500">%Oro</label>
+            <input type="number" min={0} value={bonusOro || ""} onChange={(e) => setBonusOro(e.target.value === "" ? 0 : Number(e.target.value))} className="w-16 bg-slate-900 border border-slate-700 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-gold-500" />
+          </div>
+          <div className="flex items-center gap-2">
+            <label className="text-xs text-slate-500">Mayor rareza item</label>
+            <select value={maxRarity} onChange={(e) => setMaxRarity(e.target.value)} className="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-gold-500">
+              <option value="">Todas</option>
+              <option value="common">Común</option>
+              <option value="uncommon">Inusual</option>
+              <option value="rare">Raro</option>
+              <option value="epic">Épico</option>
+              <option value="legendary">Legendario</option>
+              <option value="mythic">Mítico</option>
             </select>
-            <div className="flex items-center gap-2">
-              <label className="text-xs text-slate-500">Eff</label>
-              <select value={efficiency} onChange={(e) => setEfficiency(Number(e.target.value) as 0 | 1 | 2)} className="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-gold-500">
-                <option value={0}>0</option><option value={1}>1</option><option value={2}>2</option>
-              </select>
-            </div>
-            <div className="flex items-center gap-2">
-              <label className="text-xs text-slate-500">%Exp</label>
-              <input type="number" min={0} value={bonusExp || ""} onChange={(e) => setBonusExp(e.target.value === "" ? 0 : Number(e.target.value))} className="w-16 bg-slate-900 border border-slate-700 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-gold-500" />
-            </div>
-            <div className="flex items-center gap-2">
-              <label className="text-xs text-slate-500">%Oro</label>
-              <input type="number" min={0} value={bonusOro || ""} onChange={(e) => setBonusOro(e.target.value === "" ? 0 : Number(e.target.value))} className="w-16 bg-slate-900 border border-slate-700 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-gold-500" />
-            </div>
-            <div className="flex items-center gap-2">
-              <label className="text-xs text-slate-500">Mayor rareza item</label>
-              <select value={maxRarity} onChange={(e) => setMaxRarity(e.target.value)} className="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-gold-500">
-                <option value="">Todas</option>
-                <option value="common">Común</option>
-                <option value="uncommon">Inusual</option>
-                <option value="rare">Raro</option>
-                <option value="epic">Épico</option>
-                <option value="legendary">Legendario</option>
-                <option value="mythic">Mítico</option>
-              </select>
-            </div>
-            <button onClick={() => setShowBestMobs(true)} className="px-4 py-2 bg-gold-600 hover:bg-amber-500 text-slate-950 font-bold rounded-lg text-sm transition whitespace-nowrap">Mejores Mobs</button>
+          </div>
+          <div className="flex gap-2 ml-auto">
             <button onClick={expandAll} className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm transition">Expandir</button>
             <button onClick={collapseAll} className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm transition">Colapsar</button>
           </div>
         </div>
         {filtersOpen && (
-          <div className="md:hidden mt-3 flex flex-col gap-2">
+          <div className="md:hidden flex flex-col gap-2">
             <div className="flex gap-2 flex-wrap">
               <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} className="bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-gold-500 flex-1">
                 <option value="all">Todos los tipos</option>
