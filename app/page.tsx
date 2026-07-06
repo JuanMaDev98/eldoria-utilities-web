@@ -573,10 +573,17 @@ export default function Home() {
         const drops = getMonsterDrops(m);
         const highlights = getMonsterHighlights(m);
         const sta = Math.max(1, m.stamina_cost - efficiency);
+        const tipW = 256;
+        const tipH = 280;
+        let left = hoverPos.x + 16;
+        let top = hoverPos.y - 8;
+        if (left + tipW > window.innerWidth - 8) left = hoverPos.x - tipW - 16;
+        if (top + tipH > window.innerHeight - 8) top = window.innerHeight - tipH - 8;
+        if (top < 8) top = 8;
         return (
           <div
             className="fixed z-[60] bg-slate-900 border border-slate-700 rounded-lg p-3 shadow-xl pointer-events-none w-64"
-            style={{ left: hoverPos.x + 16, top: hoverPos.y - 8 }}
+            style={{ left, top }}
           >
             <p className="text-xs font-bold text-slate-200 mb-1 flex items-center gap-1.5">
               <span>{m.name}</span>
