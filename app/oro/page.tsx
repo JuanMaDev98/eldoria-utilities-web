@@ -125,17 +125,11 @@ export default function OroPage() {
             <Link href="/" className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-100 font-semibold rounded-lg transition">
               🗺️ Zonas
             </Link>
-            <Link href="/loot" className="px-4 py-2 bg-gold-600 hover:bg-amber-500 text-slate-950 font-semibold rounded-lg transition">
-              🎒 Loot
-            </Link>
             <Link href="/equipamiento" className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg transition">
               ⚔️ Equipamiento
             </Link>
             <Link href="/cofres" className="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white font-semibold rounded-lg transition">
               📦 Cofres
-            </Link>
-            <Link href="/simulador" className="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-lg transition">
-              ⚔️ Simulador
             </Link>
           </div>
         </div>
