@@ -173,6 +173,7 @@ export default function Home() {
   const [isDesktop, setIsDesktop] = useState(true);
   const [showBestMobs, setShowBestMobs] = useState(false);
   const [maxRarity, setMaxRarity] = useState<string>("");
+  const [filtersOpen, setFiltersOpen] = useState(true);
 
   useEffect(() => {
     const check = () => setIsDesktop(window.innerWidth >= 768);
@@ -309,7 +310,7 @@ export default function Home() {
       </header>
 
       <div className="sticky top-0 z-20 bg-slate-950/95 backdrop-blur border border-slate-800 rounded-2xl p-4 mb-6 shadow-lg">
-        <div className="flex flex-col md:flex-row gap-3 flex-wrap">
+        <div className="flex items-center gap-2">
           <input
             type="text"
             placeholder="Buscar zona o monstruo..."
@@ -317,85 +318,113 @@ export default function Home() {
             onChange={(e) => setSearch(e.target.value)}
             className="flex-1 min-w-[200px] bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-gold-500"
           />
-          <select
-            value={typeFilter}
-            onChange={(e) => setTypeFilter(e.target.value)}
-            className="bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-gold-500"
+          <button
+            onClick={() => setFiltersOpen((p) => !p)}
+            className="md:hidden flex items-center justify-center w-9 h-9 bg-slate-800 hover:bg-slate-700 rounded-lg transition text-slate-400"
           >
-            <option value="all">Todos los tipos</option>
-            {types.map((t) => (
-              <option key={t} value={t}>{TYPE_LABELS[t] || t}</option>
-            ))}
-          </select>
-          <input
-            type="number"
-            placeholder="Nivel del jugador"
-            value={maxLevel}
-            onChange={(e) => setMaxLevel(e.target.value === "" ? "" : Number(e.target.value))}
-            className="w-32 bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-gold-500"
-          />
-          <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as any)}
-            className="bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-gold-500"
-          >
-            <option value="level">Ordenar por nivel</option>
-            <option value="name">Ordenar por nombre</option>
-          </select>
-          <div className="flex items-center gap-2">
-            <label className="text-xs text-slate-500" title="Talento que reduce costo de stamina de monstruos">Eficiencia</label>
+            <span className={`text-sm transition-transform ${filtersOpen ? "rotate-180" : ""}`}>▼</span>
+          </button>
+          <div className="hidden md:flex gap-2 flex-wrap flex-1">
             <select
-              value={efficiency}
-              onChange={(e) => setEfficiency(Number(e.target.value) as 0 | 1 | 2)}
-              className="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-gold-500"
+              value={typeFilter}
+              onChange={(e) => setTypeFilter(e.target.value)}
+              className="bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-gold-500"
             >
-              <option value={0}>0</option>
-              <option value={1}>1</option>
-              <option value={2}>2</option>
+              <option value="all">Todos los tipos</option>
+              {types.map((t) => (
+                <option key={t} value={t}>{TYPE_LABELS[t] || t}</option>
+              ))}
             </select>
-          </div>
-          <div className="flex items-center gap-2">
-            <label className="text-xs text-slate-500">% Bonus Exp</label>
             <input
               type="number"
-              min={0}
-              value={bonusExp || ""}
-              onChange={(e) => setBonusExp(e.target.value === "" ? 0 : Number(e.target.value))}
-              className="w-20 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-gold-500"
+              placeholder="Nivel del jugador"
+              value={maxLevel}
+              onChange={(e) => setMaxLevel(e.target.value === "" ? "" : Number(e.target.value))}
+              className="w-32 bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-gold-500"
             />
-          </div>
-          <div className="flex items-center gap-2">
-            <label className="text-xs text-slate-500">% Bonus Oro</label>
-            <input
-              type="number"
-              min={0}
-              value={bonusOro || ""}
-              onChange={(e) => setBonusOro(e.target.value === "" ? 0 : Number(e.target.value))}
-              className="w-20 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-gold-500"
-            />
-          </div>
-          <div className="flex items-center gap-2">
-            <label className="text-xs text-slate-500">Mayor rareza item</label>
             <select
-              value={maxRarity}
-              onChange={(e) => setMaxRarity(e.target.value)}
-              className="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-gold-500"
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as any)}
+              className="bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-gold-500"
             >
-              <option value="">Todas</option>
-              <option value="common">Común</option>
-              <option value="uncommon">Inusual</option>
-              <option value="rare">Raro</option>
-              <option value="epic">Épico</option>
-              <option value="legendary">Legendario</option>
-              <option value="mythic">Mítico</option>
+              <option value="level">Ordenar por nivel</option>
+              <option value="name">Ordenar por nombre</option>
             </select>
-          </div>
-          <div className="flex gap-2">
-            <button onClick={() => setShowBestMobs(true)} className="px-4 py-2 bg-gold-600 hover:bg-amber-500 text-slate-950 font-bold rounded-lg text-sm transition">Mejores Mobs para Farmear</button>
+            <div className="flex items-center gap-2">
+              <label className="text-xs text-slate-500">Eff</label>
+              <select value={efficiency} onChange={(e) => setEfficiency(Number(e.target.value) as 0 | 1 | 2)} className="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-gold-500">
+                <option value={0}>0</option><option value={1}>1</option><option value={2}>2</option>
+              </select>
+            </div>
+            <div className="flex items-center gap-2">
+              <label className="text-xs text-slate-500">%Exp</label>
+              <input type="number" min={0} value={bonusExp || ""} onChange={(e) => setBonusExp(e.target.value === "" ? 0 : Number(e.target.value))} className="w-16 bg-slate-900 border border-slate-700 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-gold-500" />
+            </div>
+            <div className="flex items-center gap-2">
+              <label className="text-xs text-slate-500">%Oro</label>
+              <input type="number" min={0} value={bonusOro || ""} onChange={(e) => setBonusOro(e.target.value === "" ? 0 : Number(e.target.value))} className="w-16 bg-slate-900 border border-slate-700 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-gold-500" />
+            </div>
+            <div className="flex items-center gap-2">
+              <label className="text-xs text-slate-500">Mayor rareza item</label>
+              <select value={maxRarity} onChange={(e) => setMaxRarity(e.target.value)} className="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-gold-500">
+                <option value="">Todas</option>
+                <option value="common">Común</option>
+                <option value="uncommon">Inusual</option>
+                <option value="rare">Raro</option>
+                <option value="epic">Épico</option>
+                <option value="legendary">Legendario</option>
+                <option value="mythic">Mítico</option>
+              </select>
+            </div>
+            <button onClick={() => setShowBestMobs(true)} className="px-4 py-2 bg-gold-600 hover:bg-amber-500 text-slate-950 font-bold rounded-lg text-sm transition whitespace-nowrap">Mejores Mobs</button>
             <button onClick={expandAll} className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm transition">Expandir</button>
             <button onClick={collapseAll} className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm transition">Colapsar</button>
           </div>
         </div>
+        {filtersOpen && (
+          <div className="md:hidden mt-3 flex flex-col gap-2">
+            <div className="flex gap-2 flex-wrap">
+              <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} className="bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-gold-500 flex-1">
+                <option value="all">Todos los tipos</option>
+                {types.map((t) => <option key={t} value={t}>{TYPE_LABELS[t] || t}</option>)}
+              </select>
+              <input type="number" placeholder="Nivel" value={maxLevel} onChange={(e) => setMaxLevel(e.target.value === "" ? "" : Number(e.target.value))} className="w-24 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 focus:outline-none focus:border-gold-500" />
+              <select value={sortBy} onChange={(e) => setSortBy(e.target.value as any)} className="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 focus:outline-none focus:border-gold-500">
+                <option value="level">Nivel</option><option value="name">Nombre</option>
+              </select>
+            </div>
+            <div className="flex gap-2 flex-wrap">
+              <div className="flex items-center gap-1">
+                <label className="text-[10px] text-slate-500">Eff</label>
+                <select value={efficiency} onChange={(e) => setEfficiency(Number(e.target.value) as 0 | 1 | 2)} className="bg-slate-900 border border-slate-700 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-gold-500">
+                  <option value={0}>0</option><option value={1}>1</option><option value={2}>2</option>
+                </select>
+              </div>
+              <div className="flex items-center gap-1">
+                <label className="text-[10px] text-slate-500">%Exp</label>
+                <input type="number" min={0} value={bonusExp || ""} onChange={(e) => setBonusExp(e.target.value === "" ? 0 : Number(e.target.value))} className="w-16 bg-slate-900 border border-slate-700 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-gold-500" />
+              </div>
+              <div className="flex items-center gap-1">
+                <label className="text-[10px] text-slate-500">%Oro</label>
+                <input type="number" min={0} value={bonusOro || ""} onChange={(e) => setBonusOro(e.target.value === "" ? 0 : Number(e.target.value))} className="w-16 bg-slate-900 border border-slate-700 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-gold-500" />
+              </div>
+              <select value={maxRarity} onChange={(e) => setMaxRarity(e.target.value)} className="bg-slate-900 border border-slate-700 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-gold-500 flex-1">
+                <option value="">Rareza: Todas</option>
+                <option value="common">Común</option>
+                <option value="uncommon">Inusual</option>
+                <option value="rare">Raro</option>
+                <option value="epic">Épico</option>
+                <option value="legendary">Legendario</option>
+                <option value="mythic">Mítico</option>
+              </select>
+            </div>
+            <div className="flex gap-2">
+              <button onClick={() => setShowBestMobs(true)} className="flex-1 px-4 py-2 bg-gold-600 hover:bg-amber-500 text-slate-950 font-bold rounded-lg text-sm transition">Mejores Mobs</button>
+              <button onClick={expandAll} className="px-3 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm transition">Expandir</button>
+              <button onClick={collapseAll} className="px-3 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm transition">Colapsar</button>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="space-y-6">
@@ -439,7 +468,7 @@ export default function Home() {
                               {bossCount > 0 ? <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-purple-900/40 text-purple-300 border border-purple-800">{bossCount} boss</span> : null}
                             </div>
                             <div className="text-xs text-slate-400 mt-1">
-                              Nivel req: {zone.min_level} · Danger {zone.danger} · {zone.monsters.length} mob
+                              Nivel req: {zone.min_level} · Danger {zone.danger} · {search ? zone.monsters.filter((m) => m.name.toLowerCase().includes(search.toLowerCase())).length : zone.monsters.length} mob
                               {zone.gold_loss_on_death && zone.gold_loss_on_death !== "0.00" ? ` · -${zone.gold_loss_on_death}% gold` : ""}
                             </div>
                             <div className="flex items-center gap-3 mt-1.5 text-xs text-slate-500">
@@ -453,7 +482,7 @@ export default function Home() {
                           {isZoneOpen && (
                             <div className="px-4 py-3 bg-slate-950/50 border-t border-slate-800">
                               {zone.description && <p className="text-slate-400 text-xs mb-3 italic">{zone.description}</p>}
-                              {zone.monsters.length === 0 ? (
+                               {zone.monsters.length === 0 ? (
                                 <p className="text-slate-500 text-xs">Sin datos de monstruos.</p>
                               ) : (
                                 <div className="overflow-x-auto">
@@ -475,7 +504,7 @@ export default function Home() {
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      {zone.monsters.map((m) => {
+                                      {zone.monsters.filter((m) => !search || m.name.toLowerCase().includes(search.toLowerCase())).map((m) => {
                                         const effectiveSta = Math.max(1, m.stamina_cost - efficiency);
                                         const goldAvg = (m.gold_min + m.gold_max) / 2;
                                         const adjustedXp = Math.round(m.xp_reward * (1 + bonusExp / 100));
