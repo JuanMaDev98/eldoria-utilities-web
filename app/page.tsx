@@ -324,7 +324,6 @@ export default function Home() {
           >
             <span className={`text-sm transition-transform ${filtersOpen ? "rotate-180" : ""}`}>▼</span>
           </button>
-          <button onClick={() => setShowBestMobs(true)} className="hidden md:flex px-6 py-2 bg-gold-600 hover:bg-amber-500 text-slate-950 font-bold rounded-lg text-sm transition whitespace-nowrap shrink-0">Mejores Mobs para Farmear</button>
         </div>
         <div className="hidden md:flex gap-2 flex-wrap items-center">
           <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} className="bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-gold-500">
@@ -361,10 +360,11 @@ export default function Home() {
               <option value="mythic">Mítico</option>
             </select>
           </div>
-          <div className="flex gap-2 ml-auto">
-            <button onClick={expandAll} className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm transition">Expandir</button>
-            <button onClick={collapseAll} className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm transition">Colapsar</button>
-          </div>
+        </div>
+        <div className="hidden md:flex gap-2 items-center mt-2">
+          <button onClick={expandAll} className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm transition">Expandir</button>
+          <button onClick={collapseAll} className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm transition">Colapsar</button>
+          <button onClick={() => setShowBestMobs(true)} className="flex-1 ml-auto px-6 py-2 bg-gold-600 hover:bg-amber-500 text-slate-950 font-bold rounded-lg text-sm transition whitespace-nowrap">Mejores Mobs para Farmear</button>
         </div>
         {filtersOpen && (
           <div className="md:hidden flex flex-col gap-2">
@@ -404,9 +404,9 @@ export default function Home() {
               </select>
             </div>
             <div className="flex gap-2">
-              <button onClick={() => setShowBestMobs(true)} className="flex-1 px-4 py-2 bg-gold-600 hover:bg-amber-500 text-slate-950 font-bold rounded-lg text-sm transition">Mejores Mobs</button>
               <button onClick={expandAll} className="px-3 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm transition">Expandir</button>
               <button onClick={collapseAll} className="px-3 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm transition">Colapsar</button>
+              <button onClick={() => setShowBestMobs(true)} className="flex-1 px-4 py-2 bg-gold-600 hover:bg-amber-500 text-slate-950 font-bold rounded-lg text-sm transition">Mejores Mobs</button>
             </div>
           </div>
         )}
