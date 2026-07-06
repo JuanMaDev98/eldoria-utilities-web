@@ -375,7 +375,7 @@ export default function Home() {
             />
           </div>
           <div className="flex items-center gap-2">
-            <label className="text-xs text-slate-500">Rareza</label>
+            <label className="text-xs text-slate-500">Mayor rareza item</label>
             <select
               value={maxRarity}
               onChange={(e) => setMaxRarity(e.target.value)}
@@ -616,7 +616,7 @@ export default function Home() {
         const adjGold = (m: Monster) => Math.round(((m.gold_min + m.gold_max) / 2) * (1 + bonusOro / 100));
         const adjXp = (m: Monster) => Math.round(m.xp_reward * (1 + bonusExp / 100));
         const theRestricted = ["Minas de Carbón", "Campos de Hierbas"];
-        const isFarmable = (m: { is_boss: number; zoneName?: string }) => !m.is_boss && !theRestricted.includes(m.zoneName ?? "");
+        const isFarmable = (m: { is_boss: number; zoneName?: string; zoneType?: string }) => !m.is_boss && !theRestricted.includes(m.zoneName ?? "") && m.zoneType !== "event";
 
         const LOOT_ZONE_RARITY: Record<string, string> = {
           "Aldea Olvidada": "common",
