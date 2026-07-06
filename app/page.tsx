@@ -572,9 +572,10 @@ export default function Home() {
         if (!m) return null;
         const drops = getMonsterDrops(m);
         const highlights = getMonsterHighlights(m);
+        const sta = Math.max(1, m.stamina_cost - efficiency);
         return (
           <div
-            className="fixed z-50 bg-slate-900 border border-slate-700 rounded-lg p-3 shadow-xl pointer-events-none"
+            className="fixed z-50 bg-slate-900 border border-slate-700 rounded-lg p-3 shadow-xl pointer-events-none w-64"
             style={{ left: hoverPos.x + 16, top: hoverPos.y - 8 }}
           >
             <p className="text-xs font-bold text-slate-200 mb-1 flex items-center gap-1.5">
@@ -586,9 +587,23 @@ export default function Home() {
                 </span>
               ))}
             </p>
+            <div className="grid grid-cols-2 gap-x-3 gap-y-0.5 text-[11px] mt-1.5">
+              <div className="text-slate-500">Nivel</div><div className="text-slate-300">{m.level}</div>
+              <div className="text-slate-500">Sta</div><div className="text-slate-300">{sta !== m.stamina_cost ? <><span className="line-through opacity-50">{m.stamina_cost}</span> {sta}</> : m.stamina_cost}</div>
+              <div className="text-slate-500">HP</div><div className="text-slate-300">{m.hp_max}</div>
+              <div className="text-slate-500">ATK</div><div className="text-slate-300">{m.attack}</div>
+              <div className="text-slate-500">DEF</div><div className="text-slate-300">{m.defense}</div>
+              <div className="text-slate-500">Dodge</div><div className="text-slate-300">{m.dodge}</div>
+              <div className="text-slate-500">Precisión</div><div className="text-slate-300">{m.accuracy}</div>
+              <div className="text-slate-500">Res. Hechizo</div><div className="text-slate-300">{m.spell_resist}</div>
+              {m.dmg_type && <><div className="text-slate-500">Tipo daño</div><div className="text-slate-300">{m.dmg_type}</div></>}
+              {m.dot_chance != null && m.dot_chance > 0 && <><div className="text-slate-500">DoT</div><div className="text-slate-300">{m.dot_chance}% ({m.dot_dpt}/t, {m.dot_turns}t)</div></>}
+              <div className="text-slate-500">XP</div><div className="text-amber-400">{m.xp_reward}</div>
+              <div className="text-slate-500">Oro</div><div className="text-amber-400">{m.gold_min}-{m.gold_max}</div>
+            </div>
             {drops.length > 0 && (
               <>
-                <p className="text-[10px] text-slate-500 uppercase mt-2 mb-1">Drops</p>
+                <p className="text-[10px] text-slate-500 uppercase mt-2 mb-1 border-t border-slate-800 pt-1.5">Drops</p>
                 <div className="space-y-0.5">
                   {drops.map((d, i) => (
                     <div key={i} className="flex items-center gap-2 text-[11px]">
