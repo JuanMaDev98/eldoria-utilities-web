@@ -38,3 +38,8 @@ Thumbs.db
 # Temporary files
 *.tmp
 .cache/
+
+# Local scripts (contains API credentials)
+update_zones.py
+api_response.json
+update_report.txt
