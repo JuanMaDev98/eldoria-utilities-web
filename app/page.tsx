@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import zonesData from "@/public/eldoria_zones_with_loot.json";
 import Link from "next/link";
 
@@ -174,6 +174,8 @@ export default function Home() {
   const [showBestMobs, setShowBestMobs] = useState(false);
   const [maxRarity, setMaxRarity] = useState<string>("");
   const [filtersOpen, setFiltersOpen] = useState(true);
+  const tooltipRef = useRef<HTMLDivElement>(null);
+  const [adjustedPos, setAdjustedPos] = useState<{ left: number; top: number } | null>(null);
 
   useEffect(() => {
     const check = () => setIsDesktop(window.innerWidth >= 768);
@@ -181,6 +183,28 @@ export default function Home() {
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
+
+  useLayoutEffect(() => {
+    if (hoveredMonster === null || !tooltipRef.current) {
+      setAdjustedPos(null);
+      return;
+    }
+    const el = tooltipRef.current;
+    const rect = el.getBoundingClientRect();
+    const tipW = rect.width;
+    const tipH = rect.height;
+    const pad = 12;
+
+    let left = hoverPos.x + 16;
+    let top = hoverPos.y + 16;
+
+    if (left + tipW > window.innerWidth - pad) left = hoverPos.x - tipW - 16;
+    if (left < pad) left = pad;
+    if (top + tipH > window.innerHeight - pad) top = window.innerHeight - tipH - pad;
+    if (top < pad) top = pad;
+
+    setAdjustedPos({ left, top });
+  }, [hoveredMonster, hoverPos.x, hoverPos.y]);
 
   const types = useMemo(() => {
     return TYPE_ORDER.filter((t) => zones.some((z) => z.type === t));
@@ -573,16 +597,11 @@ export default function Home() {
         const drops = getMonsterDrops(m);
         const highlights = getMonsterHighlights(m);
         const sta = Math.max(1, m.stamina_cost - efficiency);
-        const tipW = 256;
-        const cursorInBottomHalf = hoverPos.y > window.innerHeight / 2;
-        let left = hoverPos.x + 16;
-        let top = cursorInBottomHalf ? hoverPos.y - 16 : hoverPos.y + 16;
-        if (left + tipW > window.innerWidth - 8) left = hoverPos.x - tipW - 16;
-        if (left < 8) left = 8;
         return (
           <div
+            ref={tooltipRef}
             className="fixed z-[60] bg-slate-900 border border-slate-700 rounded-lg p-3 shadow-xl pointer-events-none w-64 max-h-[70vh] overflow-y-auto"
-            style={{ left, top }}
+            style={adjustedPos ?? { left: hoverPos.x + 16, top: hoverPos.y + 16 }}
           >
             <p className="text-xs font-bold text-slate-200 mb-1 flex items-center gap-1.5">
               <span>{m.name}</span>
