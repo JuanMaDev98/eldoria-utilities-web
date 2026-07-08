@@ -175,9 +175,6 @@ export default function CofresPage() {
             <Link href="/equipamiento" className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg transition">
               ⚔️ Equipamiento
             </Link>
-            <Link href="/oro" className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-lg transition">
-              💰 Oro
-            </Link>
           </div>
         </div>
 

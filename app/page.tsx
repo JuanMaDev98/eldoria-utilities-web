@@ -321,9 +321,6 @@ export default function Home() {
           <Link href="/cofres" className="inline-block px-5 py-2 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-lg transition">
             📦 Cofres
           </Link>
-          <Link href="/oro" className="inline-block px-5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg transition">
-            💰 Oro
-          </Link>
         </div>
       </header>
 
