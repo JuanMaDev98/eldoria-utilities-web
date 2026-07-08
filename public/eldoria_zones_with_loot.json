@@ -13484,7 +13484,7 @@
       "code": "clanraid",
       "name": "Las Tierras del Saqueo",
       "name_en": "The Plundered Lands",
-      "type": "loot",
+      "type": "event",
       "description": "Una tierra fronteriza arrasada donde los clanes se enfrentan por el botín. Los recursos que arrebates aquí no llenan tu bolsillo — llenan el cofre de tu clan. Y otros clanes pueden venir a robártelo.",
       "description_en": "A borderland in ruin where clans clash for spoils. The resources you tear out here do not fill your pocket — they fill your clan's chest. And other clans can come to steal it.",
       "min_level": 15,
