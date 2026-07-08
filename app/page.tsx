@@ -174,6 +174,7 @@ export default function Home() {
   const [showBestMobs, setShowBestMobs] = useState(false);
   const [maxRarity, setMaxRarity] = useState<string>("");
   const [filtersOpen, setFiltersOpen] = useState(true);
+  const [selectedEvents, setSelectedEvents] = useState<string>("none");
   const tooltipRef = useRef<HTMLDivElement>(null);
   const [adjustedPos, setAdjustedPos] = useState<{ left: number; top: number } | null>(null);
 
@@ -210,6 +211,11 @@ export default function Home() {
     return TYPE_ORDER.filter((t) => zones.some((z) => z.type === t));
   }, [zones]);
 
+  const EVENT_ZONE_IDS: Record<string, number[]> = {
+    grieta: [30],
+    tierras: [35],
+  };
+
   const filteredZones = useMemo(() => {
     let list = zones.filter((z) => {
       const matchesSearch =
@@ -218,7 +224,17 @@ export default function Home() {
         z.monsters.some((m) => m.name.toLowerCase().includes(search.toLowerCase()));
       const matchesType = typeFilter === "all" || z.type === typeFilter;
       const matchesLevel = maxLevel === "" || z.min_level <= maxLevel;
-      return matchesSearch && matchesType && matchesLevel;
+      const isEvent = z.type === "event";
+      let matchesEvent = true;
+      if (isEvent) {
+        if (selectedEvents === "none") {
+          matchesEvent = false;
+        } else if (selectedEvents !== "all") {
+          const allowedIds = EVENT_ZONE_IDS[selectedEvents] || [];
+          matchesEvent = allowedIds.includes(z.id);
+        }
+      }
+      return matchesSearch && matchesType && matchesLevel && matchesEvent;
     });
 
     list.sort((a, b) => {
@@ -226,7 +242,7 @@ export default function Home() {
       return a.name.localeCompare(b.name);
     });
     return list;
-  }, [zones, search, typeFilter, maxLevel, sortBy]);
+  }, [zones, search, typeFilter, maxLevel, sortBy, selectedEvents]);
 
   const groupedZones = useMemo(() => {
     const groups: Record<string, Zone[]> = {};
@@ -375,6 +391,15 @@ export default function Home() {
               <option value="mythic">Mítico</option>
             </select>
           </div>
+          <div className="flex items-center gap-2">
+            <label className="text-xs text-slate-500">Evento</label>
+            <select value={selectedEvents} onChange={(e) => setSelectedEvents(e.target.value)} className="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-gold-500">
+              <option value="none">Ninguno</option>
+              <option value="grieta">Grieta del Cósmos</option>
+              <option value="tierras">Tierras del Saqueo</option>
+              <option value="all">Todos los eventos</option>
+            </select>
+          </div>
         </div>
         <div className="hidden md:flex gap-2 items-center mt-2">
           <button onClick={expandAll} className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm transition">Expandir</button>
@@ -416,6 +441,12 @@ export default function Home() {
                 <option value="epic">Épico</option>
                 <option value="legendary">Legendario</option>
                 <option value="mythic">Mítico</option>
+              </select>
+              <select value={selectedEvents} onChange={(e) => setSelectedEvents(e.target.value)} className="bg-slate-900 border border-slate-700 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-gold-500 flex-1">
+                <option value="none">Sin evento</option>
+                <option value="grieta">Grieta del Cósmos</option>
+                <option value="tierras">Tierras del Saqueo</option>
+                <option value="all">Todos eventos</option>
               </select>
             </div>
             <div className="flex gap-2">
@@ -675,7 +706,18 @@ export default function Home() {
         const playerRarityIdx = maxRarity === "" ? RARITY_ORDER.length : RARITY_ORDER.indexOf(maxRarity);
 
         const eligible = zones
-          .filter((z) => (maxLevel === "" || z.min_level <= maxLevel) && z.code !== "coliseo_del_tributo" && z.name !== "Coliseo del Tributo")
+          .filter((z) => {
+            if (maxLevel !== "" && z.min_level > maxLevel) return false;
+            if (z.code === "coliseo_del_tributo" || z.name === "Coliseo del Tributo") return false;
+            if (z.type === "event") {
+              if (selectedEvents === "none") return false;
+              if (selectedEvents !== "all") {
+                const allowedIds = EVENT_ZONE_IDS[selectedEvents] || [];
+                if (!allowedIds.includes(z.id)) return false;
+              }
+            }
+            return true;
+          })
           .flatMap((z) => z.monsters.map((m) => ({ ...m, zoneName: z.name, zoneType: z.type })))
           .filter((m) => {
             if (m.stamina_cost <= 0) return false;
@@ -792,7 +834,7 @@ export default function Home() {
                 <button onClick={() => setShowBestMobs(false)} className="text-slate-500 hover:text-slate-300 text-xl leading-none">&times;</button>
               </div>
               <p className="text-xs text-slate-500 mb-5">
-                {maxLevel !== "" ? `Nivel jugador ${maxLevel}` : "Sin límite"} · Eff {efficiency} · {bonusOro > 0 ? `+${bonusOro}% oro` : "sin bonus oro"} · {bonusExp > 0 ? `+${bonusExp}% exp` : "sin bonus exp"} · Rareza: {maxRarity ? {common:"Común",uncommon:"Inusual",rare:"Raro",epic:"Épico",legendary:"Legendario",mythic:"Mítico"}[maxRarity] : "todas"} · Excluye mobs 16+ niveles abajo
+                {maxLevel !== "" ? `Nivel jugador ${maxLevel}` : "Sin límite"} · Eff {efficiency} · {bonusOro > 0 ? `+${bonusOro}% oro` : "sin bonus oro"} · {bonusExp > 0 ? `+${bonusExp}% exp` : "sin bonus exp"} · Rareza: {maxRarity ? {common:"Común",uncommon:"Inusual",rare:"Raro",epic:"Épico",legendary:"Legendario",mythic:"Mítico"}[maxRarity] : "todas"} · Evento: {selectedEvents === "none" ? "Ninguno" : selectedEvents === "all" ? "Todos" : selectedEvents === "grieta" ? "Grieta del Cósmos" : "Tierras del Saqueo"} · Excluye mobs 16+ niveles abajo
               </p>
 
               {eligible.length === 0 ? (
