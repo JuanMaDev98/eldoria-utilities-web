@@ -201,8 +201,8 @@ export default function OroPage() {
             className="bg-slate-950 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-gold-500"
           >
             <option value="all">Todos</option>
-            <option value="normal">No bosses</option>
-            <option value="boss">Solo bosses</option>
+            <option value="normal">Sin jefes</option>
+            <option value="boss">Solo jefes</option>
           </select>
           <select
             value={viaFilter}

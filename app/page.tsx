@@ -331,6 +331,9 @@ export default function Home() {
         <p className="text-slate-400">Base de datos interactiva de zonas y monstruos</p>
         <p className="text-sm text-slate-500 mt-1">{zones.length} zonas · {zones.reduce((acc, z) => acc + z.monsters.length, 0)} monstruos</p>
         <div className="mt-4 flex flex-wrap justify-center gap-3">
+          <Link href="/build" className="inline-block px-5 py-2 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-lg transition">
+            🛡️ Build Simulator
+          </Link>
           <Link href="/equipamiento" className="inline-block px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg transition">
             ⚔️ Equipamiento
           </Link>
@@ -649,7 +652,7 @@ export default function Home() {
               <div className="text-slate-500">Dodge</div><div className="text-slate-300">{m.dodge}</div>
               <div className="text-slate-500">Precisión</div><div className="text-slate-300">{m.accuracy}</div>
               <div className="text-slate-500">Res. Hechizo</div><div className="text-slate-300">{m.spell_resist}</div>
-              {m.dmg_type && <><div className="text-slate-500">Tipo daño</div><div className="text-slate-300">{m.dmg_type}</div></>}
+              {m.dmg_type && <><div className="text-slate-500">Tipo de daño</div><div className="text-slate-300">{m.dmg_type}</div></>}
               {m.dot_chance != null && m.dot_chance > 0 && <><div className="text-slate-500">DoT</div><div className="text-slate-300">{m.dot_chance}% ({m.dot_dpt}/t, {m.dot_turns}t)</div></>}
               <div className="text-slate-500">XP</div><div className="text-amber-400">{m.xp_reward}</div>
               <div className="text-slate-500">Oro</div><div className="text-amber-400">{m.gold_min}-{m.gold_max}</div>

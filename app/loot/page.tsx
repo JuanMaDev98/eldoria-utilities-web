@@ -577,7 +577,7 @@ export default function LootPage() {
             </p>
           </div>
           <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-4">
-            <h4 className="text-gold-400 font-bold mb-2">Carbon concentrado</h4>
+            <h4 className="text-gold-400 font-bold mb-2">Carbón concentrado</h4>
             <p className="text-slate-400 text-sm">
               Las Minas de Carbón son la fuente directa. Prioriza mobs con chance_drops de <strong>carbon</strong>. Recuerda el límite de 15 peleas diarias por mob en esa zona.
             </p>

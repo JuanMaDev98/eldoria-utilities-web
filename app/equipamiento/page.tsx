@@ -212,7 +212,7 @@ export default function EquipmentPage() {
           </div>
           <div>
             <strong className="text-gold-400">Ofertas diarias y packs</strong>
-            <p>Daily deals, featured items y packs de temporada rotan equipo épicos/legendarios con descuento.</p>
+            <p>Daily deals, featured items y packs de temporada rotan equipos épicos/legendarios con descuento.</p>
           </div>
         </div>
       </section>
